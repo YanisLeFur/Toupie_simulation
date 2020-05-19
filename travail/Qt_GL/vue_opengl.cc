@@ -265,45 +265,49 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue){
     double slices(50);
     double theta(2*M_PI/slices);
 
-    for(unsigned int i(1);i<=slices;i++){
-    glBegin(GL_TRIANGLES);
+    glBegin(GL_POLYGON);
+
+    /*prog.setAttributeValue(CoordonneeTextureId, 0.5, 0.5);
+    prog.setAttributeValue(SommetId, 0.0,0.0,h);
+    prog.setAttributeValue(CoordonneeTextureId,r*cos(theta),r*sin(theta));
+    prog.setAttributeValue(SommetId, r*cos(theta),r*sin(theta),h);*/
+
+    for(unsigned int i(0);i<=slices;i++){
     //if(i%2==0){
 
-         prog.setAttributeValue(CoordonneeTextureId, 0.5, 0.5);
-         prog.setAttributeValue(SommetId, 0.0,0.0,h);
-         prog.setAttributeValue(CoordonneeTextureId,r*(theta*theta*0.5-1),0.5+r);
-         prog.setAttributeValue(SommetId, r*sin(theta),r*cos(theta),h);
-         prog.setAttributeValue(CoordonneeTextureId,r*(theta*theta*0.5-1),0.5+r);//y=h!!
-         prog.setAttributeValue(SommetId, r*sin((i+1)*theta),r*cos((i+1)*theta),h);
+        prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
+        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
     //
-    }
+    //}
     /*else{
         prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0);
         prog.setAttributeValue(SommetId, 0.0,0.0,h);
         prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);    //y=h!!
         prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
     }*/
-    glEnd();
+
    }
+   glEnd();
 
 
-   for(unsigned int i(1);i<=slices;i++){
+
     glBegin(GL_TRIANGLES);
+    for(unsigned int i(0);i<=slices;i++){
     if(i%2==0){
-       prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // magenta
+       prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
        prog.setAttributeValue(SommetId, 0.0,0.0,0.0);
-       prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);    //y=h!!
+       prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
        prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
     }
     else{
-        prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // magenta
+        prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // green
         prog.setAttributeValue(SommetId, 0.0,0.0,0.0);
-        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);    //y=h!!
+        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
         prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
-
     }
-    glEnd();
    }
+    glEnd();
+}
 
 //=========================================================================================================
 void VueOpenGL::dessineSphere (QMatrix4x4 const& point_de_vue,
