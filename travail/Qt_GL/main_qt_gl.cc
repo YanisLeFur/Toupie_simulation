@@ -16,6 +16,6 @@ int main(int argc, char* argv[])
   w.ajouter_Toupie(c);
   ///w.affiche(std::cout);
   w.show();
-
+//coucou
   return a.exec();
 }
