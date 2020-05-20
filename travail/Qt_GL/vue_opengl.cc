@@ -49,6 +49,20 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
     dessineCone(matrice);
 }
 //=========================================================================================================
+void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
+{
+    QMatrix4x4 matrice;
+    dessineAxes(matrice);
+    double psi(a_dessiner.getP().get_coord(1));
+    double theta(a_dessiner.getP().get_coord(2));
+    double phi(a_dessiner.getP().get_coord(3));
+    matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
+    matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
+    matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
+    dessineSphereCoupe(matrice);
+}
+
+//=========================================================================================================
 void VueOpenGL::dessine(Pendule const& a_dessiner)
 {
   QMatrix4x4 matrice;
@@ -101,8 +115,6 @@ void VueOpenGL::trace_G(ConeSimple const& c){
         glEnd();
     }
 }
-//=========================================================================================================
-void VueOpenGL::dessine(ToupieChinoise const& a_dessiner) {}
 //=========================================================================================================
 void VueOpenGL::trace_G(Toupie const& t){}
 //=========================================================================================================
@@ -171,6 +183,7 @@ void VueOpenGL::init()
 
 
   sphere.initialize();
+  sphere_coupe.initialize();
   initializePosition();
 }
 //=========================================================================================================
@@ -316,5 +329,13 @@ void VueOpenGL::dessineSphere (QMatrix4x4 const& point_de_vue,
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
   prog.setAttributeValue(CouleurId, rouge, vert, bleu);  // met la couleur
   sphere.draw(prog, SommetId);                           // dessine la sphère
+}
+//=========================================================================================================
+void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
+                               double rouge, double vert, double bleu)
+{
+  prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+  prog.setAttributeValue(CouleurId, rouge, vert, bleu);  // met la couleur
+  sphere_coupe.draw(prog, SommetId);                           // dessine la sphère
 }
 //=========================================================================================================

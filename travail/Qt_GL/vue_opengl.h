@@ -7,6 +7,7 @@
 #include "Dessinable.h"
 #include "Toupie.h"
 #include "glsphere.h"
+#include "glchinoise.h"
 #include <deque>
 
 //Memoire================================================
@@ -67,6 +68,9 @@ class VueOpenGL : public SupportADessin {
   void dessineSphere(QMatrix4x4 const& point_de_vue,
                        double rouge = 1.0, double vert = 1.0, double bleu = 1.0);
 
+  void dessineSphereCoupe(QMatrix4x4 const& point_de_vue,                       //permet de représenter graphiquement la toupie chinoise
+                       double rouge = 1.0, double vert = 1.0, double bleu = 1.0);
+
   // méthode(s) de dessin (héritée(s) de SupportADessin)
   virtual SupportADessin* copie() const override;
 
@@ -75,6 +79,7 @@ class VueOpenGL : public SupportADessin {
   // Un shader OpenGL encapsulé dans une classe Qt
   QOpenGLShaderProgram prog;
   GLSphere sphere;
+  GLSphereCoupe sphere_coupe;
   Memoire m;
 
 

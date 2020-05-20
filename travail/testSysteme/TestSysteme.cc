@@ -22,13 +22,15 @@ int main(){
     Toupie toupie(&text,m,P1,P1_point,I1,I3,d,Vecteur());
     ConeSimple cone1(&text,m,1.5,0.5,P1,P1_point,Vecteur());
     ConeSimple cone2(&text,masse_cone(0.1,0.5,1.5),1.5,0.5,P2,P2_point,Vecteur());
+    ToupieChinoise tc(&text,masse_chinoise(0.1,0.02,0.15),0.02,0.15,Vecteur({0,0.11,0,0,0}),Vecteur({50,0,0,0,0}),Vecteur({0,0,0}));
     IntegrateurRungeKutta RK;
     IntegrateurNewmark NM;
     IntegrateurEulerCromer EC;
     Systeme systeme(&NM);
     systeme.ajouter_Toupie(toupie);
-	systeme.ajouter_Toupie(cone1);
-	systeme.ajouter_Toupie(cone2);
+    systeme.ajouter_Toupie(cone1);
+    systeme.ajouter_Toupie(cone2);
+    systeme.ajouter_Toupie(tc);
     cout<<systeme;
     cout<<endl;
 
@@ -37,8 +39,19 @@ int main(){
     double temps(0);
 
     for (int i(0); i <nb_echantillons; i++){
-       RK.integre(dt,toupie);
-       RK.integre(dt,cone1);
+       //  RK.integre(dt,toupie);
+      // RK.integre(dt,cone1);
+        try{
+       systeme.evolue();
+        }
+        catch(int const& i){
+            switch(i){
+                case 1:cerr << "Erreur: division par 0 impossible" << endl;
+                case 2:cerr << "Erreur: dimension differente de 3" << endl;
+                case 3:cerr << "Erreur: dimension incompatible avec celle du vecteur" << endl;
+            }
+
+        }
        cout << "temps: " << temps+i*dt << endl;
        cout << "cone" << endl;
        text.dessine(cone1);
