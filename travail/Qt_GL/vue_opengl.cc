@@ -333,7 +333,8 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
             break;
             case phi_point: prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.2+abs(phi_point_)/2.0);
             break;
-
+            case null:prog.setAttributeValue(CouleurId, 0.0, 1.0, 1.0);
+            break;
         }
 
        prog.setAttributeValue(SommetId, 0.0,0.0,0.0);
