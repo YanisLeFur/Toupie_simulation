@@ -80,7 +80,7 @@ class VueOpenGL : public SupportADessin {
 
    //textures
   GLuint textureDeChat;
-  GLuint textureFractale;
+  GLuint textureBois;
 
 };
 
