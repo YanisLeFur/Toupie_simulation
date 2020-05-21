@@ -51,6 +51,10 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
     double psi(a_dessiner.getP().get_coord(1));
     double theta(a_dessiner.getP().get_coord(2));
     double phi(a_dessiner.getP().get_coord(3));
+    double Ax(a_dessiner.get_OA().get_coord(1));
+    double Ay(a_dessiner.get_OA().get_coord(2));
+    double Az(a_dessiner.get_OA().get_coord(3));
+    matrice.translate(Ax,Ay,Az+1);
     matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
     matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
     matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);

@@ -18,7 +18,7 @@ void GLSphereCoupe::initialize(GLuint slices, GLuint stacks)
   const double alpha(M_PI / double(stacks));//stacks
   const double beta(2.0*M_PI / double(slices));//slices
 
-  positions << 0.0 << 0.0 << 1.0;
+  positions << 0.0 << 0.0 << cos(20*alpha);
 
   for (GLuint i(1); i < stacks; ++i) {
     for (GLuint j(0); j < slices; ++j) {
