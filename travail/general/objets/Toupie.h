@@ -122,7 +122,6 @@ class Toupie:public Dessinable{
 
         virtual void trace_G() const override;
 
-        //void plot(invariants) ; //affiche l'energie,le produit,mixte...............
 };
 
 std::ostream& operator<<(std::ostream&,Toupie const& etre_affiche);

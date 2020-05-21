@@ -50,7 +50,10 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
     matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
     matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
     matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
-    dessineCone(matrice,a_dessiner.get_hauteur(),a_dessiner.get_rayon());
+
+    dessineCone(matrice,a_dessiner.get_hauteur(),a_dessiner.get_rayon(),
+                theta_point,a_dessiner.getP_point().get_coord(1),a_dessiner.getP_point().get_coord(2),
+                a_dessiner.getP_point().get_coord(3));
 }
 //=========================================================================================================
 void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
@@ -273,7 +276,10 @@ void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
   glEnd();
 }
 //=========================================================================================================
-void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, double rayon){
+void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, double rayon,
+                            Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_){
+
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
 
     /// Attribut la texture 'textureDeChat' à la texture numéro 0 du shader
@@ -290,8 +296,18 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     glBegin(GL_TRIANGLES);
 
     for(unsigned int i(0);i<=slices;i++){
+        prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
+        switch (grandeur) {
 
-       prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
+            case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
+             break;
+            case theta_point: prog.setAttributeValue(CouleurId, 0.0, 0.2+abs(theta_point_)/2.0, 0.0);
+            break;
+            case phi_point: prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.2+abs(phi_point_)/2.0);
+            break;
+
+        }
+
        prog.setAttributeValue(SommetId, 0.0,0.0,0.0);
        prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
