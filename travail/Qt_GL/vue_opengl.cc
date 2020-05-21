@@ -111,6 +111,11 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner) {}
 void VueOpenGL::trace_G(Toupie const& t){}
 //=========================================================================================================
 void VueOpenGL::trace_G(Pendule const& p){}
+
+void VueOpenGL::trace_G(const ToupieChinoise &)
+{
+
+}
 //=========================================================================================================
 void VueOpenGL::trace_G(MasseTombe const& m){}
 //=========================================================================================================

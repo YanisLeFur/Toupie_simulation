@@ -415,6 +415,11 @@ using namespace std;
         return (EC()+EP());
     }
 
+    Vecteur MasseTombe::G_O() const
+    {
+        return P;
+    }
+
     void MasseTombe::trace_G() const{
         support->trace_G(*this);
     }
@@ -465,6 +470,11 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
 
  double Pendule::E() const {
      return (EC()+EP());
+ }
+
+ Vecteur Pendule::G_O() const
+ {
+     return P;
  }
 
  void Pendule::trace_G() const{

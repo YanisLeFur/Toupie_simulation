@@ -108,7 +108,7 @@ class Toupie:public Dessinable{
 
         Vecteur G_G() const; // vecteur du centre du referentiel R_G au point G exprime dans le referentiel R_G
 
-        Vecteur G_O() const; // vecteur du centre du referentiel R_O au point G exprime dans le referentiel R_O
+        virtual Vecteur G_O() const; // vecteur du centre du referentiel R_O au point G exprime dans le referentiel R_O
 
         Vecteur P_G() const; // vecteur du poids de la toupie dans le referentiel R_G
 
@@ -253,6 +253,8 @@ class MasseTombe:public Toupie{
 
     virtual double E() const override;
 
+    virtual Vecteur G_O() const override;
+
     virtual void trace_G() const override;
 };	
 
@@ -283,9 +285,11 @@ public:
 
     virtual double EC() const override;
 
-     double EP() const;
+    double EP() const;
 
     virtual double E() const override;
+
+    virtual Vecteur G_O() const override;
 
     virtual void trace_G() const override;
 
