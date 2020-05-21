@@ -13,8 +13,10 @@ using namespace std;
  	Toupie::~Toupie(){}
 
 	Vecteur Toupie::getP() const {return P;}
-	
-	Vecteur Toupie::getP_point() const {return P_point;}
+
+    Vecteur Toupie::getP_point() const {return P_point;}
+
+    Vecteur Toupie::get_OA() const {return OA;}
 	
 	void Toupie::setP(Vecteur const& v) {P=v;}
 	

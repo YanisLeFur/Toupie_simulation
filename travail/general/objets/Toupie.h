@@ -35,6 +35,8 @@ class Toupie:public Dessinable{
         Vecteur getP() const; // retourne vecteur position
 		
         Vecteur getP_point() const; // retourne derivée vecteur position
+
+        Vecteur get_OA() const; // retourne le vecteur indiquant le point de contact
 		
 		void setP(Vecteur const& v);
 		

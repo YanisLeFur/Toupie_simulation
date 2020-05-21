@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
   VueOpenGL* v(w.get_Vue_ptr());
   ///Pendule p(v,1,Vecteur({0,3*PI/4,0}),Vecteur({0,0,0}),2);
   ///MasseTombe mt(v,1,Vecteur({0,0,0}),Vecteur({0,5,5}));
-  ConeSimple c1(v,0.039270,1.5,0.5,Vecteur({0,PI/6,0}),Vecteur({0,0,200}),Vecteur());
+  ConeSimple c1(v,0.039270,1.5,0.5,Vecteur({0,PI/6,0}),Vecteur({0,0,200}),Vecteur(1,1,0));
   ConeSimple c2(v,0.039270,0.5,0.5,Vecteur({0,PI/6,0}),Vecteur({0,0,200}),Vecteur());
   ///w.ajouter_Toupie(p);
   ///w.ajouter_Toupie(mt);
@@ -18,6 +18,5 @@ int main(int argc, char* argv[])
   w.ajouter_Toupie(c2);
   ///w.affiche(std::cout);
   w.show();
-//coucou
   return a.exec();
 }
