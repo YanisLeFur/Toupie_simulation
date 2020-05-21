@@ -346,6 +346,10 @@ using namespace std;
         return R*omega_O()^Vecteur(0,0,1);
     }
 
+    void ToupieChinoise::trace_G() const{
+        support->trace_G(*this);
+    }
+
     double masse_chinoise(double rho,double h,double R) {
         return M_PI * rho * ( 4.0/3.0 * pow(R,3) - pow(h,2) * ( R - h/3.0 ) ); //OK
     }
@@ -370,9 +374,11 @@ using namespace std;
         return ( M_PI / 30.0 ) * rho_chinoise(m,h,R) * pow((2*R-h),3) * ( 2 * R * R + 3 * h * R + 3 * h * h ); //OK
     }
 
+
     ostream& operator<<(ostream& sortie, ToupieChinoise const& etre_affiche) {
         return etre_affiche.affiche(sortie);
     }
+
 
 //MasseTombe=====================================================================
 	MasseTombe::MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point)

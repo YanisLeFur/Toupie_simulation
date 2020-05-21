@@ -215,6 +215,8 @@ class ToupieChinoise:public Toupie{
 
     Vecteur vC_O() const;
 
+    virtual void trace_G() const override;
+
 };
 
 double masse_chinoise(double masse_volumique, double h, double R);
@@ -228,6 +230,7 @@ double integrale_z_carre(double m, double h, double R);
 double I1_chinoise(double m, double h, double R);
 
 double I3_chinoise(double m, double h, double R);
+
 
 std::ostream& operator<<(std::ostream&,ToupieChinoise const& etre_affiche);
 
