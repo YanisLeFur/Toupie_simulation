@@ -13,10 +13,12 @@ void Memoire::ajouter_point(Vecteur const& P){
 
 size_t Memoire::getTaille()
 {return taille;}
+
+bool Memoire::get_on(){return on;}
 //=========================================================================================================
 std::deque<Vecteur> Memoire::GetPoints(){
     return points;
 }
 //=========================================================================================================
-Memoire::Memoire(size_t taille)
-    :taille(taille){}
+Memoire::Memoire(bool on,size_t taille)
+    :on(on),taille(taille){}
