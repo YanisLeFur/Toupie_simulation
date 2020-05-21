@@ -10,6 +10,7 @@
 #include "glchinoise.h"
 #include <deque>
 
+enum Grandeur_physique{psi_point,theta_point,phi_point};
 //Memoire================================================
 class Memoire{
     private:
@@ -40,7 +41,8 @@ class VueOpenGL : public SupportADessin {
   
   // méthode utilitaire offerte pour simplifier
   void dessineCube(QMatrix4x4 const& point_de_vue = QMatrix4x4() );
-  void dessineCone(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double h = 1.5, double r = 0.5);
+  void dessineCone(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double h = 1.5, double r = 0.5,
+                   Grandeur_physique=phi_point,double =0,double =0,double=0);
 
   virtual void dessine(ConeSimple const&) override;
 
