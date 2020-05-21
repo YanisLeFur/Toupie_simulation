@@ -107,6 +107,7 @@ void VueOpenGL::dessine(MasseTombe const& a_dessiner) {
 void VueOpenGL::trace_G(ConeSimple& c){
 
     QMatrix4x4 point_de_vue;
+     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     c.ajouter_point_memoire(c.G_O()+c.get_OA());
 
@@ -125,6 +126,7 @@ void VueOpenGL::trace_G(ConeSimple& c){
 //=========================================================================================================
 void VueOpenGL::trace_G(Toupie& t){
     QMatrix4x4 point_de_vue;
+     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     t.ajouter_point_memoire(t.G_O()+t.get_OA());
     if (t.get_m().GetPoints().size()>=2){
@@ -140,6 +142,7 @@ void VueOpenGL::trace_G(Toupie& t){
 //=========================================================================================================
 void VueOpenGL::trace_G(Pendule& p){
     QMatrix4x4 point_de_vue;
+     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     p.ajouter_point_memoire(p.G_O());
     if (p.get_m().GetPoints().size()>=2){
@@ -160,6 +163,7 @@ void VueOpenGL::trace_G(ToupieChinoise&)
 //=========================================================================================================
 void VueOpenGL::trace_G(MasseTombe& mt){
     QMatrix4x4 point_de_vue;
+     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     mt.ajouter_point_memoire(mt.G_O());
     if (mt.get_m().GetPoints().size()>=2){
@@ -176,7 +180,7 @@ void VueOpenGL::trace_G(MasseTombe& mt){
 void VueOpenGL::dessineAxes (QMatrix4x4 const& point_de_vue, bool en_couleur)
 {
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-
+    prog.setUniformValue("textureId", 5);
   glBegin(GL_LINES);
 
   // axe X
@@ -205,6 +209,7 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
 {
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
 
+    prog.setUniformValue("textureId", 0);
     QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
     glFuncs->glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureBois);
@@ -260,6 +265,10 @@ void VueOpenGL::init()
     // Préparation d'une seconde texture.
     // S'il y devait y en avoir plus, on ferait bien sûr une fonction ;-)
     textureBois= context->bindTexture(QPixmap(":/wood_texture_208389.jpg"), GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+    textureOptique= context->bindTexture(QPixmap(":/optical_illusion.jpg"), GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
@@ -356,7 +365,7 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     /// Attribut la texture 'textureDeChat' à la texture numéro 0 du shader
     QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
     glFuncs->glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureDeChat);
+    glBindTexture(GL_TEXTURE_2D, textureOptique);
 
     double h(hauteur);
     double r(rayon);
