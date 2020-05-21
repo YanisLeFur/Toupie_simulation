@@ -15,17 +15,17 @@ void GLSphereCoupe::initialize(GLuint slices, GLuint stacks)
 
   positions.reserve(3 * size);
 
-  const double alpha(M_PI / double(stacks));//stacks M_PI
+  const double alpha(M_PI / double(stacks));//stacks
   const double beta(2.0*M_PI / double(slices));//slices
 
   positions << 0.0 << 0.0 << 1.0;
 
-  for (GLuint i(1); i < stacks; ++i) {
+  for (GLuint i(1); i < stacks-1; ++i) {
     for (GLuint j(0); j < slices; ++j) {
       float r = sin(i*alpha);
-      float z;
-      if((i<=20)and(i!=0)){z = cos(i*alpha);}
-      else{ z =0.5;}
+      float z = cos(i*alpha);
+      //if((i<=20)and(i!=0)){z = cos(i*alpha);}
+      //else{ z =0.5;}
       float y = sin(j*beta)*r;
       float x = cos(j*beta) * r;
 

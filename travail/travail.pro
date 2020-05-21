@@ -1,19 +1,23 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    TestIntegrateur/testIntegrateur.pro \
-    TestMatrice/testMatrice.pro \
-    TestToupie/testToupie.pro \
-    TestVecteur/testVecteur.pro \
-    TestSysteme/testSysteme.pro \
-    general \
+    #general/
     general/general.pro \
-    #testCustomPlot \
-    testIntegrateur \
-    testMatrice \
-    testSysteme \
-    testVecteur\
-    testToupie\
-    Qt_Gl\
-    Qt_GL/Qt_Gl.pro
+    #testVecteur\
+    testVecteur/testVecteur.pro \
+    #testMatrice\
+    testMatrice/testMatrice.pro \
+    #testToupie\
+    testToupie/testToupie.pro \
+    #testIntegrateur\
+    testIntegrateur/testIntegrateur.pro \
+    #testSysteme\
+    testSysteme/testSysteme.pro \
+    #Qt_GL\
+    Qt_GL/Qt_Gl.pro\
+
+    testCustomPlot/testCustomPlot.pro\
+
+
+
 

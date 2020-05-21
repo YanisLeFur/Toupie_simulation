@@ -1,6 +1,7 @@
 TEMPLATE = lib
 CONFIG += c++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+
 INCLUDEPATH= ../general\
               ../general/outils_Maths\
               ../general/objets\
