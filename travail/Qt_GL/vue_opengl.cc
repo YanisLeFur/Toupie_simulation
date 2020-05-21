@@ -275,7 +275,6 @@ void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
 //=========================================================================================================
 void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, double rayon){
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    prog.setUniformValue("textureId", 0);
 
     /// Attribut la texture 'textureDeChat' à la texture numéro 0 du shader
     QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
@@ -287,46 +286,31 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     double slices(50);
     double theta(2*M_PI/slices);
 
-    glBegin(GL_POLYGON);
-
-    /*prog.setAttributeValue(CoordonneeTextureId, 0.5, 0.5);
-    prog.setAttributeValue(SommetId, 0.0,0.0,h);
-    prog.setAttributeValue(CoordonneeTextureId,r*cos(theta),r*sin(theta));
-    prog.setAttributeValue(SommetId, r*cos(theta),r*sin(theta),h);*/
+    prog.setUniformValue("textureId", 5);
+    glBegin(GL_TRIANGLES);
 
     for(unsigned int i(0);i<=slices;i++){
-    //if(i%2==0){
 
+       prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
+       prog.setAttributeValue(SommetId, 0.0,0.0,0.0);
+       prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
+       prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
+
+
+   }
+    glEnd();
+
+    prog.setUniformValue("textureId", 0);
+    glBegin(GL_POLYGON);
+
+    for(unsigned int i(0);i<=slices;i++){
+
+        prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.0);
         prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
         prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
-    //
-    //}
-    /*else{
-        prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0);
-        prog.setAttributeValue(SommetId, 0.0,0.0,h);
-        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);    //y=h!!
-        prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
-    }*/
 
    }
    glEnd();
-
-    glBegin(GL_TRIANGLES);
-    for(unsigned int i(0);i<=slices;i++){
-    if(i%2==0){
-       prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
-       prog.setAttributeValue(SommetId, 0.0,0.0,0.0);
-       prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
-       prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
-    }
-    else{
-        prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // green
-        prog.setAttributeValue(SommetId, 0.0,0.0,0.0);
-        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
-        prog.setAttributeValue(SommetId, r*cos((i+1)*theta),r*sin((i+1)*theta),h);
-    }
-   }
-    glEnd();
 }
 
 //=========================================================================================================
