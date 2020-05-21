@@ -9,18 +9,6 @@
 #include "glsphere.h"
 #include "glchinoise.h"
 #include "constant.h"
-#include <deque>
-
-//Memoire================================================
-class Memoire{
-    private:
-          std::deque<Vecteur> points;
-           size_t taille;
-     public:
-           Memoire(size_t taille=100);
-           std::deque<Vecteur> GetPoints();
-           void ajouter_point(Vecteur const&);
-};
 
 
 //VueOpenGl================================================
@@ -54,15 +42,15 @@ class VueOpenGL : public SupportADessin {
 
   virtual void dessine(ToupieChinoise const&) override;
 
-  virtual void trace_G(Toupie const&) override;
+  virtual void trace_G(Toupie&) override;
 
-  virtual void trace_G(ConeSimple const&) override;
+  virtual void trace_G(ConeSimple&) override;
 
-  virtual void trace_G(MasseTombe const&) override;
+  virtual void trace_G(MasseTombe&) override;
 
-  virtual void trace_G(Pendule const&) override;
+  virtual void trace_G(Pendule&) override;
 
-  virtual void trace_G(ToupieChinoise const&) override;
+  virtual void trace_G(ToupieChinoise&) override;
 
 
   void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);

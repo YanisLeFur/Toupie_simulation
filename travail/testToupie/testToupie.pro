@@ -22,6 +22,7 @@ SOURCES += TestToupie.cc\
     constant.cc \
     Dessinable.cc \
     Matrice.cc \
+    memoire.cc\
 
 
 
@@ -31,3 +32,4 @@ HEADERS += \ \
     constant.h\
     Dessinable.h \
     Matrice.h \
+    memoire.h\

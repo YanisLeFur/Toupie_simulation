@@ -22,7 +22,8 @@ SOURCES += TestIntegrateur.cc\
     Vecteur.cc \
     Toupie.cc \
     constant.cc \
-    Dessinable.cc
+    Dessinable.cc\
+    memoire.cc\
 
 
 
@@ -32,4 +33,5 @@ HEADERS += \ \
     Vecteur.h \
     Toupie.h \
     constant.h\
-    Dessinable.h
+    Dessinable.h\
+    memoire.h\
