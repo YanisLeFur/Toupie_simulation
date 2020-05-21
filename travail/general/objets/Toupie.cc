@@ -17,13 +17,17 @@ using namespace std;
     Vecteur Toupie::getP_point() const {return P_point;}
 
     Vecteur Toupie::get_OA() const {return OA;}
-	
+
+    Grandeur_physique Toupie::get_Grandeur() const {return grandeur;}
+
+    void Toupie::changer_grandeur(Grandeur_physique g) {grandeur=g;}
+
 	void Toupie::setP(Vecteur const& v) {P=v;}
 	
 	void Toupie::setP_point(Vecteur const& v) {P_point=v;} 
 
-    Toupie::Toupie(SupportADessin* support,double masse,Vecteur P,Vecteur P_point,double I1,double I3,double distance,Vecteur OA)
-        :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA){}
+    Toupie::Toupie(SupportADessin* support,double masse,Vecteur P,Vecteur P_point,double I1,double I3,double distance,Vecteur OA,Grandeur_physique grandeur)
+        :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA),grandeur(grandeur){}
 	
     ostream& Toupie::affiche(ostream& sortie) const {
     sortie  <<"Masse (kg) : "<<masse<<endl
@@ -204,8 +208,8 @@ using namespace std;
 
 //ConeSimple================================================================================================
 
-    ConeSimple::ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA)
-    :Toupie(support,m,P,P_point,3.*m/20.*(r*r+1./4.*h*h),3.*m/10.*r*r,h*3./4.,OA),hauteur(h),rayon(r){}
+    ConeSimple::ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur)
+    :Toupie(support,m,P,P_point,3.*m/20.*(r*r+1./4.*h*h),3.*m/10.*r*r,h*3./4.,OA,grandeur),hauteur(h),rayon(r){}
 
 
     ostream& ConeSimple::affiche(ostream& sortie) const {
@@ -257,8 +261,8 @@ using namespace std;
 
 //ToupieChinoise==============================================================
 	
-    ToupieChinoise::ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA) // d???????
-        :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA),h(h),R(R){}
+    ToupieChinoise::ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur) // d???????
+        :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA,grandeur),h(h),R(R){}
 
     ostream& ToupieChinoise::affiche(ostream& sortie) const {
         sortie<<"Toupie de type Toupie Chinoise: "<<endl;

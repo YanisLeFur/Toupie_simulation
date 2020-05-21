@@ -4,6 +4,7 @@
 #include "Dessinable.h"
 #include "Matrice.h"
 #include "Integrateur.h"
+#include "constant.h"
 
 #ifndef T
 #define T
@@ -28,6 +29,8 @@ class Toupie:public Dessinable{
 
         Vecteur OA; // Vecteur OA
 
+        Grandeur_physique grandeur; //grandeur utilisé pour l'affichage de couleur differente selon une grandeur physique
+
 	public:
 	
 		~Toupie();
@@ -37,12 +40,16 @@ class Toupie:public Dessinable{
         Vecteur getP_point() const; // retourne derivée vecteur position
 
         Vecteur get_OA() const; // retourne le vecteur indiquant le point de contact
+
+        Grandeur_physique get_Grandeur() const; //retourne la grandeur physique dont la toupie utilise pour changer de couleur
+
+        void changer_grandeur(Grandeur_physique); //change la grandeur physique vu précédemment
 		
 		void setP(Vecteur const& v);
 		
 		void setP_point(Vecteur const& v);
 		
-        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A);
+        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A,Grandeur_physique grandeur=null);
 		
         virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristique de la toupies(masse,I1,I3...)
 		
@@ -138,7 +145,7 @@ class ConeSimple:public Toupie{
 		
     public:
 	
-        ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA);
+        ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA, Grandeur_physique grandeur=null);
 		
 		std::ostream& affiche(std::ostream& sortie) const override;
 
@@ -190,7 +197,7 @@ class ToupieChinoise:public Toupie{
 
     public:
 
-    ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA);
+    ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur=null);
 
     std::ostream& affiche(std::ostream& sortie) const override;
 

@@ -52,7 +52,7 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
     matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
 
     dessineCone(matrice,a_dessiner.get_hauteur(),a_dessiner.get_rayon(),
-                theta_point,a_dessiner.getP_point().get_coord(1),a_dessiner.getP_point().get_coord(2),
+                a_dessiner.get_Grandeur(),a_dessiner.getP_point().get_coord(1),a_dessiner.getP_point().get_coord(2),
                 a_dessiner.getP_point().get_coord(3));
 }
 //=========================================================================================================

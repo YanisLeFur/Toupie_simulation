@@ -8,9 +8,9 @@
 #include "Toupie.h"
 #include "glsphere.h"
 #include "glchinoise.h"
+#include "constant.h"
 #include <deque>
 
-enum Grandeur_physique{psi_point,theta_point,phi_point};
 //Memoire================================================
 class Memoire{
     private:
