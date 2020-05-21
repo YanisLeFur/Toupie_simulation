@@ -12,6 +12,7 @@
 void VueOpenGL::dessine(Toupie const& a_dessiner) {
     QMatrix4x4 matrice;
     dessineAxes(matrice);
+    dessinePlateforme(matrice);
     double psi(a_dessiner.getP().get_coord(1));
     double theta(a_dessiner.getP().get_coord(2));
     double phi(a_dessiner.getP().get_coord(3));
@@ -25,7 +26,6 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
 {
     QMatrix4x4 matrice;
     dessineAxes(matrice);
-    matrice.setToIdentity();
     dessinePlateforme(matrice);
     double psi(a_dessiner.getP().get_coord(1));
     double theta(a_dessiner.getP().get_coord(2));
@@ -47,6 +47,7 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
 {
     QMatrix4x4 matrice;
     dessineAxes(matrice);
+    dessinePlateforme(matrice);
     double psi(a_dessiner.getP().get_coord(1));
     double theta(a_dessiner.getP().get_coord(2));
     double phi(a_dessiner.getP().get_coord(3));
@@ -61,16 +62,23 @@ void VueOpenGL::dessine(Pendule const& a_dessiner)
 {
   QMatrix4x4 matrice;
   dessineAxes(matrice);
+  dessinePlateforme(matrice);
+
+  double Ax(a_dessiner.get_OA().get_coord(1));
+  double Ay(a_dessiner.get_OA().get_coord(2));
+  double Az(a_dessiner.get_OA().get_coord(3));
 
   glBegin(GL_LINES);
 
-  prog.setAttributeValue(SommetId, 0.0, 0.0, 0.0);
+  prog.setAttributeValue(SommetId, Ax, Ay, Az);
   prog.setAttributeValue(SommetId,
-                         a_dessiner.get_l()*sin(a_dessiner.getP().get_coord(2)),
-                                                                              0,
-                         -a_dessiner.get_l()*cos(a_dessiner.getP().get_coord(2)));
+                         Ax+a_dessiner.get_l()*sin(a_dessiner.getP().get_coord(2)),
+                                                                              Ay,
+                         Az-a_dessiner.get_l()*cos(a_dessiner.getP().get_coord(2)));
 
   glEnd();
+
+  matrice.translate(Ax,Ay,Az);
 
   matrice.translate(a_dessiner.get_l()*sin(a_dessiner.getP().get_coord(2)),
                                                                          0,
@@ -85,6 +93,7 @@ void VueOpenGL::dessine(MasseTombe const& a_dessiner) {
     QMatrix4x4 matrice;
     glBegin(GL_LINES);
     dessineAxes(matrice);
+    dessinePlateforme(matrice);
     matrice.translate(a_dessiner.getP().get_coord(1),
                       a_dessiner.getP().get_coord(2),
                       a_dessiner.getP().get_coord(3));
@@ -266,6 +275,7 @@ void VueOpenGL::initializePosition()
   matrice_vue.setToIdentity();
   matrice_vue.translate(0.0, 0.0, -4.0);
   matrice_vue.rotate(-90.0, 1.0, 0.0, 0.0);
+  matrice_vue.translate(0.0, 0.0, -4.0);
 }
 //=========================================================================================================
 void VueOpenGL::translate(double x, double y, double z)

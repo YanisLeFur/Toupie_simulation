@@ -259,7 +259,7 @@ using namespace std;
     }
 //endConeSimple===============================================================================================
     double masse_cone(double masse_volumique,double hauteur,double rayon) {
-    return double(masse_volumique*(PI*rayon*rayon*hauteur)/3);
+    return double(masse_volumique*(M_PI*rayon*rayon*hauteur)/3);
     }
 
 	ostream& operator<<(ostream& sortie,ConeSimple const& etre_affiche) {
@@ -447,8 +447,8 @@ using namespace std;
     }
 
 //Pendule======================================================================================================
-    Pendule::Pendule(SupportADessin* support, double m,Vecteur P,Vecteur P_point,double longueur,bool trace_on)
-    :Toupie(support,m,P,P_point,1,1,1,Vecteur(),null,trace_on), longueur(longueur)
+    Pendule::Pendule(SupportADessin* support, double m,Vecteur P,Vecteur P_point,Vecteur OA,double longueur,bool trace_on)
+    :Toupie(support,m,P,P_point,1,1,1,OA,null,trace_on), longueur(longueur)
     {}
 
     double Pendule::get_l() const { return longueur; }

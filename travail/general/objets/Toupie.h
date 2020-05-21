@@ -289,7 +289,7 @@ public:
 
     double get_l() const;//donne la longeur du fil
 
-    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point, double longueur, bool trace_on = true);
+    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point,Vecteur OA, double longueur, bool trace_on = true);
 
     std::ostream& affiche (std::ostream& sortie) const override;
 
