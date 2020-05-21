@@ -112,31 +112,31 @@ void VueOpenGL::trace_G(ConeSimple& c){
     }
 }
 //=========================================================================================================
-void VueOpenGL::trace_G(Toupie const& t){
+void VueOpenGL::trace_G(Toupie& t){
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    m.ajouter_point(t.G_O()+t.get_OA());
-    if (m.GetPoints().size()>=2){
+    t.ajouter_point_memoire(t.G_O()+t.get_OA());
+    if (t.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
-        for(size_t i(0);i<m.GetPoints().size()-1;i++){
+        for(size_t i(0);i<t.get_m().GetPoints().size()-1;i++){
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
-            prog.setAttributeValue(SommetId, m.GetPoints()[i].get_coord(1), m.GetPoints()[i].get_coord(2), m.GetPoints()[i].get_coord(3));
-            prog.setAttributeValue(SommetId, m.GetPoints()[i+1].get_coord(1), m.GetPoints()[i+1].get_coord(2), m.GetPoints()[i+1].get_coord(3));
+            prog.setAttributeValue(SommetId, t.get_m().GetPoints()[i].get_coord(1), t.get_m().GetPoints()[i].get_coord(2), t.get_m().GetPoints()[i].get_coord(3));
+            prog.setAttributeValue(SommetId, t.get_m().GetPoints()[i+1].get_coord(1), t.get_m().GetPoints()[i+1].get_coord(2), t.get_m().GetPoints()[i+1].get_coord(3));
         }
         glEnd();
     }
 }
 //=========================================================================================================
-void VueOpenGL::trace_G(Pendule const& p){
+void VueOpenGL::trace_G(Pendule& p){
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    m.ajouter_point(p.G_O());
-    if (m.GetPoints().size()>=2){
+    p.ajouter_point_memoire(p.G_O());
+    if (p.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
-        for(size_t i(0);i<m.GetPoints().size()-1;i++){
+        for(size_t i(0);i<p.get_m().GetPoints().size()-1;i++){
             prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0);
-            prog.setAttributeValue(SommetId, m.GetPoints()[i].get_coord(1), m.GetPoints()[i].get_coord(2), m.GetPoints()[i].get_coord(3));
-            prog.setAttributeValue(SommetId, m.GetPoints()[i+1].get_coord(1), m.GetPoints()[i+1].get_coord(2), m.GetPoints()[i+1].get_coord(3));
+            prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i].get_coord(1), p.get_m().GetPoints()[i].get_coord(2), p.get_m().GetPoints()[i].get_coord(3));
+            prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i+1].get_coord(1), p.get_m().GetPoints()[i+1].get_coord(2), p.get_m().GetPoints()[i+1].get_coord(3));
         }
         glEnd();
     }
@@ -147,16 +147,16 @@ void VueOpenGL::trace_G(ToupieChinoise&)
 
 }
 //=========================================================================================================
-void VueOpenGL::trace_G(MasseTombe const& mt){
+void VueOpenGL::trace_G(MasseTombe& mt){
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    m.ajouter_point(mt.G_O());
-    if (m.GetPoints().size()>=2){
+    mt.ajouter_point_memoire(mt.G_O());
+    if (mt.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
-        for(size_t i(0);i<m.GetPoints().size()-1;i++){
+        for(size_t i(0);i<mt.get_m().GetPoints().size()-1;i++){
             prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0);
-            prog.setAttributeValue(SommetId, m.GetPoints()[i].get_coord(1), m.GetPoints()[i].get_coord(2), m.GetPoints()[i].get_coord(3));
-            prog.setAttributeValue(SommetId, m.GetPoints()[i+1].get_coord(1), m.GetPoints()[i+1].get_coord(2), m.GetPoints()[i+1].get_coord(3));
+            prog.setAttributeValue(SommetId, mt.get_m().GetPoints()[i].get_coord(1), mt.get_m().GetPoints()[i].get_coord(2), mt.get_m().GetPoints()[i].get_coord(3));
+            prog.setAttributeValue(SommetId, mt.get_m().GetPoints()[i+1].get_coord(1), mt.get_m().GetPoints()[i+1].get_coord(2), mt.get_m().GetPoints()[i+1].get_coord(3));
         }
         glEnd();
     }
