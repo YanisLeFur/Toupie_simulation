@@ -1,0 +1,106 @@
+# PROGRESSION
+
+Format : [V(=fait)/X(=à faire)] TACHE	Semaine de realisation(remplacer les ??)
+
+Vous pouvez ajouter vos propres tâches si vous le jugez utile
+(p.ex. décomposition plus fine).
+
+[V] créer le JOURNAL                                    	 1
+[V] lire complètement le descriptif général                  	 1
+[V] s'inscrire en binôme                                      	 1
+[V] fusionner les deux projets (y compris les fichiers JOURNAL)  2
+[V] Makefile                                               	 2
+[V] Vecteur finis (pleinement opérationnels et testés)  	 2
+[V] fichier REPONSES                                         	 2
+[V] Vecteur  	                                         	 2
+[V] Matrice                                               	 2
+[V] Toupies                                                	 4/5/8/9
+[V] integrateurs                                          	 5/8/9
+[V] Systeme	                                            	??
+[V] exerciceP9                                           	??
+[X] Graphisme                                           	3/8
+[X] Indicateurs							??
+[X] Toupies générales						??
+[] Autres Intégrateurs		                                ??
+                                   				??
+[ ] fichier CONCEPTION                                         	??
+[ ] fichier README                                        	??
+[ ] fichier NOMS                                        	??
+
+======================================================================
+# A FAIRE (PROCHAINE ETAPE)
+
+PENSER AUX TEMPLATE + GESTION  ERREUR!!!
+
+
+======================================================================
+# SUIVI§
+## Semaine 2 :
+
+Travail sur la class Vecteur:
+
+-pas de problème particulier pour la classe Vecteur et le fichier test de celle-ci.
+-reflexion sur la gestion d'erreur et revision sur les bases de ces gestions pour permettre de les implémenter plus tard dans le(s) fichiers main(s).
+
+--------------------------------------------------
+## Semaine 3 :
+
+	- Nous avons dans un premier lieu essayé de créer la matrice comme étant un tableau de trois Vecteurs mais cela n'était conceptuelement pas totalement correct et compliquais le code, nous avons donc modélisé une matrice comme étant un vector de vector de double.
+
+	-renseignements sur le logiciel qt et openGl et tests sur les exercices mit à la disposition dans le cours pour essayer de comprendre comment créer des formes, leur attribuer des couleurs et les faire bouger.
+
+
+--------------------------------------------------
+## Semaine 4 :
+
+	Réflexion et début d'implémentation de la classe Toupie, quelques problèmes conceptuels sur quelles méthodes était virtuelles purs ou non, que signifiait d'avoir une classe abstraite d'une toupie. Problèmes qui se sont finalement réglé lors de la constructions de la sous classe ConeSimple nous permettant de comprendre qu'il n'existait pas de toupie "générique" mais plus plusieurs types de toupie qui hérite donc de la classe toupie.La classe toupie qui doit donc bien rester abstraite.Cependant nous nous posons encore des questions sur la façon que la toupie va évoluer.
+
+
+--------------------------------------------------
+## Semaine 5 :
+
+	Continuation l'implémentation de la classe Toupie avec en parallèle le début de la création de la classe Integrateur nous a permis de mieux comprendre le fonctionnement de cette première. En effet, cela nous à permis de comprendre comment était utilisé la classe toupie par la suite du programme et que comment la toupie allait évoluer dans le système.Enfin nous avons fini par la création d'un fichier test pour la classe Toupie.
+
+--------------------------------------------------
+## Semaine 6 :
+
+	Création d'un fichier de test pour la classe intégrateur en mettant en place le logiciel gnu plot pour nous permettre de verifier aussi si nos toupies était correctement réalisées.Cependant nous avons noté une erreur sur la classe pendule qui nous donnait une courbe très particulière qui était en finalement lié au fait que nous tracions une courbe de y en fonction de x, nous avons donc rajouté une dimension de temps nous permettant d'obtenir une courbe sinusoïdale comme désirée.
+
+--------------------------------------------------
+## Semaine 7 :
+
+	Implementation de la classe Dessinable, Support à dessin et Système debutant par une reflexion sur ce que sont exactement ces trois classes.Nous avons donc déduit que la classe dessinante représentait tout objet physique pouvant être représenter graphiquement ou par des coordonées, support à dessin étant la façon d'affichage que l'on va choisir et enfin la classe système étant un ensemble de toupie affiché selon un support à dessin.Implementation de ces trois classes sans trop de problème excepté un problème d'indépendance cyclique de ce que nous pensons car la classe dessinable avais besoin de la classe toupie et la classe toupie avait besoin de la classe dessinable et des problèmes de redefinitions réglés en rajoutant des prototypes des différentes classes de toupies et un ifndef, define et endif, tout cela dans la classe dessinable.Enfin,nous remarquons pendant le test des classes dessins et plus particulièrement systèmes que notre intégrateur euler-cromer n'est pas assez précis et donc diverge des valeurs désirés rapidement ce qui explique l'implémentations prochainement d'autres intégrateurs.
+	De plus, nous sommes passé de la bibliothèque geany a qt à l'aide des exemples mit dans le cours nous permettant une bien meilleur vision global du projet.
+	Enfin, nous terminons cette semaine par une revisions de OpenGl et de la façon d'afficher des objets dans qt à l'aide des exemples.
+
+--------------------------------------------------
+## Semaine 8 :
+	Nous commençons donc cette semaine par l'affichage d'un pendule de forme sphérique et relier à l'origine par un fil. Nous continuons donc facilement par l'implementation d'une masse qui tombe de forme sphérique, il nous a donc suffit de reprendre l'affichage du pendule pour l'implementer à la masse qui tombe.
+	Nous avons ensuite essayer de créer un cone pour la toupie conique à partir d'une sphere cependant, nous ne pouvons pas augmenter le rayon du one indépendamment de la hauteur il nous faudra donc revoir cet affichage.
+	Enfin, nous avons rencontré un problème plutôt consequent du à la mise à jour de MacOS sur Catalina.En effet, cela empêchait tout progression sur qt.Ce problème se décomposait en faite en 2 sous-problème, le premier étant que qt ne reconnaissait plus la version du mac, il fallait donc rentrer dans les fichiers de qt pour modifier une ligne de code.La deuxième erreur, plus complexe, étant du à un problème d'extension de fichier libs créer pendant le build de Qt_GL. En effet, qt créait sous macOS des fichier libs.dylib et recherchait ensuite pour l'affichage un fichier libs.a n'existant pas il nous à donc fallut retrouver le fichier make créé dans le build pour modifier cela cependant, nous n'avons pas trouver de réel solution stable.
+
+--------------------------------------------------
+## Semaine 9 :
+	Nous débutons par cette semaine par des tests sur CustomPlot un programme nous permettant de pouvoir créer des modélisations des courbes des invariants du mouvement des toupies.Cependant nous n'avons pas débuté l'implémentation des equations des toupies mais plus une mise en place d'une reflexion et d'une compréhension	du programme en lui même.
+De plus, nous avons mis en place les invariants du mouvement pour les toupies.
+
+
+--------------------------------------------------
+## Semaine 10 :
+	début d'implémentation de CustomPlot sur notre programme malheureusement beaucoup d'erreurs surviennent notamment d'architecture lorsque l'on ajoute les fichier lié à Customplot dans notre programme.Cependant, nous décidons de laisser cette partie(facultative) pour l'instant et se concentrer sur l'implémentation des grandeurs physiques pour la classe toupie.
+
+
+--------------------------------------------------
+## Semaine 11 :
+	Développement des méthodes manquante à la classe Toupie pour permettre de créer une toupie générale et implémentation d'une sous classe Toupie chinoise.
+
+
+--------------------------------------------------
+## Semaine 12 :
+Implémentation d'une couleur pour le background de la fenêtre dédié à l'affichage de nos toupies et modification du code du main de qtgl pour permettre une simplification du choix des toupies à afficher.
+recherche et début d'implémentation de shaders pour nos toupies cependant, nous rencontrons des problème sur la dimension à donner à l'image sur un cone.
+
+--------------------------------------------------
+## Semaine 13 :
+
+

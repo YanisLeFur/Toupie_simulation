@@ -1,0 +1,99 @@
+
+Question 1.1:
+
+	attribut: * vector de type double
+
+	méthodes:  * meme_dimension(private): vérifie si deux vecteurs ont le meme nombre de composantes.
+		   * augmente: permettant d'augmenter la dimension d'une unité le vecteur avec une  valeur rentrée en argument par référence constante.
+		   * verifier: gère l'erreure commise durant les opérations de double.
+		   * set_coord: permettant de mettre une valeur (entrée en argument) dans une composante du vecteur(aussi rentrée en argument).
+		   * get_coord: permet de retourner la valeur de la composante(rentré en argument).
+		   * affiche: permet d'afficher les coordonnées d'un vecteur.
+		   * norme: retourne la norme du vecteur.
+		   * norme2: retourne la norme au carre du vecteur.
+		   
+
+
+
+Question 1.2:
+	
+	Nous avons choisit de lancer une erreur (throw) si les vecteurs n'ont pas la même dimension.
+
+
+Question 4.1:
+
+	Nous n'avons pas créé de constructeur par copie pour la classe Vecteur car cela nous paraissait inutile compte tenu du faite qu'il existe 
+	deja un constructeur par copie par défaut géré par le compilateur.
+
+Question 4.2:
+	
+	a) au niveau des attributs, cela ne reviendrait à rien changer car les angles et la longueur étant des doubles, ils rentrent donc dans le cadre
+	   du vector de double mit en place comme attribut de la classe Vecteur.
+	b) Cependant, la difficulté majeur serait de différencier les opérations quand l'utilisateur voudras utiliser des coordonnées sphériques (en effet 
+	   une addition,mulitplication... ne se fait pas de la même manière lorsque l'on utilise les coordonnées cartésiennes ou sphérique). Le problème 
+	   c'est que comme dit dans la réponse (a), nous n'avons aucune façon de les différencier. Il faudrait donc inventer une manière de les différencier
+	   (avec une booléen par exemple) et ensuite redéfinir toute la classe Vecteur ce qui serait très complexe.
+
+Question 4.3:
+
+	Nous avons introduit:
+				* operator==: compare deux vecteurs, regarde si ils sont de même dimension et on les même composantes et retourne un booléen 
+				
+				* operator!=: opposé de l'operator==.
+
+		   		* operator+=,-=,*=(interne).
+
+		   		* operator-(interne /aucune prise d'argument): retourne l'opposé du vecteur.
+			
+				* operator ~: retourne la norme d'un vecteur.
+	
+				* operator^=: retourne le produit vectoriel entre deux vecteurs.
+
+		   		* operator*(interne/ double en argument): retourne le produit d'un scalaire et d'un vecteur.
+
+		  	 	* operator +,-,*,^(externe): permet la meme chose que operator +=,-=,*=
+	  	 		  mais en prenant en arguments deux Vecteurs et retourne un vecteur constant.
+
+		   		* operator* (externe/scalaire en argument):permet la meme chose que l'operator *=(avec argument un scalaire) mais prends 
+		 		  cette fois-ci en argument un scalaire et un vecteur.
+	
+		   		* operator<< (externe): utilise la méthode affiche.
+
+
+
+Question 6.1: La classe Conesimple est une sous-classe de Toupie. Elle a deux attributs supplémentaire (hauteur, rayon). Elles se différencie aussi sur 
+	      les méthodes eq_mouv (où elle a ses propres équations de mouvement) et la méthode affiche.
+
+Question 7.1: Nous avons simplement construit la classe intégrateur comme ayant une seule méthode virtual pure, c'est à dire qu'elle ne sera jamais utilisé 
+	     (ou même possible d'appeler).
+
+Question 7.2: La classe IntegrateurEulerCromer est la sous-classe héritant de Integrateur.
+
+question 8.1:la méthode dessine est une méthode virtuelle pur de la classe SupportADessin(qui est abstraite), c'est donc une méthode polymorphique car elle sera utilisé par des sous-classes à travers des pointeurs.
+
+Question 8.2:la classe système devra contenir une collection hétérogène de toupies, c'est à dire un tableau de pointeur sur des toupies. Ceci nous permettra d'utiliser le polymorphisme en ayant deja possession des pointeurs avec les méthodes virtuelles de fonctions spécifiques aux toupies.
+
+Question 8.3: Il faut faire attentions à bien gérer la mémoire pour ne pas avoir des pointeurs qui ne pointent vers rien. Pour cela il existent deux solutions, l la première étant d'utiliser des unique_ptr qui vont gérer la mémoire qu'ils vont allouer ou être certain de bien désavouer la mémoire une fois que l'objet pointé a été détruit.
+
+Question 8.4:la classe système contient un tableau de unique_ptr sur des toupies et un pointeur sur un intégrateur.Nous avons utiliser un tableau de unique_ptr sur des toupies qui nous permet d'avoir une collection hétérogène de toupie, ceci nous permet de stocker nos toupies de façon générique mais d'y accéder de façon spécifique à travers le polymorphsisme. De plus, l'utilisation d'unique ptr nous permet de pouvoir facilement gérer la mémoire.Enfin, le pointeur sur l'intégrateur qui est elle même une classe abstraite nous permet d'avoir un intégrateur global qui peut agir sur les différentes toupies de notre système.Nous avons choisis d'avoir notre système qui pointe sur un intégrateur plutôt que les toupies qui pointe vers un intégrateur car nous avons pensé qu'un système devrait avoir une façon à la fois de représenter les objets qu'il contient et que cela ne serait sans sens physique d'avoir un système qui est décrit de deux façons différentes simultanément 
+
+
+Question 11.1:Nous mettons ces méthodes dans la classe toupie car ce sont des éléments représentant le mouvement des toupies.
+
+Question 13.1:Nous pouvons changer d'intégrateur à partir de la classe système avec la méthode changer d'integrateur ce qui va changer la façon d'intégrer de toutes les toupies appartenant à ce système	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
