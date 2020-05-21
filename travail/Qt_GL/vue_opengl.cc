@@ -394,7 +394,7 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     for(unsigned int i(0);i<=slices;i++){
 
         prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.0);
-        prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
+        prog.setAttributeValue(CoordonneeTextureId,0.5*cos(i*theta)+0.5,0.5*sin(i*theta)+0.5);
         prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
 
    }

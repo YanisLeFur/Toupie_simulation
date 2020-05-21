@@ -177,7 +177,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent* event)
    */
 
   if (event->buttons() & Qt::LeftButton) {
-    constexpr double petit_angle(.4); // en degrés
+    constexpr double petit_angle(.2); // en degrés
 
     // Récupère le mouvement relatif par rapport à la dernière position de la souris
     QPointF d = event->pos() - lastMousePosition;
