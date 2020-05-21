@@ -207,7 +207,7 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
 
     QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
     glFuncs->glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureDeChat);
+    glBindTexture(GL_TEXTURE_2D, textureBois);
 
     glBegin(GL_POLYGON);
 
@@ -259,7 +259,7 @@ void VueOpenGL::init()
 
     // Préparation d'une seconde texture.
     // S'il y devait y en avoir plus, on ferait bien sûr une fonction ;-)
-    textureFractale = context->bindTexture(QPixmap(":/mandelbrot.jpeg"), GL_TEXTURE_2D);
+    textureBois= context->bindTexture(QPixmap(":/wood_texture_208389.jpg"), GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
