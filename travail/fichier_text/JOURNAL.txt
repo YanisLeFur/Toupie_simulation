@@ -103,4 +103,9 @@ recherche et début d'implémentation de shaders pour nos toupies cependant, nou
 --------------------------------------------------
 ## Semaine 13 :
 
+-changer de couleurs cones en fonctions de grandeurs physiques (phi_point,psi_point,theta_point)
+-trace_g pour plusieurs toupies à la fois et implémentation de la trace pour toutes les toupies
+-memoire en argument de toupie
+
+
 
