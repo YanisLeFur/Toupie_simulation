@@ -140,6 +140,10 @@ class ConeSimple:public Toupie{
         ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA);
 		
 		std::ostream& affiche(std::ostream& sortie) const override;
+
+        double get_hauteur() const;
+
+        double get_rayon() const;
 		
 		Vecteur eq_mouv() const override;
 		

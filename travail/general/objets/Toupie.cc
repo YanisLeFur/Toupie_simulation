@@ -209,7 +209,17 @@ using namespace std;
     ostream& ConeSimple::affiche(ostream& sortie) const {
         sortie<<"Toupie de type Cone Simple: "<<endl;
             this->Toupie::affiche(sortie);
-            return sortie;
+        return sortie;
+    }
+
+    double ConeSimple::get_hauteur() const
+    {
+        return hauteur;
+    }
+
+    double ConeSimple::get_rayon() const
+    {
+        return rayon;
     }
 
     Vecteur ConeSimple::eq_mouv() const {

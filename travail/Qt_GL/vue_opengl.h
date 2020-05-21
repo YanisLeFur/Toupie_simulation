@@ -39,7 +39,7 @@ class VueOpenGL : public SupportADessin {
   
   // méthode utilitaire offerte pour simplifier
   void dessineCube(QMatrix4x4 const& point_de_vue = QMatrix4x4() );
-  void dessineCone(QMatrix4x4 const& point_de_vue = QMatrix4x4());
+  void dessineCone(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double h = 1.5, double r = 0.5);
 
   virtual void dessine(ConeSimple const&) override;
 

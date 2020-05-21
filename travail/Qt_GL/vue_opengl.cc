@@ -33,7 +33,7 @@ void VueOpenGL::dessine(Toupie const& a_dessiner) {
     matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
     matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
     matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
-    dessineCone(matrice);
+    dessineCone(matrice,1.5,0.5);
 }
 //=========================================================================================================
 void VueOpenGL::dessine(ConeSimple const& a_dessiner)
@@ -46,7 +46,7 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
     matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
     matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
     matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
-    dessineCone(matrice);
+    dessineCone(matrice,a_dessiner.get_hauteur(),a_dessiner.get_rayon());
 }
 //=========================================================================================================
 void VueOpenGL::dessine(Pendule const& a_dessiner)
@@ -251,7 +251,7 @@ void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
   glEnd();
 }
 //=========================================================================================================
-void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue){
+void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, double rayon){
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     prog.setUniformValue("textureId", 0);
 
@@ -260,8 +260,8 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue){
     glFuncs->glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureDeChat);
 
-    double h(1.5);
-    double r(0.5);
+    double h(hauteur);
+    double r(rayon);
     double slices(50);
     double theta(2*M_PI/slices);
 
@@ -288,8 +288,6 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue){
 
    }
    glEnd();
-
-
 
     glBegin(GL_TRIANGLES);
     for(unsigned int i(0);i<=slices;i++){
