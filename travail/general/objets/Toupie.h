@@ -48,6 +48,8 @@ class Toupie:public Dessinable{
 
         Grandeur_physique get_Grandeur() const; //retourne la grandeur physique dont la toupie utilise pour changer de couleur
 
+        bool get_trace_on(); // retourne le bool indiquant si on veut la trace ou pas
+
         void changer_grandeur(Grandeur_physique); //change la grandeur physique vu précédemment
 		
 		void setP(Vecteur const& v);
@@ -56,7 +58,7 @@ class Toupie:public Dessinable{
 
         void ajouter_point_memoire(Vecteur const&);
 		
-        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A,Grandeur_physique grandeur=null);
+        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A,Grandeur_physique grandeur=null, bool trace_on = true);
 		
         virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristique de la toupies(masse,I1,I3...)
 		
@@ -152,7 +154,7 @@ class ConeSimple:public Toupie{
 		
     public:
 	
-        ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA, Grandeur_physique grandeur=null);
+        ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA, Grandeur_physique grandeur=null, bool trace_on = true);
 		
 		std::ostream& affiche(std::ostream& sortie) const override;
 
@@ -204,7 +206,7 @@ class ToupieChinoise:public Toupie{
 
     public:
 
-    ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur=null);
+    ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur=null, bool trace_on = true);
 
     std::ostream& affiche(std::ostream& sortie) const override;
 
@@ -251,7 +253,7 @@ std::ostream& operator<<(std::ostream&,ToupieChinoise const& etre_affiche);
 class MasseTombe:public Toupie{
 	public:
 	
-	MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point);
+    MasseTombe(SupportADessin* support, double m, Vecteur P, Vecteur P_point, bool trace_on = true);
 	
 	std::ostream& affiche (std::ostream& sortie) const override;
 	
@@ -287,7 +289,7 @@ public:
 
     double get_l() const;//donne la longeur du fil
 
-    Pendule(SupportADessin* support, double m,Vecteur P,Vecteur P_point,double longueur);
+    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point, double longueur, bool trace_on = true);
 
     std::ostream& affiche (std::ostream& sortie) const override;
 
