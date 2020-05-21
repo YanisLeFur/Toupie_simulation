@@ -55,7 +55,7 @@ class VueOpenGL : public SupportADessin {
 
   void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
 
-  void dessinePlateforme(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
+  void dessinePlateforme(QMatrix4x4 const& point_de_vue);
 
   void dessineSphere(QMatrix4x4 const& point_de_vue,
                        double rouge = 0.0, double vert = 0.0, double bleu = 1.0);

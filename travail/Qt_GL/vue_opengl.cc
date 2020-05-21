@@ -25,6 +25,8 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
 {
     QMatrix4x4 matrice;
     dessineAxes(matrice);
+    matrice.setToIdentity();
+    dessinePlateforme(matrice);
     double psi(a_dessiner.getP().get_coord(1));
     double theta(a_dessiner.getP().get_coord(2));
     double phi(a_dessiner.getP().get_coord(3));
@@ -188,6 +190,37 @@ void VueOpenGL::dessineAxes (QMatrix4x4 const& point_de_vue, bool en_couleur)
   prog.setAttributeValue(SommetId, 0.0, 0.0, 1.0);
 
   glEnd();
+}
+
+void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
+{
+    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
+    glFuncs->glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureDeChat);
+
+    glBegin(GL_POLYGON);
+
+    /*prog.setAttributeValue(CouleurId, 0.707, 0.395, 0.113); // bleu
+    prog.setAttributeValue(SommetId, 1000.0, 1000.0, 0.0);
+    prog.setAttributeValue(SommetId, 50.0, -50.0, 0.0);
+    prog.setAttributeValue(SommetId, -50.0, 50.0, 0.0);
+    prog.setAttributeValue(SommetId, -50.0, -50.0, 0.0);*/
+
+    double r(100);
+    double slices(50);
+    double theta(2*M_PI/slices);
+
+    for(unsigned int i(0);i<=slices;i++){
+
+        prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.0);
+        prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
+        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),0);
+
+   }
+
+   glEnd();
 }
 //=========================================================================================================
 SupportADessin* VueOpenGL::copie() const {}
