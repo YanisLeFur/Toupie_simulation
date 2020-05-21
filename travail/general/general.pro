@@ -22,6 +22,7 @@ HEADERS += \
     Integrateur.h \
     Dessinable.h \
     Systeme.h \
+    memoire.h\
    # qcustomplot.h\
    # mainwindow.h\
     #ui_mainwindow.h
@@ -34,6 +35,7 @@ SOURCES += \
     Matrice.cc \
     Toupie.cc \
     constant.cc \
+    memoire.cc\
    # qcustomplot.cpp\
    # mainwindow.cpp\
 

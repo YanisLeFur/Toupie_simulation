@@ -22,6 +22,16 @@ int main(){
     Toupie toupie(&text,m,P1,P1_point,I1,I3,d,Vecteur());
     ConeSimple cone1(&text,m,1.5,0.5,P1,P1_point,Vecteur());
     ConeSimple cone2(&text,masse_cone(0.1,0.5,1.5),1.5,0.5,P2,P2_point,Vecteur());
+
+
+    toupie.get_m().ajouter_point(Vecteur({0,0,0}));
+    cout<<"test: "<<toupie.get_m().GetPoints().size()<<endl;
+    /*Memoire mem;
+    mem.ajouter_point(Vecteur({0,0,0}));
+    cout<<"test: "<<mem.GetPoints().size()<<endl;
+
+*/
+
     ToupieChinoise tc(&text,masse_chinoise(0.1,0.02,0.15),0.02,0.15,Vecteur({0,0.11,0,0,0}),Vecteur({50,0,0,0,0}),Vecteur({0,0,0}));
     IntegrateurRungeKutta RK;
     IntegrateurNewmark NM;

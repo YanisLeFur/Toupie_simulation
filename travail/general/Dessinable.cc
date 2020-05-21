@@ -44,23 +44,23 @@ void TextViewer::dessine(ToupieChinoise const& chinoise) {
         <<"derivee : "<<Vecteur({modulo_2pi(chinoise.getP_point().get_coord(1)),modulo_2pi(chinoise.getP_point().get_coord(2)),modulo_2pi(chinoise.getP_point().get_coord(3)),chinoise.getP_point().get_coord(4),chinoise.getP_point().get_coord(5)})<<endl;
 }
 
-void TextViewer::trace_G(Toupie const& toupie) {
+void TextViewer::trace_G(Toupie& toupie) {
     flot<<"centre de masse : "<< toupie.G_O() << endl;
 }
 
-void TextViewer::trace_G(ConeSimple const& conesimple) {
+void TextViewer::trace_G(ConeSimple& conesimple) {
     flot<<"centre de masse : "<< conesimple.G_O() << endl;
 }
 
-void TextViewer::trace_G(MasseTombe const& massetombe) {
+void TextViewer::trace_G(MasseTombe& massetombe) {
     flot<<"centre de masse : "<< massetombe.G_O() << endl;
 }
 
-void TextViewer::trace_G(Pendule const& pendule) {
+void TextViewer::trace_G(Pendule& pendule) {
     flot<<"centre de masse : "<< pendule.G_O() << endl;
 }
 
-void TextViewer::trace_G(const ToupieChinoise & chinoise)
+void TextViewer::trace_G(ToupieChinoise & chinoise)
 {
     flot<<"centre de masse : "<< chinoise.G_O() << endl;
 }

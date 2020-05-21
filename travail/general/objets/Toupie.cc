@@ -5,8 +5,7 @@
 #include "Matrice.h"
 #include "Toupie.h"
 #include "constant.h"
-//#include <QMainWindow>
-//#include <QVector>
+#include "memoire.h"
 using namespace std;
 
 //Toupie================================================================================================
@@ -18,16 +17,22 @@ using namespace std;
 
     Vecteur Toupie::get_OA() const {return OA;}
 
+    Memoire Toupie::get_m() const{return m;}
+
     Grandeur_physique Toupie::get_Grandeur() const {return grandeur;}
 
     void Toupie::changer_grandeur(Grandeur_physique g) {grandeur=g;}
 
 	void Toupie::setP(Vecteur const& v) {P=v;}
-	
-	void Toupie::setP_point(Vecteur const& v) {P_point=v;} 
+
+    void Toupie::setP_point(Vecteur const& v) {P_point=v;}
+
+    void Toupie::ajouter_point_memoire(Vecteur const& v){
+        m.ajouter_point(v);
+    }
 
     Toupie::Toupie(SupportADessin* support,double masse,Vecteur P,Vecteur P_point,double I1,double I3,double distance,Vecteur OA,Grandeur_physique grandeur)
-        :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA),grandeur(grandeur){}
+        :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA),grandeur(grandeur),m(Memoire(100)){}
 	
     ostream& Toupie::affiche(ostream& sortie) const {
     sortie  <<"Masse (kg) : "<<masse<<endl
@@ -196,7 +201,7 @@ using namespace std;
         return (Vecteur({0,0,1}))*(omega_G()^LG_G());
     }
 
-    void Toupie::trace_G() const{
+    void Toupie::trace_G(){
         support->trace_G(*this);
     }
 
@@ -247,7 +252,7 @@ using namespace std;
 		return unique_ptr<ConeSimple>(new ConeSimple(*this));
 	}
 
-    void ConeSimple::trace_G() const{
+    void ConeSimple::trace_G(){
         support->trace_G(*this);
     }
 //endConeSimple===============================================================================================
@@ -350,7 +355,7 @@ using namespace std;
         return R*omega_O()^Vecteur(0,0,1);
     }
 
-    void ToupieChinoise::trace_G() const{
+    void ToupieChinoise::trace_G(){
         support->trace_G(*this);
     }
 
@@ -430,7 +435,7 @@ using namespace std;
         return P;
     }
 
-    void MasseTombe::trace_G() const{
+    void MasseTombe::trace_G(){
         support->trace_G(*this);
     }
 
@@ -487,7 +492,7 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
      return P;
  }
 
- void Pendule::trace_G() const{
+ void Pendule::trace_G(){
      support->trace_G(*this);
  }
 

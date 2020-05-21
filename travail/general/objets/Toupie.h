@@ -5,6 +5,7 @@
 #include "Matrice.h"
 #include "Integrateur.h"
 #include "constant.h"
+#include "memoire.h"
 
 #ifndef T
 #define T
@@ -31,6 +32,8 @@ class Toupie:public Dessinable{
 
         Grandeur_physique grandeur; //grandeur utilisé pour l'affichage de couleur differente selon une grandeur physique
 
+        Memoire m;
+
 	public:
 	
 		~Toupie();
@@ -41,6 +44,8 @@ class Toupie:public Dessinable{
 
         Vecteur get_OA() const; // retourne le vecteur indiquant le point de contact
 
+        Memoire get_m() const; //retourne les points G en mémoire (pour l'affichage graphique)
+
         Grandeur_physique get_Grandeur() const; //retourne la grandeur physique dont la toupie utilise pour changer de couleur
 
         void changer_grandeur(Grandeur_physique); //change la grandeur physique vu précédemment
@@ -48,6 +53,8 @@ class Toupie:public Dessinable{
 		void setP(Vecteur const& v);
 		
 		void setP_point(Vecteur const& v);
+
+        void ajouter_point_memoire(Vecteur const&);
 		
         Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A,Grandeur_physique grandeur=null);
 		
@@ -127,7 +134,7 @@ class Toupie:public Dessinable{
 
         double prod_mixt() const; // le produit mixte (omega^L)*a
 
-        virtual void trace_G() const override;
+        virtual void trace_G() override;
 
 };
 
@@ -161,7 +168,7 @@ class ConeSimple:public Toupie{
 		
 		std::unique_ptr<ConeSimple> clone() const;
 
-        virtual void trace_G() const override;
+        virtual void trace_G() override;
 };
 
 double masse_cone(double masse_volumique,double hauteur,double rayon);//calcule la masse du cone a partir d'une masse volumique,une hauteur et un rayon associés au cone
@@ -221,7 +228,7 @@ class ToupieChinoise:public Toupie{
 
     Vecteur vC_O() const;
 
-    virtual void trace_G() const override;
+    virtual void trace_G() override;
 
 };
 
@@ -264,7 +271,7 @@ class MasseTombe:public Toupie{
 
     virtual Vecteur G_O() const override;
 
-    virtual void trace_G() const override;
+    virtual void trace_G() override;
 };	
 
 std::ostream& operator<<(std::ostream&,MasseTombe const& etre_affiche);
@@ -300,7 +307,7 @@ public:
 
     virtual Vecteur G_O() const override;
 
-    virtual void trace_G() const override;
+    virtual void trace_G() override;
 
 };
 

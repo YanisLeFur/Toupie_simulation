@@ -6,21 +6,6 @@
 #include <QGLContext>
 #include <QOpenGLFunctions>
 
-//memoire=================================================================================================
-void Memoire::ajouter_point(Vecteur const& P){
-
-    if (points.size()>=taille){
-        points.pop_front();
-    }
-    points.push_back(P);
-}
-//=========================================================================================================
-std::deque<Vecteur> Memoire::GetPoints(){
-    return points;
-}
-//=========================================================================================================
-Memoire::Memoire(size_t taille)
-    :taille(taille){}
 
 // VueOpenGL===============================================================================================
 
@@ -108,31 +93,35 @@ void VueOpenGL::dessine(MasseTombe const& a_dessiner) {
     glEnd();
 }
 //=========================================================================================================
-void VueOpenGL::trace_G(ConeSimple const& c){
+void VueOpenGL::trace_G(ConeSimple& c){
+
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    m.ajouter_point(c.G_O());
-    if (m.GetPoints().size()>=2){
+    c.ajouter_point_memoire(c.G_O()+c.get_OA());
+
+    if (c.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
-        for(size_t i(0);i<m.GetPoints().size()-1;i++){
+        for(size_t i(0);i<c.get_m().GetPoints().size()-1;i++){
+
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0);
-            prog.setAttributeValue(SommetId, m.GetPoints()[i].get_coord(1), m.GetPoints()[i].get_coord(2), m.GetPoints()[i].get_coord(3));
-            prog.setAttributeValue(SommetId, m.GetPoints()[i+1].get_coord(1), m.GetPoints()[i+1].get_coord(2), m.GetPoints()[i+1].get_coord(3));
+            prog.setAttributeValue(SommetId, c.get_m().GetPoints()[i].get_coord(1), c.get_m().GetPoints()[i].get_coord(2), c.get_m().GetPoints()[i].get_coord(3));
+            prog.setAttributeValue(SommetId, c.get_m().GetPoints()[i+1].get_coord(1), c.get_m().GetPoints()[i+1].get_coord(2), c.get_m().GetPoints()[i+1].get_coord(3));
+
         }
         glEnd();
     }
 }
 //=========================================================================================================
-void VueOpenGL::trace_G(Toupie const& t){}
+void VueOpenGL::trace_G(Toupie& t){}
 //=========================================================================================================
-void VueOpenGL::trace_G(Pendule const& p){}
+void VueOpenGL::trace_G(Pendule& p){}
 
-void VueOpenGL::trace_G(const ToupieChinoise &)
+void VueOpenGL::trace_G(ToupieChinoise&)
 {
 
 }
 //=========================================================================================================
-void VueOpenGL::trace_G(MasseTombe const& m){}
+void VueOpenGL::trace_G(MasseTombe& m){}
 //=========================================================================================================
 void VueOpenGL::dessineAxes (QMatrix4x4 const& point_de_vue, bool en_couleur)
 {
