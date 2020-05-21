@@ -35,6 +35,7 @@ class SupportADessin{
 
         virtual void trace_G(Pendule const&) = 0;
 
+        virtual void trace_G(ToupieChinoise const&) = 0;
 };
 
 //Dessinable=============================================================
@@ -85,6 +86,8 @@ class TextViewer: public SupportADessin{
         virtual void trace_G(MasseTombe const&)override;
 
         virtual void trace_G(Pendule const&)override;
+
+        virtual void trace_G(ToupieChinoise const&)override;
 
 };
 //==========================================================================================================================
