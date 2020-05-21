@@ -60,6 +60,8 @@ class VueOpenGL : public SupportADessin {
 
   virtual void trace_G(Pendule const&) override;
 
+  virtual void trace_G(ToupieChinoise const&) override;
+
 
   void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
 
