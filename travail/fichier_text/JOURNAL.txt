@@ -107,6 +107,4 @@ recherche et début d'implémentation de shaders pour nos toupies cependant, nou
 -trace_g pour plusieurs toupies à la fois et implémentation de la trace pour toutes les toupies
 -memoire en argument de toupie
 -mise en place "parquet" avec texture
-
-
-
+-mise en place déplacement avec toupie

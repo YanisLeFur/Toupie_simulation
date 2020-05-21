@@ -371,7 +371,7 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
         switch (grandeur) {
 
             case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
-             break;
+            break;
             case theta_point: prog.setAttributeValue(CouleurId, 0.0, 0.2+abs(theta_point_)/2.0, 0.0);
             break;
             case phi_point: prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.2+abs(phi_point_)/2.0);
