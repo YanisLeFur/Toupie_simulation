@@ -336,8 +336,32 @@ void VueOpenGL::dessineSphere (QMatrix4x4 const& point_de_vue,
 void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
                                double rouge, double vert, double bleu)
 {
-  prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-  prog.setAttributeValue(CouleurId, rouge, vert, bleu);  // met la couleur
-  sphere_coupe.draw(prog, SommetId);                           // dessine la sphère
+
+    prog.setUniformValue("textureId", 5);
+
+    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+    prog.setAttributeValue(CouleurId, rouge,vert,bleu);  // met la couleur
+    sphere_coupe.draw(prog, SommetId);
+
+
+   prog.setUniformValue("textureId", 0);
+   QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
+   glFuncs->glActiveTexture(GL_TEXTURE0);
+   glBindTexture(GL_TEXTURE_2D, textureDeChat);
+
+   double slices(25);
+   double beta(2*M_PI/slices);
+   double r(0.5877);
+
+  glBegin(GL_POLYGON);
+
+  for(unsigned int i(0);i<=25;i++){
+    prog.setAttributeValue(CouleurId, 0.0,0.0,0.0);
+    prog.setAttributeValue(CoordonneeTextureId,r*cos(i*beta)+0.5,r*sin(i*beta)+0.5);
+    prog.setAttributeValue(SommetId, r*cos(i*beta),r*sin(i*beta),abs(cos((20*M_PI)/25)));
+  }
+
+  glEnd();
+
 }
 //=========================================================================================================

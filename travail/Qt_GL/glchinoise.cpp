@@ -20,12 +20,12 @@ void GLSphereCoupe::initialize(GLuint slices, GLuint stacks)
 
   positions << 0.0 << 0.0 << 1.0;
 
-  for (GLuint i(1); i < stacks-1; ++i) {
+  for (GLuint i(1); i < stacks; ++i) {
     for (GLuint j(0); j < slices; ++j) {
       float r = sin(i*alpha);
       float z = cos(i*alpha);
-      //if((i<=20)and(i!=0)){z = cos(i*alpha);}
-      //else{ z =0.5;}
+      if((i<=20)and(i!=0)){z = cos(i*alpha);}
+      else{ z =0.5;}
       float y = sin(j*beta)*r;
       float x = cos(j*beta) * r;
 
