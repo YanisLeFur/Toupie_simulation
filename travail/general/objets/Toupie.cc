@@ -326,7 +326,10 @@ using namespace std;
         return unique_ptr<ToupieChinoise>(new ToupieChinoise(*this));
     }
 
-    void ToupieChinoise::set_OA(const Vecteur & v){ OA=v; }
+    Vecteur ToupieChinoise::get_OA() const
+    {
+        return Vecteur(OA.get_coord(1)+P_point.get_coord(4),OA.get_coord(2)+P_point.get_coord(5),OA.get_coord(3));
+    }
 
     Vecteur ToupieChinoise::eq_mouv() const {
         return Vecteur({psi_point_point(),theta_point_point(),phi_point_point(),P4_point_point(),P5_point_point()});

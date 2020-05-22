@@ -51,7 +51,7 @@ void GLWidget::paintGL()
 void GLWidget::keyPressEvent(QKeyEvent* event)
 {
   constexpr double petit_angle(5.0); // en degrés
-  constexpr double petit_pas(1.0);
+  constexpr double petit_pas(0.25);
 
   switch (event->key()) {
 

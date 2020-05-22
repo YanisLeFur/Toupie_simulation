@@ -42,9 +42,9 @@ class Toupie:public Dessinable{
 		
         Vecteur getP_point() const; // retourne derivée vecteur position
 
-        Vecteur get_OA() const; // retourne le vecteur indiquant le point de contact
+        virtual Vecteur get_OA() const; // retourne le vecteur indiquant le point de contact
 
-        Memoire get_m() const; //retourne les points G en mémoire (pour l'affichage graphique)
+        Memoire get_m() const; //retourne les points en mémoire (pour l'affichage graphique)
 
         Grandeur_physique get_Grandeur() const; //retourne la grandeur physique dont la toupie utilise pour changer de couleur
 
@@ -216,7 +216,7 @@ class ToupieChinoise:public Toupie{
 
     std::unique_ptr<ToupieChinoise> clone() const;
 
-    void set_OA(Vecteur const&) ;
+    virtual  Vecteur get_OA() const override;
 
     virtual Vecteur eq_mouv() const override;
 
