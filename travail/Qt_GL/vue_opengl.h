@@ -15,6 +15,10 @@
 class VueOpenGL : public SupportADessin {
  public:
 
+  VueOpenGL():Vue_Tangentielle(false){} // por initialiser la vue (tangentielle ou non), par default non-tangentielle
+
+  void changer_vue();
+
   // méthodes de (ré-)initialisation
   void init();
   void initializePosition();
@@ -52,6 +56,8 @@ class VueOpenGL : public SupportADessin {
 
   virtual void trace_G(ToupieChinoise&) override;
 
+  void vue_tangentielle(ConeSimple const&);
+
   void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
 
   void dessinePlateforme(QMatrix4x4 const& point_de_vue);
@@ -71,8 +77,6 @@ class VueOpenGL : public SupportADessin {
   QOpenGLShaderProgram prog;
   GLSphere sphere;
   GLSphereCoupe sphere_coupe;
-  Memoire m;
-
 
   // Caméra
   QMatrix4x4 matrice_vue;
@@ -82,6 +86,8 @@ class VueOpenGL : public SupportADessin {
   GLuint textureBois;
   GLuint textureOptique;
 
+  // avoir la vue tangentielle ou pas
+  bool Vue_Tangentielle;
 };
 
 #endif
