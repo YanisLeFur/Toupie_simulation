@@ -56,8 +56,8 @@ void Systeme::dessine(){
 }
 //=========================================================================================================
 void Systeme::trace_G(){
-    for (auto& toupies: systeme) {
-    toupies->trace_G();
+    for (auto& toupie: systeme) {
+        if (toupie->get_trace_on()) toupie->trace_G();
     }
 }
 //=========================================================================================================

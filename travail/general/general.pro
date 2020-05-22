@@ -1,6 +1,7 @@
 TEMPLATE = lib
 CONFIG += c++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+
 INCLUDEPATH= ../general\
               ../general/outils_Maths\
               ../general/objets\
@@ -21,6 +22,7 @@ HEADERS += \
     Integrateur.h \
     Dessinable.h \
     Systeme.h \
+    memoire.h\
    # qcustomplot.h\
    # mainwindow.h\
     #ui_mainwindow.h
@@ -33,6 +35,7 @@ SOURCES += \
     Matrice.cc \
     Toupie.cc \
     constant.cc \
+    memoire.cc\
    # qcustomplot.cpp\
    # mainwindow.cpp\
 

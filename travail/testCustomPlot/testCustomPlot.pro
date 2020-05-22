@@ -26,5 +26,5 @@ SOURCES += TestCustomPlot.cc\
 
 
 HEADERS += \ \
-        Toupie.cc\
-       Dessinable.cc\
+        Toupie.h\
+        Dessinable.h\

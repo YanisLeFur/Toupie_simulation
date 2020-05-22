@@ -65,7 +65,7 @@ int main(){
 	double masse_volumique(0.1);
 	double hauteur(1.5);
 	double rayon(0.5);
-    Vecteur P_cone({0,PI/6,0});
+    Vecteur P_cone({0,M_PI/6,0});
     Vecteur P_point_cone({0,0,60});
     ConeSimple cone_simple(&text3,masse_cone(masse_volumique,hauteur,rayon),hauteur,rayon,P_cone,P_point_cone,Vecteur({0,0,0}));
 	

@@ -23,7 +23,8 @@ SOURCES += TestSysteme.cc\
         Dessinable.cc\
         Vecteur.cc\
         Toupie.cc\
-        Matrice.cc
+        Matrice.cc\
+        memoire.cc\
 
 HEADERS += \ \
         ../general/utilitaires/constant.h \
@@ -32,4 +33,5 @@ HEADERS += \ \
         Dessinable.h\
         Vecteur.h\
         Toupie.h\
-        Matrice.h
+        Matrice.h\
+        memoire.h\

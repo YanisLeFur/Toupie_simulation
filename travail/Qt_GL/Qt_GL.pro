@@ -22,21 +22,25 @@ SOURCES += \
     main_qt_gl.cc \
     glwidget.cc \
     vue_opengl.cc \
+    glchinoise.cpp \
     glsphere.cpp \
-    ../general/outils_Maths/integrateur.cc
+    ../general/outils_Maths/integrateur.cc\
+    ../general/utilitaires/memoire.cc\
 
 
 HEADERS += \
     ../general/objets/Toupie.h \
     ../general/outils_Maths/Vecteur.h \
     ../general/utilitaires/constant.h\
+    glchinoise.h \
     glsphere.h \
     glwidget.h \
     vertex_shader.h \
     vue_opengl.h \
     glsphere.h \
     ../general/dessinable.h \
-    ../general/outils_Maths/integrateur.h
+    ../general/outils_Maths/integrateur.h\
+    ../general/utilitaires/memoire.h\
 
 RESOURCES += \
     resource.qrc
