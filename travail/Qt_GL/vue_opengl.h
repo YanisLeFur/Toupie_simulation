@@ -52,7 +52,6 @@ class VueOpenGL : public SupportADessin {
 
   virtual void trace_G(ToupieChinoise&) override;
 
-
   void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
 
   void dessinePlateforme(QMatrix4x4 const& point_de_vue);

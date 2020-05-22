@@ -230,6 +230,18 @@ class ToupieChinoise:public Toupie{
 
     double P5_point_point() const;
 
+    Vecteur GC_G() const;
+
+    Vecteur GC_O() const;
+
+    Vecteur AC_G() const;
+
+    Vecteur AC_O() const;
+
+    Vecteur AG_G() const;
+
+    Vecteur AG_O() const;
+
     Vecteur vC_O() const;
 
     virtual void trace_G() override;
