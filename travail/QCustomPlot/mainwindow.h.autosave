@@ -26,8 +26,7 @@ public:
 
 private slots:
 
-    void on_Clear_Button_clicked();
-
+    void on_Clear_Button_clicked();  //fonctions utilisant les boutons du widget
 
     void on_Energie_button_clicked();
 

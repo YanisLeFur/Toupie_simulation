@@ -110,3 +110,8 @@ recherche et début d'implémentation de shaders pour nos toupies cependant, nou
 -mise en place déplacement avec toupie
 _Qcustom plot de fini
 -vue tangentielle
+-recréation makefile pour l'exercice P9 (comme demandé)
+
+
+
+!!!! SI ON MODIFIE TESTSYSTEME NE PAS OUBLIER DE LE CHANGER DANS P9 AUSSI !!!!
