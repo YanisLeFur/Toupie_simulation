@@ -358,6 +358,36 @@ using namespace std;
         return - R * ( theta_point() * cos(psi()) + phi_point() * sin(psi()) * sin(theta()) ); //OK
     }
 
+    Vecteur ToupieChinoise::GC_G() const
+    {
+        return R*alpha_chinoise(h,R)*Vecteur(0,0,1);
+    }
+
+    Vecteur ToupieChinoise::GC_O() const
+    {
+        return GtoO(GC_G());
+    }
+
+    Vecteur ToupieChinoise::AC_G() const
+    {
+        return OtoG(AC_O());
+    }
+
+    Vecteur ToupieChinoise::AC_O() const
+    {
+        return R*Vecteur(0,0,1);
+    }
+
+    Vecteur ToupieChinoise::AG_G() const
+    {
+        return AC_G()-GC_G();
+    }
+
+    Vecteur ToupieChinoise::AG_O() const
+    {
+        return AC_O()-GC_O();
+    }
+
     Vecteur ToupieChinoise::vC_O() const {
         return R*omega_O()^Vecteur(0,0,1);
     }
