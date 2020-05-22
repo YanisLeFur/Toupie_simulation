@@ -67,6 +67,11 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
     dessineSphereCoupe(matrice);
 }
 
+void VueOpenGL::dessine(const SolideRevolution &)
+{
+
+}
+
 //=========================================================================================================
 void VueOpenGL::dessine(Pendule const& a_dessiner)
 {
@@ -184,6 +189,11 @@ void VueOpenGL::trace_G(ToupieChinoise& tc)
         }
         glEnd();
     }
+}
+
+void VueOpenGL::trace_G(SolideRevolution &)
+{
+
 }
 
 void VueOpenGL::vue_tangentielle(ConeSimple const& c)

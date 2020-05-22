@@ -44,6 +44,11 @@ void TextViewer::dessine(ToupieChinoise const& chinoise) {
         <<"derivee : "<<Vecteur({modulo_2pi(chinoise.getP_point().get_coord(1)),modulo_2pi(chinoise.getP_point().get_coord(2)),modulo_2pi(chinoise.getP_point().get_coord(3)),chinoise.getP_point().get_coord(4),chinoise.getP_point().get_coord(5)})<<endl;
 }
 
+void TextViewer::dessine(SolideRevolution const& solide) {
+    flot<<"parametre : "<<Vecteur(modulo_2pi(solide.getP().get_coord(1)),modulo_2pi(solide.getP().get_coord(2)),modulo_2pi(solide.getP().get_coord(3))) << endl
+        <<"derivee : "<<Vecteur(modulo_2pi(solide.getP_point().get_coord(1)),modulo_2pi(solide.getP_point().get_coord(2)),modulo_2pi(solide.getP_point().get_coord(3)))<<endl;
+}
+
 void TextViewer::trace_G(Toupie& toupie) {
     flot<<"centre de masse : "<< toupie.G_O() << endl;
 }
@@ -63,6 +68,11 @@ void TextViewer::trace_G(Pendule& pendule) {
 void TextViewer::trace_G(ToupieChinoise & chinoise)
 {
     flot<<"centre de masse : "<< chinoise.G_O() << endl;
+}
+
+void TextViewer::trace_G(SolideRevolution& solide)
+{
+    flot<<"centre de masse : "<< solide.G_O() << endl;
 }
 
 SupportADessin* TextViewer::copie() const { return new TextViewer(*this); }

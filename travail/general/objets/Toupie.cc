@@ -425,6 +425,82 @@ using namespace std;
         return etre_affiche.affiche(sortie);
     }
 
+//SolideRevolution===============================================================
+
+    SolideRevolution::SolideRevolution(SupportADessin* support, double rho, double L, std::vector<double> r_i, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur, bool trace_on)
+    :Toupie(support,masse_solide_revolution(rho,L,r_i),P,P_point,I1_solide_revolution(rho,L,r_i),I3_solide_revolution(rho,L,r_i),d_solide_revolution(L,r_i),OA,grandeur,trace_on),rho(rho),L(L),r_i(r_i){}
+
+    ostream& SolideRevolution::affiche(ostream& sortie) const {
+        sortie<<"Toupie de type Solide de Revolution: "<<endl;
+            this->Toupie::affiche(sortie);
+            return sortie;
+    }
+
+    void SolideRevolution::dessine() const {
+      support->dessine(*this);
+    }
+
+    unique_ptr<Toupie> SolideRevolution::copie() const {
+        return clone();
+    }
+
+    unique_ptr<SolideRevolution> SolideRevolution::clone() const {
+        return unique_ptr<SolideRevolution>(new SolideRevolution(*this));
+    }
+
+    void SolideRevolution::trace_G(){
+        support->trace_G(*this);
+    }
+
+    ostream& operator<<(ostream& sortie, SolideRevolution const& etre_affiche) {
+        return etre_affiche.affiche(sortie);
+    }
+
+    double masse_solide_revolution(double rho, double L, const std::vector<double> &r_i)
+    {
+        double somme_r_i_carre(0.0);
+        double N(r_i.size());
+        for (auto r:r_i) {
+            somme_r_i_carre += r*r;
+        }
+        return M_PI*rho*L/N*somme_r_i_carre;
+    }
+
+    double d_solide_revolution(double L, const std::vector<double> &r_i)
+    {
+        double somme_numerateur(0.0);
+        double somme_denominateur(0.0);
+        double N(r_i.size());
+        for (size_t i(1); i<=r_i.size(); ++i) {
+            somme_numerateur += ((2*i-1)/2.0)*(L/N)*pow(r_i[i-1],2);
+            somme_denominateur += pow(r_i[i-1],2);
+        }
+        return somme_numerateur/somme_denominateur;
+    }
+
+    double I3_solide_revolution(double rho, double L, const std::vector<double> &r_i)
+    {
+        double somme(0.0);
+        double N(r_i.size());
+        for(auto r:r_i){
+            somme += pow(r,4);
+        }
+        return M_PI/2*rho*L/N*somme;
+    }
+
+    double I1_solide_revolution(double rho, double L, const std::vector<double> &r_i)
+    {
+        double somme(0.0);
+        double N(r_i.size());
+        for (size_t i(1); i<=r_i.size(); ++i) {
+            somme += pow(((2*i-1)/2.0)*(L/N)*r_i[i-1],2);
+        }
+        return 0.5*I3_solide_revolution(rho,L,r_i)+M_PI*rho*L/N*somme
+        -masse_solide_revolution(rho,L,r_i)*pow(d_solide_revolution(L,r_i),2);
+    }
+
+//Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur OA,Grandeur_physique grandeur=null, bool trace_on = true);
+
 
 //MasseTombe=====================================================================
     MasseTombe::MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point,bool trace_on)
@@ -537,3 +613,5 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
  ostream& operator<<(std::ostream& sortie,Pendule const& etre_affiche) {
      return etre_affiche.affiche(sortie);
  }
+
+

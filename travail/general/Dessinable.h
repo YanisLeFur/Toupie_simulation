@@ -6,6 +6,7 @@ class MasseTombe;
 class Systeme;
 class Pendule;
 class ToupieChinoise;
+class SolideRevolution;
 
 #ifndef S
 #define S
@@ -27,6 +28,8 @@ class SupportADessin{
 
         virtual void dessine(ToupieChinoise const&) = 0;
 
+        virtual void dessine(SolideRevolution const&) = 0;
+
         virtual void trace_G(ConeSimple&) = 0;
 
         virtual void trace_G(Toupie&) = 0;
@@ -36,6 +39,8 @@ class SupportADessin{
         virtual void trace_G(Pendule&) = 0;
 
         virtual void trace_G(ToupieChinoise&) = 0;
+
+        virtual void trace_G(SolideRevolution&) = 0;
 };
 
 //Dessinable=============================================================
@@ -72,6 +77,8 @@ class TextViewer: public SupportADessin{
 		virtual void dessine(ConeSimple const&) override;
 
         virtual void dessine(ToupieChinoise const&) override;
+
+        virtual void dessine(SolideRevolution const&) override;
 		
 		virtual void dessine(MasseTombe const&) override;
 
@@ -88,6 +95,8 @@ class TextViewer: public SupportADessin{
         virtual void trace_G(Pendule&)override;
 
         virtual void trace_G(ToupieChinoise&)override;
+
+        virtual void trace_G(SolideRevolution&)override;
 
 };
 //==========================================================================================================================

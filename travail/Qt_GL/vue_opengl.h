@@ -46,6 +46,8 @@ class VueOpenGL : public SupportADessin {
 
   virtual void dessine(ToupieChinoise const&) override;
 
+  virtual void dessine(SolideRevolution const&) override;
+
   virtual void trace_G(Toupie&) override;
 
   virtual void trace_G(ConeSimple&) override;
@@ -55,6 +57,8 @@ class VueOpenGL : public SupportADessin {
   virtual void trace_G(Pendule&) override;
 
   virtual void trace_G(ToupieChinoise&) override;
+
+  virtual void trace_G(SolideRevolution&) override;
 
   void vue_tangentielle(ConeSimple const&);
 
