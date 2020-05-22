@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+
 //Constructeur du MainWindow=========================================================================================
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -38,7 +40,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-//==================================================================================================
+//=================================================================================================================
 void MainWindow::clearData()
 {
     qv_x.clear();
@@ -46,7 +48,7 @@ void MainWindow::clearData()
     qv_y_NM.clear();
     qv_y_EC.clear();
 }
-
+//=================================================================================================================
 void MainWindow::plot()
 {
 
@@ -61,8 +63,7 @@ void MainWindow::plot()
   ui->plot->yAxis->setRange(0, 60);
 
 }
-
-
+//=================================================================================================================
 void MainWindow::transmet(QVector<double> time_plot,QVector<double> y_energie_RK, QVector<double> y_prod_mixt_RK,
                           QVector<double> y_LA_a_RK,QVector<double> y_LA_k_RK,
                           QVector<double> y_energie_NM, QVector<double> y_prod_mixt_NM,
@@ -89,14 +90,13 @@ void MainWindow::transmet(QVector<double> time_plot,QVector<double> y_energie_RK
 
 
 }
-
+//=================================================================================================================
 void MainWindow::on_Clear_Button_clicked()
 {
     clearData();
     plot();
 }
-
-
+//=================================================================================================================
 void MainWindow::on_Energie_button_clicked()
 {
     clearData();
@@ -107,7 +107,7 @@ void MainWindow::on_Energie_button_clicked()
     plot();
 
 }
-
+//=================================================================================================================
 void MainWindow::on_Prod_mixt_button_2_clicked()
 {
     clearData();
@@ -118,7 +118,7 @@ void MainWindow::on_Prod_mixt_button_2_clicked()
     plot();
 
 }
-
+//=================================================================================================================
 void MainWindow::on_LA_a_button_3_clicked()
 {
     clearData();
@@ -129,7 +129,7 @@ void MainWindow::on_LA_a_button_3_clicked()
     plot();
 
 }
-
+//=================================================================================================================
 void MainWindow::on_LA_k_button_clicked()
 {
     clearData();
@@ -139,10 +139,11 @@ void MainWindow::on_LA_k_button_clicked()
     qv_y_EC=qv_y_LA_k_EC;
     plot();
 }
-
+//=================================================================================================================
 void MainWindow::on_Scale_button_clicked()
 {
     ui->plot->xAxis->setRange(*std::min_element(qv_x.begin(),qv_x.end()),*std::max_element(qv_x.begin(),qv_x.end()));
     ui->plot->yAxis->setRange(*std::min_element(qv_y_RK.begin(),qv_y_RK.end()),*std::max_element(qv_y_NM.begin(),qv_y_NM.end()));
     plot();
 }
+//=================================================================================================================

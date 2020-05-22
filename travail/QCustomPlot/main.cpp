@@ -8,9 +8,6 @@
 #include "constant.h"
 #include "Integrateur.h"
 
-enum invariant{produit_mixte,energie_totale,projection_LA_a,projection_LA_k};
-
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -73,10 +70,7 @@ int main(int argc, char *argv[])
        EC.integre(0.1,c1);
 
      }
-    //======================================================================================================================
-
-
-
+//======================================================================================================================
 
     w.transmet(time, y_energie_RK, y_prod_mixt_RK, y_LA_a_RK, y_LA_k_RK,
                y_energie_NM, y_prod_mixt_NM, y_LA_a_NM, y_LA_k_NM,
