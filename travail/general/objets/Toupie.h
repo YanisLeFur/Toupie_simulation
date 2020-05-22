@@ -216,6 +216,8 @@ class ToupieChinoise:public Toupie{
 
     std::unique_ptr<ToupieChinoise> clone() const;
 
+    void set_OA(Vecteur const&) ;
+
     virtual Vecteur eq_mouv() const override;
 
     virtual double psi_point_point() const override; // derivée seconde de psi
