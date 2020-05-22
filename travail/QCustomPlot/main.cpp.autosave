@@ -1,0 +1,16 @@
+#include "mainwindow.h"
+#include <iostream>
+#include <QApplication>
+#include  "Toupie.h"
+#include "Vecteur.h"
+#include "TextVie.h"
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    TextViewer t(std::cout);
+    ConeSimple c(,0.039270,1.5,0.5,Vecteur({0,PI/6,0}),Vecteur({0,0,200})
+    w.show();
+    return a.exec();
+}

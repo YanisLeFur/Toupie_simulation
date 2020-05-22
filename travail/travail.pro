@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    QCustomPlot \
     TestIntegrateur/testIntegrateur.pro \
     TestMatrice/testMatrice.pro \
     TestToupie/testToupie.pro \
