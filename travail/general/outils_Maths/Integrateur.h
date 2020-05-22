@@ -12,6 +12,8 @@ class Integrateur{
         virtual Integrateur* copie() const = 0; // permet de créer un nouveau pointeur pointant vers le meme integrateur
 
         virtual std::ostream& affiche(std::ostream& sortie) const = 0; // affiche le nom de l'integrateur
+
+        virtual ~Integrateur();
 };
 
 class IntegrateurEulerCromer: public Integrateur{

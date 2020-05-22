@@ -9,7 +9,14 @@
 using namespace std;
 
 int main(){
+
 	TextViewer text(cout);
+	IntegrateurRungeKutta RK;
+	IntegrateurNewmark NM;
+	IntegrateurEulerCromer EC;
+	Systeme systeme(&NM);
+
+
     Vecteur P1(0.,0.523599,0.);
     Vecteur P1_point(0.,0.,60.);
     Vecteur P2(0.,0.785398,0.);
@@ -20,6 +27,7 @@ int main(){
     double I1(3.*m/20.*(r*r+1./4.*h*h));
     double I3(3.*m/10.*r*r);
     double d((3./4.)*h);
+
     Toupie toupie(&text,m,P1,P1_point,I1,I3,d,Vecteur());
     ConeSimple cone1(&text,m,1.5,0.5,P1,P1_point,Vecteur());
     ConeSimple cone2(&text,masse_cone(0.1,0.5,1.5),1.5,0.5,P2,P2_point,Vecteur());
@@ -27,17 +35,10 @@ int main(){
 
     toupie.get_m().ajouter_point(Vecteur({0,0,0}));
     cout<<"test: "<<toupie.get_m().GetPoints().size()<<endl;
-    /*Memoire mem;
-    mem.ajouter_point(Vecteur({0,0,0}));
-    cout<<"test: "<<mem.GetPoints().size()<<endl;
-
-*/
 
     ToupieChinoise tc(&text,masse_chinoise(0.1,0.02,0.15),0.02,0.15,Vecteur({0,0.11,0,0,0}),Vecteur({50,0,0,0,0}),Vecteur({0,0,0}));
-    IntegrateurRungeKutta RK;
-    IntegrateurNewmark NM;
-    IntegrateurEulerCromer EC;
-    Systeme systeme(&NM);
+
+
     systeme.ajouter_Toupie(toupie);
     systeme.ajouter_Toupie(cone1);
     systeme.ajouter_Toupie(cone2);
@@ -50,23 +51,11 @@ int main(){
     double temps(0);
 
     for (int i(0); i <nb_echantillons; i++){
-       //  RK.integre(dt,toupie);
-      // RK.integre(dt,cone1);
-        try{
-       systeme.evolue();
-        }
-        catch(int const& i){
-            switch(i){
-                case 1:cerr << "Erreur: division par 0 impossible" << endl;
-                case 2:cerr << "Erreur: dimension differente de 3" << endl;
-                case 3:cerr << "Erreur: dimension incompatible avec celle du vecteur" << endl;
-            }
 
-        }
        cout << "temps: " << temps+i*dt << endl;
-       cout << "cone" << endl;
+       cout << "=====cone=====" << endl;
        text.dessine(cone1);
-       cout << "toupie generale" << endl;
+       cout << "======toupie generale=====" << endl;
        text.dessine(toupie);
     }
 

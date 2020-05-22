@@ -8,6 +8,11 @@ using namespace std;
 Systeme::Systeme(Integrateur const& integrateur) :integrateur(integrateur.copie()){}
 //=========================================================================================================
 Systeme::Systeme(Integrateur* integrateur) :integrateur(integrateur){}
+
+Systeme::~Systeme()
+{
+    delete integrateur;
+}
 //=========================================================================================================
 void Systeme::changer_integrateur(Integrateur& nouvel_integrateur) {
     integrateur = &nouvel_integrateur;
