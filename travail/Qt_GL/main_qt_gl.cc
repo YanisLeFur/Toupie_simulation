@@ -18,9 +18,9 @@ int main(int argc, char* argv[])
   //w.ajouter_Toupie(p);
   //w.ajouter_Toupie(mt);
   //w.ajouter_Toupie(tc1);
-  w.ajouter_Toupie(tc2);
-  //w.ajouter_Toupie(c1);
-  //w.ajouter_Toupie(c2);
+  //w.ajouter_Toupie(tc2);
+  w.ajouter_Toupie(c1);
+  w.ajouter_Toupie(c2);
   ///w.affiche(std::cout);
   w.show();
   return a.exec();

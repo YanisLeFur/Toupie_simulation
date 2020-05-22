@@ -124,12 +124,6 @@ void GLWidget::timerEvent(QTimerEvent* event)
 
   double dt = chronometre.restart() / 1000.0;
 
-  IntegrateurEulerCromer EC;
-
-  IntegrateurNewmark NM;
-
-  IntegrateurRungeKutta RK;
-
   s.integre(dt);
   update();
 }

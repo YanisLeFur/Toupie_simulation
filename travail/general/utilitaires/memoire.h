@@ -14,7 +14,7 @@ class Memoire{
 
      public:
 
-           Memoire(bool on = true, size_t taille=100);
+           Memoire(bool on = true, size_t taille=75);
 
            std::deque<Vecteur> GetPoints();
 
