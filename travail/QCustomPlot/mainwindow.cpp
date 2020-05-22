@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+//Constructeur du MainWindow=========================================================================================
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -33,18 +33,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->plot->graph(2)->setName("Euler-Cromer");
     ui->plot->graph(2)->setLineStyle(QCPGraph::lsLine);
 }
-
+//Destructeur du MainWindow=========================================================================================
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-void MainWindow::addPoint(double x,double y)
-{
- qv_x.append(x);
- qv_y_RK.append(y);
-}
-
+//==================================================================================================
 void MainWindow::clearData()
 {
     qv_x.clear();

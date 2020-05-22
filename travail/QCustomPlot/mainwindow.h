@@ -16,7 +16,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void addPoint(double x ,double y);
     void clearData();
     void plot();
     void transmet(QVector<double> time, QVector<double> y_energie_RK,
