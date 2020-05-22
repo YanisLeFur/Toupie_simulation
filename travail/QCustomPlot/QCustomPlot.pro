@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 INCLUDEPATH = ../general/objets\
               ../general/outils_Maths\
+              ../general/utilitaires\
               ../general\
 
 
@@ -26,6 +27,10 @@ SOURCES += \
     ../general/objets/Toupie.cc\
     ../general/outils_Maths/Vecteur.cc\
     ../general/Dessinable.cc\
+    ../general/utilitaires/constant.cc\
+    ../general/outils_Maths/Integrateur.cc\
+    ../general/outils_Maths/Matrice.cc\
+    ../general/utilitaires/memoire.cc\
 
 HEADERS += \
     mainwindow.h \
@@ -33,6 +38,10 @@ HEADERS += \
     ../general/objets/Toupie.h\
     ../general/outils_Maths/Vecteur.h\
     ../general/Dessinable.h\
+    ../general/utilitaires/constant.h\
+    ../general/outils_Maths/Integrateur.h\
+    ../general/outils_Maths/Matrice.h\
+    ../general/utilitaires/memoire.h\
 
 FORMS += \
     mainwindow.ui

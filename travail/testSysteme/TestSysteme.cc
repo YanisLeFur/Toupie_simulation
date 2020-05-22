@@ -5,6 +5,7 @@
 #include "Integrateur.h"
 #include "Toupie.h"
 #include "Matrice.h"
+#include <cmath>
 using namespace std;
 
 int main(){
