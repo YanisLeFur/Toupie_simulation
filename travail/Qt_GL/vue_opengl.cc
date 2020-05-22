@@ -197,18 +197,26 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
     double Az(c.get_OA().get_coord(3));
 
     double h(c.get_hauteur());
+    double r(c.get_rayon());
 
     matrice_vue.setToIdentity();
 
     matrice_vue.rotate(-90.0, 1.0, 0.0, 0.0); // rotation pour avoir z vers le haut
 
-    matrice_vue.translate(-Ax,-Ay,-Az); // translation pour amener la camera sur la toupie
-
     matrice_vue.translate(0,0,-h); // on monte du sol a la hauteur de la toupie
 
-    matrice_vue.rotate(-(psi*360/(2*M_PI)), 0.0, 0.0, 1.0); // on s'oriente par rapport a psi
+    matrice_vue.rotate(-(psi*360/(2*M_PI)+180), 0.0, 0.0, 1.0); // on s'oriente par rapport a psi
+
+    matrice_vue.translate(r*cos(psi),r*sin(psi),0); // on se deplace sur le bord de la toupie en bougeant une distance d'un rayon
 
     matrice_vue.rotate(-(theta*360/(2*M_PI)-30), cos(psi), sin(psi), 0.0); // on s'oriente par rapport a theta
+
+    //matrice_vue.rotate(-(phi*360/(2*M_PI)), cos(psi)*sin(theta), sin(psi)*sin(theta), cos(theta)); // on s'oriente par rapport a phi
+
+    //on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soi
+
+    matrice_vue.translate(-Ax,-Ay,-Az); // translation pour amener la camera sur la toupie
+
 }
 //=========================================================================================================
 void VueOpenGL::trace_G(MasseTombe& mt){
