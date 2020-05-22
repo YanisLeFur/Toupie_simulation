@@ -112,6 +112,10 @@ void GLWidget::keyPressEvent(QKeyEvent* event)
   case Qt::Key_Space:
 	pause();
 	break;
+
+  case Qt::Key_V:
+    vue.changer_vue();
+    break;
   };
 
   update(); // redessine
@@ -123,12 +127,6 @@ void GLWidget::timerEvent(QTimerEvent* event)
   Q_UNUSED(event);
 
   double dt = chronometre.restart() / 1000.0;
-
-  IntegrateurEulerCromer EC;
-
-  IntegrateurNewmark NM;
-
-  IntegrateurRungeKutta RK;
 
   s.integre(dt);
   update();

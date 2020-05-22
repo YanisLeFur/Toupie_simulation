@@ -38,9 +38,15 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
     matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
     matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
 
-    dessineCone(matrice,a_dessiner.get_hauteur(),a_dessiner.get_rayon(),
-                a_dessiner.get_Grandeur(),a_dessiner.getP_point().get_coord(1),a_dessiner.getP_point().get_coord(2),
+    dessineCone(matrice,
+                a_dessiner.get_hauteur(),
+                a_dessiner.get_rayon(),
+                a_dessiner.get_Grandeur(),
+                a_dessiner.getP_point().get_coord(1),
+                a_dessiner.getP_point().get_coord(2),
                 a_dessiner.getP_point().get_coord(3));
+
+    if (Vue_Tangentielle) vue_tangentielle(a_dessiner);
 }
 //=========================================================================================================
 void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
@@ -111,7 +117,7 @@ void VueOpenGL::dessine(MasseTombe const& a_dessiner) {
 void VueOpenGL::trace_G(ConeSimple& c){
 
     QMatrix4x4 point_de_vue;
-     prog.setUniformValue("textureId", 5);
+    prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     c.ajouter_point_memoire(c.G_O()+c.get_OA());
 
@@ -146,7 +152,7 @@ void VueOpenGL::trace_G(Toupie& t){
 //=========================================================================================================
 void VueOpenGL::trace_G(Pendule& p){
     QMatrix4x4 point_de_vue;
-     prog.setUniformValue("textureId", 5);
+    prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     p.ajouter_point_memoire(p.G_O());
     if (p.get_m().GetPoints().size()>=2){
@@ -160,14 +166,62 @@ void VueOpenGL::trace_G(Pendule& p){
     }
 }
 
-void VueOpenGL::trace_G(ToupieChinoise&)
+void VueOpenGL::trace_G(ToupieChinoise& tc)
 {
+    QMatrix4x4 point_de_vue;
+    prog.setUniformValue("textureId", 5);
+    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+    tc.ajouter_point_memoire(tc.AG_O()+tc.get_OA());
+
+    if (tc.get_m().GetPoints().size()>=2){
+        glBegin(GL_LINES);
+        for(size_t i(0);i<tc.get_m().GetPoints().size()-1;i++){
+
+            prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0);
+            prog.setAttributeValue(SommetId, tc.get_m().GetPoints()[i].get_coord(1), tc.get_m().GetPoints()[i].get_coord(2), tc.get_m().GetPoints()[i].get_coord(3));
+            prog.setAttributeValue(SommetId, tc.get_m().GetPoints()[i+1].get_coord(1), tc.get_m().GetPoints()[i+1].get_coord(2), tc.get_m().GetPoints()[i+1].get_coord(3));
+
+        }
+        glEnd();
+    }
+}
+
+void VueOpenGL::vue_tangentielle(ConeSimple const& c)
+{
+    double psi(c.getP().get_coord(1));
+    double theta(c.getP().get_coord(2));
+    double phi(c.getP().get_coord(3));
+
+    double Ax(c.get_OA().get_coord(1));
+    double Ay(c.get_OA().get_coord(2));
+    double Az(c.get_OA().get_coord(3));
+
+    double h(c.get_hauteur());
+    double r(c.get_rayon());
+
+    matrice_vue.setToIdentity();
+
+    matrice_vue.rotate(-90.0, 1.0, 0.0, 0.0); // rotation pour avoir z vers le haut
+
+    matrice_vue.translate(0,0,-h); // on monte du sol a la hauteur de la toupie
+
+    matrice_vue.rotate(-(psi*360/(2*M_PI)+180), 0.0, 0.0, 1.0); // on s'oriente par rapport a psi
+
+    matrice_vue.translate(r*cos(psi),r*sin(psi),0); // on se deplace sur le bord de la toupie en bougeant une distance d'un rayon
+
+    matrice_vue.rotate(-(theta*360/(2*M_PI)-30), cos(psi), sin(psi), 0.0); // on s'oriente par rapport a theta
+
+    //matrice_vue.rotate(-(phi*360/(2*M_PI)), cos(psi)*sin(theta), sin(psi)*sin(theta), cos(theta)); // on s'oriente par rapport a phi
+
+    //on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soi
+
+    matrice_vue.translate(-Ax,-Ay,-Az); // translation pour amener la camera sur la toupie
 
 }
 //=========================================================================================================
 void VueOpenGL::trace_G(MasseTombe& mt){
     QMatrix4x4 point_de_vue;
-     prog.setUniformValue("textureId", 5);
+    prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     mt.ajouter_point_memoire(mt.G_O());
     if (mt.get_m().GetPoints().size()>=2){
@@ -181,7 +235,7 @@ void VueOpenGL::trace_G(MasseTombe& mt){
     }
 }
 //=========================================================================================================
-void VueOpenGL::dessineAxes (QMatrix4x4 const& point_de_vue, bool en_couleur)
+void VueOpenGL::dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur)
 {
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     prog.setUniformValue("textureId", 5);
@@ -243,6 +297,11 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
 //=========================================================================================================
 SupportADessin* VueOpenGL::copie() const {}
 //=========================================================================================================
+void VueOpenGL::changer_vue()
+{
+    Vue_Tangentielle = not Vue_Tangentielle;
+}
+
 void VueOpenGL::init()
 {
     // Initialisation des shaders
