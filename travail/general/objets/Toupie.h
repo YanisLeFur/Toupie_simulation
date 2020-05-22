@@ -58,7 +58,7 @@ class Toupie:public Dessinable{
 
         void ajouter_point_memoire(Vecteur const&);
 		
-        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A,Grandeur_physique grandeur=null, bool trace_on = true);
+        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur OA,Grandeur_physique grandeur=null, bool trace_on = true);
 		
         virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristique de la toupies(masse,I1,I3...)
 		
@@ -262,6 +262,42 @@ double I3_chinoise(double m, double h, double R);
 
 
 std::ostream& operator<<(std::ostream&,ToupieChinoise const& etre_affiche);
+
+//SolideRevolution==========================================================
+
+class SolideRevolution:public Toupie {
+    private:
+
+    double rho; // masse volumique
+
+    double L; // hauteur
+
+    std::vector<double> r_i; // ensemble de distances a l'axe
+
+    public:
+
+    SolideRevolution(SupportADessin* support, double rho, double L, std::vector<double> r_i, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur=null, bool trace_on = true);
+
+    std::ostream& affiche(std::ostream& sortie) const override;
+
+    virtual void dessine() const override;
+
+    virtual std::unique_ptr<Toupie> copie() const override;
+
+    std::unique_ptr<SolideRevolution> clone() const;
+
+    virtual void trace_G() override;
+};
+
+std::ostream& operator<<(std::ostream&,SolideRevolution const& etre_affiche);
+
+double masse_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
+
+double d_solide_revolution(double L, std::vector<double>  const& r_i);
+
+double I1_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
+
+double I3_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
 
 //MasseTombe================================================================
 class MasseTombe:public Toupie{
