@@ -82,17 +82,17 @@ void VueOpenGL::dessine(Pendule const& a_dessiner)
 
   prog.setAttributeValue(SommetId, Ax, Ay, Az);
   prog.setAttributeValue(SommetId,
-                         Ax+a_dessiner.get_l()*sin(a_dessiner.getP().get_coord(2)),
-                                                                              Ay,
-                         Az-a_dessiner.get_l()*cos(a_dessiner.getP().get_coord(2)));
+                         Ax+a_dessiner.getP().get_coord(1)*sin(a_dessiner.getP().get_coord(2)),
+                                                                                            Ay,
+                         Az-a_dessiner.getP().get_coord(1)*cos(a_dessiner.getP().get_coord(2)));
 
   glEnd();
 
   matrice.translate(Ax,Ay,Az);
 
-  matrice.translate(a_dessiner.get_l()*sin(a_dessiner.getP().get_coord(2)),
-                                                                         0,
-                   -a_dessiner.get_l()*cos(a_dessiner.getP().get_coord(2)));
+  matrice.translate(a_dessiner.getP().get_coord(1)*sin(a_dessiner.getP().get_coord(2)),
+                                                                                     0,
+                   -a_dessiner.getP().get_coord(1)*cos(a_dessiner.getP().get_coord(2)));
   matrice.scale(0.25);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // passe en mode "plein"
 
@@ -154,11 +154,11 @@ void VueOpenGL::trace_G(Pendule& p){
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    p.ajouter_point_memoire(p.G_O());
+    p.ajouter_point_memoire(p.G_O()+p.get_OA());
     if (p.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
         for(size_t i(0);i<p.get_m().GetPoints().size()-1;i++){
-            prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0);
+            prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
             prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i].get_coord(1), p.get_m().GetPoints()[i].get_coord(2), p.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i+1].get_coord(1), p.get_m().GetPoints()[i+1].get_coord(2), p.get_m().GetPoints()[i+1].get_coord(3));
         }

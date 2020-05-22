@@ -482,22 +482,20 @@ using namespace std;
     }
 
 //Pendule======================================================================================================
-    Pendule::Pendule(SupportADessin* support, double m,Vecteur P,Vecteur P_point,Vecteur OA,double longueur,bool trace_on)
-    :Toupie(support,m,P,P_point,1,1,1,OA,null,trace_on), longueur(longueur)
+    Pendule::Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point, Vecteur OA, bool trace_on)
+    :Toupie(support,m,P,P_point,1,1,1,OA,null,trace_on)
     {}
-
-    double Pendule::get_l() const { return longueur; }
 
     ostream& Pendule::affiche(std::ostream& sortie) const{
         sortie<<"Toupie de type Pendule : "<<endl
             <<"Masse (kg) : "<<masse<<endl
-            <<"Longueur (m) : "<<longueur<<endl
+            <<"Longueur (m) : "<<P.get_coord(1)<<endl
             <<"Vecteur P : "<<P<<endl
             <<"Derivee de P : "<<P_point<<endl;
             return sortie;
     }
     Vecteur Pendule::eq_mouv() const{
-        return Vecteur({0,-g/longueur*sin(getP().get_coord(2)),0});
+        return Vecteur({0,-g/P.get_coord(1)*sin(P.get_coord(2)),0});
     }
 
     unique_ptr<Toupie> Pendule::copie() const {
@@ -526,7 +524,8 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
 
  Vecteur Pendule::G_O() const
  {
-     return P;
+     return Vecteur(P.get_coord(1)*sin(P.get_coord(2)),P.get_coord(3),-P.get_coord(1)*cos(P.get_coord(2)));
+     // (r*cos(theta),r*sin(theta),z)
  }
 
  void Pendule::trace_G(){

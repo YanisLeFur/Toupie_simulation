@@ -294,16 +294,14 @@ std::ostream& operator<<(std::ostream&,MasseTombe const& etre_affiche);
 
 
 //Pendule================================================================
-class Pendule:public Toupie{
-private:
 
-    double longueur;
+// le vecteur de degres de liberte est (r,theta,z) ou on utilise les coordonnes cylindriques
+
+class Pendule:public Toupie{
 
 public:
 
-    double get_l() const;//donne la longeur du fil
-
-    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point,Vecteur OA, double longueur, bool trace_on = true);
+    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point,Vecteur OA, bool trace_on = true);
 
     std::ostream& affiche (std::ostream& sortie) const override;
 
