@@ -11,6 +11,7 @@ Systeme::Systeme(Integrateur* integrateur) :integrateur(integrateur){}
 
 Systeme::~Systeme()
 {
+    integrateur=nullptr;
     delete integrateur;
 }
 //=========================================================================================================

@@ -17,6 +17,8 @@ class Systeme{
         Systeme(Integrateur const& integrateur); // construit un systeme avec un pointeur sur un integrateur par rapport à un integrateur rentré en argument
 		
         Systeme(Integrateur* integrateur); // construit un systeme avec un pointeur sur un integrateur
+
+        ~Systeme();
 		
         void changer_integrateur(Integrateur& nouvel_integrateur); // change l'integrateur
 		
