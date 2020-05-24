@@ -67,9 +67,27 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
     dessineSphereCoupe(matrice);
 }
 
-void VueOpenGL::dessine(const SolideRevolution &)
+void VueOpenGL::dessine(const SolideRevolution& a_dessiner)
 {
+    QMatrix4x4 matrice;
 
+
+    dessineAxes(matrice);
+    dessinePlateforme(matrice);
+    double psi(a_dessiner.getP().get_coord(1));
+    double theta(a_dessiner.getP().get_coord(2));
+    double phi(a_dessiner.getP().get_coord(3));
+    double Ax(a_dessiner.get_OA().get_coord(1));
+    double Ay(a_dessiner.get_OA().get_coord(2));
+    double Az(a_dessiner.get_OA().get_coord(3));
+    double L(a_dessiner.get_L());
+    std::vector<double> r_i(a_dessiner.get_r_i());
+    matrice.translate(Ax,Ay,Az);
+    matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
+    matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
+    matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
+
+    dessineSolideRevolution(matrice,L,r_i);
 }
 
 //=========================================================================================================
@@ -427,6 +445,39 @@ void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
   prog.setAttributeValue(SommetId, +1.0, -1.0, -1.0);
 
   glEnd();
+}
+
+void VueOpenGL::dessineCylindre(const QMatrix4x4 &point_de_vue, double z_0, double z_1, double r_i)
+{
+    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    double slices(50);
+    double theta(2*M_PI/slices);
+
+    for(unsigned int i(0);i<slices;i++){
+        glBegin(GL_POLYGON);
+        prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
+        prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_0);
+        prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_1);
+        prog.setAttributeValue(SommetId, r_i*cos((i+1)*theta),r_i*sin((i+1)*theta),z_1);
+        prog.setAttributeValue(SommetId, r_i*cos((i+1)*theta),r_i*sin((i+1)*theta),z_0);
+        glEnd();
+    }
+}
+
+void VueOpenGL::dessineSolideRevolution(const QMatrix4x4 &point_de_vue, double L, std::vector<double> r_i)
+{
+    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    double N(r_i.size());
+
+    dessineCylindre(point_de_vue,0,L/(2*N),r_i[0]);
+
+    for(size_t i(1); i<N; ++i) {
+        double z_0(((2*i-1)/2.0)*L/N);
+        double z_1(((2*(i+1)-1)/2.0)*L/N);
+        dessineCylindre(point_de_vue,z_0,z_1,r_i[i]);
+    }
 }
 //=========================================================================================================
 void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, double rayon,
