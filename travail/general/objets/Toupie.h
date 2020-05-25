@@ -287,6 +287,10 @@ class SolideRevolution:public Toupie {
     std::unique_ptr<SolideRevolution> clone() const;
 
     virtual void trace_G() override;
+
+    double get_L() const;
+
+    std::vector<double> get_r_i() const;
 };
 
 std::ostream& operator<<(std::ostream&,SolideRevolution const& etre_affiche);

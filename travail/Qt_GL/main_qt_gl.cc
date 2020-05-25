@@ -3,7 +3,10 @@
 #include "Toupie.h"
 #include "Dessinable.h"
 #include <iostream>
+#include <vector>
 #include <cmath>
+
+using namespace std;
 
 int main(int argc, char* argv[])
 {
@@ -21,9 +24,10 @@ int main(int argc, char* argv[])
   //w.ajouter_Toupie(mt);
   //w.ajouter_Toupie(tc1);
   //w.ajouter_Toupie(tc2);
-  w.ajouter_Toupie(c1);
-  w.ajouter_Toupie(c2);
-  ///w.affiche(std::cout);
+  //w.ajouter_Toupie(c1);
+  //w.ajouter_Toupie(c2);
+  w.ajouter_Toupie(sr);
+  //w.affiche(std::cout);
   w.show();
   return a.exec();
 }

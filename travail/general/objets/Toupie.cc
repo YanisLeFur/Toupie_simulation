@@ -452,6 +452,16 @@ using namespace std;
         support->trace_G(*this);
     }
 
+    double SolideRevolution::get_L() const
+    {
+        return L;
+    }
+
+    std::vector<double> SolideRevolution::get_r_i() const
+    {
+        return r_i;
+    }
+
     ostream& operator<<(ostream& sortie, SolideRevolution const& etre_affiche) {
         return etre_affiche.affiche(sortie);
     }
