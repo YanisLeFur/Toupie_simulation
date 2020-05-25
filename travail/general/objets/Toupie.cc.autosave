@@ -45,6 +45,7 @@ using namespace std;
         if(masse==0){throw 4;}
         if(I1==0){throw 6;}
         if(I3==0){throw 7;}
+        if(distance==0){throw 14;}
 
     }
 	

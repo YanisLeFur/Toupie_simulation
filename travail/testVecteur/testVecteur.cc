@@ -352,17 +352,19 @@ int main(){
         }
     }
 
-    // N.B.
+    /* N.B.
 
-    // les messages d'erreurs qui servent de test sont afficher avec cout
+    * les messages d'erreurs qui servent de test sont afficher avec cout
 
-    // pour les avoir au bon endroit dans l'affichage
+    * pour les avoir au bon endroit dans l'affichage
 
-    // ceci apparaitront dans la meme couleur que le reste de l'affichage
+    * ceci apparaitront dans la meme couleur que le reste de l'affichage
 
-    // si des erreurs innatendu adviennent, on les affichent avec cerr
+    * si des erreurs innatendu adviennent, on les affichent avec cerr
 
-    // les messages seront donc a la fin de l'affichage en rouge
+    * les messages seront donc a la fin de l'affichage en rouge
+
+    */
 
     return 0;
 }
