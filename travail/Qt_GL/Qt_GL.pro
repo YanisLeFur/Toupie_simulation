@@ -26,6 +26,7 @@ SOURCES += \
     glsphere.cpp \
     ../general/outils_Maths/integrateur.cc\
     ../general/utilitaires/memoire.cc\
+    ../general/Dessinable.cc\
 
 
 HEADERS += \
@@ -41,6 +42,7 @@ HEADERS += \
     ../general/dessinable.h \
     ../general/outils_Maths/integrateur.h\
     ../general/utilitaires/memoire.h\
+    ../general/Dessinable.h\
 
 RESOURCES += \
     resource.qrc

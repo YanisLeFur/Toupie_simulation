@@ -25,7 +25,7 @@ using namespace std;
 
     void Toupie::changer_grandeur(Grandeur_physique g) {grandeur=g;}
 
-	void Toupie::setP(Vecteur const& v) {P=v;}
+    void Toupie::setP(Vecteur const& v) {P=v;} ///attention si vecteur differente taille
 
     void Toupie::setP_point(Vecteur const& v) {P_point=v;}
 
