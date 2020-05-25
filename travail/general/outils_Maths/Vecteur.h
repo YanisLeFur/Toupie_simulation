@@ -9,10 +9,10 @@ class Vecteur {
 		std::vector<double> vecteur;
 
 		bool meme_dimension(Vecteur const& comparaison) const; /*test si 2 vecteurs ont la meme dimension*/
+
+        void verifier();//precision double
 		
 	public:
-
-		void verifier();
 
 		size_t dimension() const;
 

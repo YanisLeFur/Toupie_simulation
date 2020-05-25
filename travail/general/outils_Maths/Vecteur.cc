@@ -27,7 +27,7 @@ size_t Vecteur::dimension() const {
 //=========================================================================================================
 double Vecteur::get_coord(size_t composante)const{
     if((composante<=vecteur.size()) and (composante>0)) return vecteur[composante-1];
-	else throw 2;
+    else throw 3;
 }
 //=========================================================================================================
 void Vecteur::augmente(double const& valeur) {

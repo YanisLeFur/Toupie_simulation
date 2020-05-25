@@ -4,6 +4,8 @@
 #include "Dessinable.h"
 #include "Matrice.h"
 #include "Integrateur.h"
+#include "constant.h"
+#include "memoire.h"
 
 #ifndef T
 #define T
@@ -28,6 +30,10 @@ class Toupie:public Dessinable{
 
         Vecteur OA; // Vecteur OA
 
+        Grandeur_physique grandeur; //grandeur utilisé pour l'affichage de couleur differente selon une grandeur physique
+
+        Memoire m;
+
 	public:
 	
 		~Toupie();
@@ -36,13 +42,23 @@ class Toupie:public Dessinable{
 		
         Vecteur getP_point() const; // retourne derivée vecteur position
 
-        Vecteur get_OA() const; // retourne le vecteur indiquant le point de contact
+        virtual Vecteur get_OA() const; // retourne le vecteur indiquant le point de contact
+
+        Memoire get_m() const; //retourne les points en mémoire (pour l'affichage graphique)
+
+        Grandeur_physique get_Grandeur() const; //retourne la grandeur physique dont la toupie utilise pour changer de couleur
+
+        bool get_trace_on(); // retourne le bool indiquant si on veut la trace ou pas
+
+        void changer_grandeur(Grandeur_physique); //change la grandeur physique vu précédemment
 		
 		void setP(Vecteur const& v);
 		
 		void setP_point(Vecteur const& v);
+
+        void ajouter_point_memoire(Vecteur const&);
 		
-        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A);
+        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur OA,Grandeur_physique grandeur=null, bool trace_on = true);
 		
         virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristique de la toupies(masse,I1,I3...)
 		
@@ -120,9 +136,8 @@ class Toupie:public Dessinable{
 
         double prod_mixt() const; // le produit mixte (omega^L)*a
 
-        virtual void trace_G() const override;
+        virtual void trace_G() override;
 
-        //void plot(invariants) ; //affiche l'energie,le produit,mixte...............
 };
 
 std::ostream& operator<<(std::ostream&,Toupie const& etre_affiche);
@@ -139,7 +154,7 @@ class ConeSimple:public Toupie{
 		
     public:
 	
-        ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA);
+        ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA, Grandeur_physique grandeur=null, bool trace_on = true);
 		
 		std::ostream& affiche(std::ostream& sortie) const override;
 
@@ -155,7 +170,7 @@ class ConeSimple:public Toupie{
 		
 		std::unique_ptr<ConeSimple> clone() const;
 
-        virtual void trace_G() const override;
+        virtual void trace_G() override;
 };
 
 double masse_cone(double masse_volumique,double hauteur,double rayon);//calcule la masse du cone a partir d'une masse volumique,une hauteur et un rayon associés au cone
@@ -191,7 +206,7 @@ class ToupieChinoise:public Toupie{
 
     public:
 
-    ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA);
+    ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur=null, bool trace_on = true);
 
     std::ostream& affiche(std::ostream& sortie) const override;
 
@@ -200,6 +215,8 @@ class ToupieChinoise:public Toupie{
     virtual std::unique_ptr<Toupie> copie() const override;
 
     std::unique_ptr<ToupieChinoise> clone() const;
+
+    virtual  Vecteur get_OA() const override;
 
     virtual Vecteur eq_mouv() const override;
 
@@ -213,9 +230,21 @@ class ToupieChinoise:public Toupie{
 
     double P5_point_point() const;
 
+    Vecteur GC_G() const;
+
+    Vecteur GC_O() const;
+
+    Vecteur AC_G() const;
+
+    Vecteur AC_O() const;
+
+    Vecteur AG_G() const;
+
+    Vecteur AG_O() const;
+
     Vecteur vC_O() const;
 
-    virtual void trace_G() const override;
+    virtual void trace_G() override;
 
 };
 
@@ -234,11 +263,51 @@ double I3_chinoise(double m, double h, double R);
 
 std::ostream& operator<<(std::ostream&,ToupieChinoise const& etre_affiche);
 
+//SolideRevolution==========================================================
+
+class SolideRevolution:public Toupie {
+    private:
+
+    double rho; // masse volumique
+
+    double L; // hauteur
+
+    std::vector<double> r_i; // ensemble de distances a l'axe
+
+    public:
+
+    SolideRevolution(SupportADessin* support, double rho, double L, std::vector<double> r_i, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur=null, bool trace_on = true);
+
+    std::ostream& affiche(std::ostream& sortie) const override;
+
+    virtual void dessine() const override;
+
+    virtual std::unique_ptr<Toupie> copie() const override;
+
+    std::unique_ptr<SolideRevolution> clone() const;
+
+    virtual void trace_G() override;
+
+    double get_L() const;
+
+    std::vector<double> get_r_i() const;
+};
+
+std::ostream& operator<<(std::ostream&,SolideRevolution const& etre_affiche);
+
+double masse_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
+
+double d_solide_revolution(double L, std::vector<double>  const& r_i);
+
+double I1_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
+
+double I3_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
+
 //MasseTombe================================================================
 class MasseTombe:public Toupie{
 	public:
 	
-	MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point);
+    MasseTombe(SupportADessin* support, double m, Vecteur P, Vecteur P_point, bool trace_on = true);
 	
 	std::ostream& affiche (std::ostream& sortie) const override;
 	
@@ -258,23 +327,21 @@ class MasseTombe:public Toupie{
 
     virtual Vecteur G_O() const override;
 
-    virtual void trace_G() const override;
+    virtual void trace_G() override;
 };	
 
 std::ostream& operator<<(std::ostream&,MasseTombe const& etre_affiche);
 
 
 //Pendule================================================================
-class Pendule:public Toupie{
-private:
 
-    double longueur;
+// le vecteur de degres de liberte est (r,theta,z) ou on utilise les coordonnes cylindriques
+
+class Pendule:public Toupie{
 
 public:
 
-    double get_l() const;//donne la longeur du fil
-
-    Pendule(SupportADessin* support, double m,Vecteur P,Vecteur P_point,double longueur);
+    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point,Vecteur OA, bool trace_on = true);
 
     std::ostream& affiche (std::ostream& sortie) const override;
 
@@ -294,7 +361,7 @@ public:
 
     virtual Vecteur G_O() const override;
 
-    virtual void trace_G() const override;
+    virtual void trace_G() override;
 
 };
 

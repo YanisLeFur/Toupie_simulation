@@ -24,7 +24,9 @@ SOURCES += \
     vue_opengl.cc \
     glchinoise.cpp \
     glsphere.cpp \
-    ../general/outils_Maths/integrateur.cc
+    ../general/outils_Maths/integrateur.cc\
+    ../general/utilitaires/memoire.cc\
+    ../general/Dessinable.cc\
 
 
 HEADERS += \
@@ -38,7 +40,9 @@ HEADERS += \
     vue_opengl.h \
     glsphere.h \
     ../general/dessinable.h \
-    ../general/outils_Maths/integrateur.h
+    ../general/outils_Maths/integrateur.h\
+    ../general/utilitaires/memoire.h\
+    ../general/Dessinable.h\
 
 RESOURCES += \
     resource.qrc

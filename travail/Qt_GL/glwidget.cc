@@ -51,7 +51,7 @@ void GLWidget::paintGL()
 void GLWidget::keyPressEvent(QKeyEvent* event)
 {
   constexpr double petit_angle(5.0); // en degrés
-  constexpr double petit_pas(1.0);
+  constexpr double petit_pas(0.25);
 
   switch (event->key()) {
 
@@ -112,6 +112,10 @@ void GLWidget::keyPressEvent(QKeyEvent* event)
   case Qt::Key_Space:
 	pause();
 	break;
+
+  case Qt::Key_V:
+    vue.changer_vue();
+    break;
   };
 
   update(); // redessine
@@ -123,12 +127,6 @@ void GLWidget::timerEvent(QTimerEvent* event)
   Q_UNUSED(event);
 
   double dt = chronometre.restart() / 1000.0;
-
-  IntegrateurEulerCromer EC;
-
-  IntegrateurNewmark NM;
-
-  IntegrateurRungeKutta RK;
 
   s.integre(dt);
   update();
@@ -158,6 +156,35 @@ VueOpenGL* GLWidget::get_Vue_ptr() {
 //=========================================================================================================
 ostream& GLWidget::affiche(ostream& sortie) const {
     s.affiche(sortie);
+}
+
+void GLWidget::mousePressEvent(QMouseEvent* event)
+{
+  lastMousePosition = event->pos();
+}
+
+// ======================================================================
+void GLWidget::mouseMoveEvent(QMouseEvent* event)
+{
+  /* If mouse tracking is disabled (the default), the widget only receives
+   * mouse move events when at least one mouse button is pressed while the
+   * mouse is being moved.
+   *
+   * Pour activer le "mouse tracking" if faut lancer setMouseTracking(true)
+   * par exemple dans le constructeur de cette classe.
+   */
+
+  if (event->buttons() & Qt::LeftButton) {
+    constexpr double petit_angle(.2); // en degrés
+
+    // Récupère le mouvement relatif par rapport à la dernière position de la souris
+    QPointF d = event->pos() - lastMousePosition;
+    lastMousePosition = event->pos();
+
+    vue.rotate(petit_angle * d.manhattanLength(), d.y(), d.x(), 0);
+
+    update();
+  }
 }
 //=========================================================================================================
 //=========================================================================================================

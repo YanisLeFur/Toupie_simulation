@@ -6,6 +6,7 @@ class MasseTombe;
 class Systeme;
 class Pendule;
 class ToupieChinoise;
+class SolideRevolution;
 
 #ifndef S
 #define S
@@ -27,15 +28,19 @@ class SupportADessin{
 
         virtual void dessine(ToupieChinoise const&) = 0;
 
-        virtual void trace_G(ConeSimple const&) = 0;
+        virtual void dessine(SolideRevolution const&) = 0;
 
-        virtual void trace_G(Toupie const&) = 0;
+        virtual void trace_G(ConeSimple&) = 0;
 
-        virtual void trace_G(MasseTombe const&) = 0;
+        virtual void trace_G(Toupie&) = 0;
 
-        virtual void trace_G(Pendule const&) = 0;
+        virtual void trace_G(MasseTombe&) = 0;
 
-        virtual void trace_G(ToupieChinoise const&) = 0;
+        virtual void trace_G(Pendule&) = 0;
+
+        virtual void trace_G(ToupieChinoise&) = 0;
+
+        virtual void trace_G(SolideRevolution&) = 0;
 };
 
 //Dessinable=============================================================
@@ -54,7 +59,7 @@ class Dessinable{
 	    
         virtual void dessine() const = 0;
 
-        virtual void trace_G() const = 0;
+        virtual void trace_G() = 0;
 };
 
 //TextViewer=============================================================
@@ -72,6 +77,8 @@ class TextViewer: public SupportADessin{
 		virtual void dessine(ConeSimple const&) override;
 
         virtual void dessine(ToupieChinoise const&) override;
+
+        virtual void dessine(SolideRevolution const&) override;
 		
 		virtual void dessine(MasseTombe const&) override;
 
@@ -79,15 +86,17 @@ class TextViewer: public SupportADessin{
 
         virtual SupportADessin* copie() const override;
 
-        virtual void trace_G(ConeSimple const&)override;
+        virtual void trace_G(ConeSimple&)override;
 
-        virtual void trace_G(Toupie const&)override;
+        virtual void trace_G(Toupie&)override;
 
-        virtual void trace_G(MasseTombe const&)override;
+        virtual void trace_G(MasseTombe&)override;
 
-        virtual void trace_G(Pendule const&)override;
+        virtual void trace_G(Pendule&)override;
 
-        virtual void trace_G(ToupieChinoise const&)override;
+        virtual void trace_G(ToupieChinoise&)override;
+
+        virtual void trace_G(SolideRevolution&)override;
 
 };
 //==========================================================================================================================

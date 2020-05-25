@@ -1,7 +1,13 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    #general/
+    QCustomPlot \
+    TestIntegrateur/testIntegrateur.pro \
+    TestMatrice/testMatrice.pro \
+    TestToupie/testToupie.pro \
+    TestVecteur/testVecteur.pro \
+    TestSysteme/testSysteme.pro \
+    general \
     general/general.pro \
     #testVecteur\
     testVecteur/testVecteur.pro \
@@ -17,7 +23,3 @@ SUBDIRS += \
     Qt_GL/Qt_Gl.pro\
 
     testCustomPlot/testCustomPlot.pro\
-
-
-
-
