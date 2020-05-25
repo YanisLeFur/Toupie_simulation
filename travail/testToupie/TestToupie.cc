@@ -4,9 +4,12 @@
 #include "constant.h"
 #include "Vecteur.h"
 #include "Dessinable.h"
+
 using namespace std;
 
 int main(){
+
+
     TextViewer text(cout);
 
     cout << "=========TOUPIE SINUS==========" << endl;
