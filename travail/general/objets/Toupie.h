@@ -162,11 +162,11 @@ class ConeSimple:public Toupie{
 
         double get_rayon() const;
 		
-		Vecteur eq_mouv() const override;
+        Vecteur eq_mouv() const override;  //equation du mouvement du cone
 		
-		virtual void dessine() const override;
+        virtual void dessine() const override; //retourne les parametres et dérivées des parametres
 		
-		virtual std::unique_ptr<Toupie> copie() const override;
+        virtual std::unique_ptr<Toupie> copie() const override;
 		
 		std::unique_ptr<ConeSimple> clone() const;
 
@@ -216,7 +216,7 @@ class ToupieChinoise:public Toupie{
 
     std::unique_ptr<ToupieChinoise> clone() const;
 
-    virtual  Vecteur get_OA() const override;
+    virtual  Vecteur get_OA() const override;  //retourne le point de contact
 
     virtual Vecteur eq_mouv() const override;
 
@@ -226,25 +226,25 @@ class ToupieChinoise:public Toupie{
 
     virtual double phi_point_point() const override; // derivée seconde de phi
 
-    double P4_point_point() const;
+    double P4_point_point() const;  // dérivée du déplacement en x du centre géométrique de la toupie chinoise
 
-    double P5_point_point() const;
+    double P5_point_point() const; // dérivée du déplacement en y du centre géométrique de la toupie chinoise
 
-    Vecteur GC_G() const;
+    Vecteur GC_G() const;  //Vecteur du centre de masse au centre géométrique dans le référentiel de la toupie
 
-    Vecteur GC_O() const;
+    Vecteur GC_O() const;   //Vecteur du centre de masse au centre géométrique dans le référentiel inertiel
 
-    Vecteur AC_G() const;
+    Vecteur AC_G() const;   //Vecteur du point de contact au centre géométrique dans le référentiel de la toupie
 
-    Vecteur AC_O() const;
+    Vecteur AC_O() const;   //Vecteur du point de contact au centre géométrique dans le référentiel de la inertiel
 
-    Vecteur AG_G() const;
+    Vecteur AG_G() const;   //Vecteur du point de contact au centre de masse dans le référentiel de la toupie
 
-    Vecteur AG_O() const;
+    Vecteur AG_O() const;   //Vecteur du point de contact au centre masse dans le référentiel de la inertiel
 
-    Vecteur vC_O() const;
+    Vecteur vC_O() const; //vitesse du point C dans le repère inertiel
 
-    virtual void trace_G() override;
+    virtual void trace_G() override;  //done la trace du centre de masse de la toupie chinoise
 
 };
 
@@ -256,9 +256,9 @@ double alpha_chinoise(double h, double R);
 
 double integrale_z_carre(double m, double h, double R);
 
-double I1_chinoise(double m, double h, double R);
+double I1_chinoise(double m, double h, double R); //retourne le coefficient I1 du tenseur d'inertie de la toupie chinoise
 
-double I3_chinoise(double m, double h, double R);
+double I3_chinoise(double m, double h, double R); //retourne le coefficient I3 du tenseur d'inertie de la toupie chinoise
 
 
 std::ostream& operator<<(std::ostream&,ToupieChinoise const& etre_affiche);
