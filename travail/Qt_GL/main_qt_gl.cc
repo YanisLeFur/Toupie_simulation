@@ -23,12 +23,12 @@ int main(int argc, char* argv[])
 
   vector<double> r_i;
 
-  double r(0.1);
+  double r(0.01);
   double L(1.5);
   double rho(0.1);
 
-  for(int i(0); i<3 ; ++i) {
-      r_i.push_back(r+i);
+  for(int i(0); i<50 ; ++i) {
+      r_i.push_back(r+i*(0.01));
   }
 
   SolideRevolution sr(v,rho,L,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(),phi_point,false);
