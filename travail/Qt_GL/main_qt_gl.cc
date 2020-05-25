@@ -20,6 +20,18 @@ int main(int argc, char* argv[])
   ConeSimple c2(v,0.039270,3,1.5,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(),phi_point,false);
   ToupieChinoise tc1(v,masse_chinoise(0.1,0.02,0.15),0.02,0.15,Vecteur({0,0.11,0,0,0}),Vecteur({50,0,0,0,0}),Vecteur(0,0,0));
   ToupieChinoise tc2(v,0.7,0.1,0.3,Vecteur({0,0.5,0,0,0}),Vecteur({15,0,0,0,0}),Vecteur(0,0,0));
+
+  vector<double> r_i;
+
+  double r(0.1);
+  double L(1.5);
+  double rho(0.1);
+
+  for(int i(0); i<3 ; ++i) {
+      r_i.push_back(r+i);
+  }
+
+  SolideRevolution sr(v,rho,L,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(),phi_point,false);
   //w.ajouter_Toupie(p);
   //w.ajouter_Toupie(mt);
   //w.ajouter_Toupie(tc1);
