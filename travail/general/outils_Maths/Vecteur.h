@@ -10,11 +10,11 @@ class Vecteur {
 
 		bool meme_dimension(Vecteur const& comparaison) const; /*test si 2 vecteurs ont la meme dimension*/
 
-        void verifier();//precision double
+        void verifier(); //precision des double
 		
 	public:
 
-		size_t dimension() const;
+        size_t dimension() const; // retourne la dimension de l'instance courante
 
         void augmente(double const& valeur); //augmente la dimension du vecteur par 1 et affecte valeur a la nouvelle composante
 
@@ -50,8 +50,7 @@ class Vecteur {
 
         double norme() const; //retourne la norme euclidienne du vecteur
 
-        double norme2() const; //retourne la norme euclidienne du vecteur eleve au carre
-		
+        double norme2() const; //retourne la norme euclidienne du vecteur eleve au carre		
 };
 	
 std::ostream& operator<<(std::ostream& sortie,Vecteur etre_affiche); //affiche les composantes d'un vecteur a travers cout
