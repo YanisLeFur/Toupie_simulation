@@ -121,9 +121,9 @@ int main(){
 
     catch(int const& i){
         switch(i){
-            case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl;
-            case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl;
-            case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl;
+            case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
+            case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
+            case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
         }
     }
 
@@ -145,7 +145,7 @@ int main(){
 
     cout << "- " << vect1 << " = " << -vect1 << endl;
 
-    cout << "- " << -vect2 << " + " << vect1 << " = " << endl << endl;
+    cout << "- " << -vect2 << " + " << vect1 << " = "  << -vect2+vect1 << endl << endl;
 
     //Vecteur vect4(4);      // le vecteur nul en 4D
     Vecteur vect10(1.,2.,3.), vect6(4.,5.,6.), vect7(7.,8.,9.), vect8({1.,3.});
