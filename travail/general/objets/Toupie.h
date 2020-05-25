@@ -10,8 +10,6 @@
 #ifndef T
 #define T
 
-//enum invariants{energie,produit_mixte,moment_cinetique};
-
 //Toupie===================================================================================================
 class Toupie:public Dessinable{
 	protected:
@@ -60,7 +58,7 @@ class Toupie:public Dessinable{
 		
         Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur OA,Grandeur_physique grandeur=null, bool trace_on = true);
 		
-        virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristique de la toupies(masse,I1,I3...)
+        virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristiques de la toupies(masse,I1,I3...)
 		
         virtual Vecteur eq_mouv() const; // equation de mouvement de la toupie
 

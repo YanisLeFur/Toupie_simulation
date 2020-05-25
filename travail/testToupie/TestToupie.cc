@@ -68,7 +68,7 @@ int main(){
 
     //Construction d'une toupie cônique avec:  un support à dessin, une masse, des coefficient d'un tenseur d'inertie (I1,I3),
     //                                         un Vecteur de paramètre, un Vecteur de dérivée des paramètre et un point de contact
-    ConeSimple cone_simple(&text,m_cone,1,1,P_cone,P_point_cone,Vecteur());
+    ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({1,1,1}));
 
     cout<<"--------------------------------------"<<endl;
 
@@ -122,13 +122,13 @@ int main(){
     cout<<"--------------------------------------"<<endl;
 
     //Energie potentielle de la masse en chute libre
-    cout<<"L'énergie potentielle du pendule est: "<<masse_tombe.EP()<<endl;
+    cout<<"L'énergie potentielle de la masse est: "<<masse_tombe.EP()<<endl;
 
     //Energie cinétique de la masse en chute libre
-    cout<<"L'énergie cinétique du pendule est: "<<masse_tombe.EC()<<endl;
+    cout<<"L'énergie cinétique de la masse est: "<<masse_tombe.EC()<<endl;
 
     //Energie totale de la masse en chute libre
-    cout<<"L'énergie totale du pendule est: "<<masse_tombe.E()<<endl;
+    cout<<"L'énergie totale de la masse est: "<<masse_tombe.E()<<endl;
 
     cout<<"--------------------------------------"<<endl<<endl;
 
@@ -158,7 +158,7 @@ int main(){
     cout<<"Au temps t=0 :"<<endl;
     chinoise.dessine();
 
-    //donne les équations de mouvements/accélération de' la masse en chute libre'une toupie chinoise
+    //donne les équations de mouvements/accélération d'une toupie chinoise
     cout << "Le vecteur acceleration de la toupie est " << chinoise.eq_mouv() << endl;
 
     //donne la position du centre de masse (G) au temps t=0
@@ -199,6 +199,124 @@ int main(){
 //Solide de Révolution==========================================================================================================================================================
 
         cout << endl << "==========SOLIDE REVOLUTION==========" << endl<<endl;
+
+        //vector des rayons différents
+        vector<double> r_i;
+
+        //premier rayon'
+        double r(0.01);
+        double hauteur_sr(1.5);
+        double masse_volumique_sr(0.1);
+
+        for(int i(0); i<50 ; ++i) {
+            r_i.push_back(r+i*(0.01));
+        }
+
+        //Construction d'un solide de révolution à partir: d'un support à dessin, une masse volumique, une hauteur, un tableau des rayons différents,
+        //                                              un Vecteur de paramètres, un Vecteur dérivée de paramètre, un point de contact
+       SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur());
+
+       cout<<"--------------------------------------"<<endl;
+       // test l'affichage  des attributs du solide de révolution
+       cout << sr;
+
+       cout<<"--------------------------------------"<<endl;
+
+       //donne les composantes du Vecteur paramètre et dérivée des paramètre au temps t=0
+       cout<<"Au temps t=0 :"<<endl;
+       sr.dessine();
+
+       //donne les équations de mouvements/accélération du solide de révolution
+       cout << "Le vecteur acceleration de la toupie est " << sr.eq_mouv() << endl;
+
+       //donne la position du centre de masse (G) au temps t=0
+       sr.trace_G();
+
+       cout<<"--------------------------------------"<<endl;
+
+//Toupie general==========================================================================================================================================================
+
+       cout << endl << "==========TOUPIE GENERAL==========" << endl<<endl;
+
+       /* Construction d'une toupie general à partir : d'un support à dessin, une masse,un Vecteur de parametres,
+        *                                              un Vecteur dérivée de paramètres, des coefficients du tenseur d'inertie(I1,I3)
+        *                                              une distance (entre le centre de masse et le point de contact),
+        *                                              et un point de contact
+        *
+        * à noter: ici on construit une toupie générale avec des attributs similaires au cône vu plus haut pour vérifier que les
+        * deux toupies ont les mêmes valeurs
+        */
+       Toupie toupie_general(&text,m_cone,P_cone,P_point_cone,3.*(m_cone/20.)*(rayon_cone*rayon_cone+1./4.*hauteur_cone*hauteur_cone),
+                             3.*m_cone/10.*rayon_cone*rayon_cone,hauteur_cone*3./4.,Vecteur({1,1,1}));
+
+       cout<<"--------------------------------------"<<endl;
+
+       cout<<"Toupie de type general:"<<endl<<toupie_general;
+
+       cout<<"--------------------------------------"<<endl;
+
+       //donne les composantes du Vecteur paramètre et dérivée des paramètre au temps t=0
+       cout<<"Au temps t=0 :"<<endl;
+       toupie_general.dessine();
+
+       //donne les équations de mouvements/accélération de la toupie general
+       cout << "Le vecteur acceleration de la toupie est " << toupie_general.eq_mouv() << endl;
+
+       //donne la position du centre de masse (G) au temps t=0
+       toupie_general.trace_G();
+
+       cout<<"--------------------------------------"<<endl;
+
+       //Energie cinétique de la toupie general
+       cout<<"L'énergie cinétique de la toupie general est: "<<toupie_general.EC()<<endl;
+
+       //Energie totale de la toupie general
+       cout<<"L'énergie totale de la toupie general est: "<<toupie_general.E()<<endl;
+
+       //produit mixte de la toupie general
+       cout<<"produit mixte: "<<toupie_general.prod_mixt()<<endl;
+
+       //moment cinetique au point de contact autour de l'axe a
+       cout<<"LA_a: "<<toupie_general.LA_a()<<endl;
+
+       //moment cinetique au point de contact autour de l'axe a
+        cout<<"LA_k: "<<toupie_general.LA_k()<<endl;
+
+
+       cout<<"--------------------------------------"<<endl;
+
+       //vecteur rotation omega selon le referentiel de la toupie
+       cout<<"Omega_G: "<<toupie_general.omega_G()<<endl;
+
+       //vecteur rotation omega selon le referentiel inertiel
+       cout<<"Omega_O: "<<toupie_general.omega_O()<<endl;
+
+       //derivee du vecteur rotation omega selon le referentiel de la toupie
+       cout<<"Omega_point_G: "<<toupie_general.omega_point_G()<<endl;
+
+       //derivee du vecteur rotation omega selon le referentiel inertiel
+       cout<<"Omega_point_O: "<<toupie_general.omega_point_O()<<endl;
+
+       //Moment de force au point de contact dans le referentiel de la toupie
+       cout<<"MA_G: "<<toupie_general.MA_G()<<endl;
+
+       //Moment de force au point de contact dans le referentiel d'inertie
+       cout<<"MA_G: "<<toupie_general.MA_O()<<endl;
+
+       //Moment cinetique au point de contact dans le referentiel de la toupie
+       cout<<"LA_G: "<<toupie_general.LA_G()<<endl;
+
+       //Moment cinetique au point de contact dans le referentiel d'inertie
+       cout<<"LA_G: "<<toupie_general.LA_O()<<endl;
+
+       //Moment cinetique au centre de masse dans le referentiel de la toupie
+       cout<<"LG_G: "<<toupie_general.LG_G()<<endl;
+
+       //Moment cinetique au centre de masse dans le referentiel d'inertie
+       cout<<"LG_G: "<<toupie_general.LG_O()<<endl;
+
+       cout<<"--------------------------------------"<<endl;
+
 
 
 

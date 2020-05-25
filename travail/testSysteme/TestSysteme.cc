@@ -63,11 +63,13 @@ int main(){
             }
 
         }
-       cout << "temps: " << temps+i*dt << endl;
+      /* cout << "temps: " << temps+i*dt << endl;
        cout << "cone" << endl;
        text.dessine(cone1);
        cout << "toupie generale" << endl;
-       text.dessine(toupie);
+       text.dessine(toupie);*/
+        cout<<toupie;
+        cout<<cone1;
     }
 
 	return 0;
