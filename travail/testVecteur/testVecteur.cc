@@ -145,7 +145,7 @@ int main(){
 
     cout << "- " << vect1 << " = " << -vect1 << endl;
 
-    cout << "- " << vect1
+    cout << "- " << -vect2 << " + " << vect1 << " = " << endl << endl;
 
     //Vecteur vect4(4);      // le vecteur nul en 4D
     Vecteur vect10(1.,2.,3.), vect6(4.,5.,6.), vect7(7.,8.,9.), vect8({1.,3.});
