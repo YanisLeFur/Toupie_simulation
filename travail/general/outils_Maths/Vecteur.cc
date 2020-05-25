@@ -28,7 +28,7 @@ size_t Vecteur::dimension() const {
 //=========================================================================================================
 double Vecteur::get_coord(size_t composante)const{
     if((composante<=vecteur.size()) and (composante>0)) return vecteur[composante-1];
-    else throw 3;
+    else throw 4;
 }
 //=========================================================================================================
 void Vecteur::augmente(double const& valeur) {
@@ -46,7 +46,7 @@ Vecteur::Vecteur(size_t dimension) :vecteur(vector<double>(dimension, 0.0)) {}
 ostream& Vecteur::affiche(ostream& sortie) const {
     sortie << "(";
     for (size_t i(0); i<vecteur.size()-1; ++i) {
-        sortie << setprecision(4) << vecteur[i] << " ";
+        sortie << setprecision(7) << vecteur[i] << " ";
     }
     sortie << vecteur.back() << ")";
     return sortie;
