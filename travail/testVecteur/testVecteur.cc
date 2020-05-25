@@ -124,16 +124,7 @@ int main(){
     }
 
     catch(int const& i){
-        switch(i){
-        case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
-        break;
-        case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
-        break;
-        case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
-        break;
-        case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
-        break;
-        }
+        affiche_erreur(i);
     }
 
     try {
@@ -141,16 +132,7 @@ int main(){
     }
 
     catch(int const& i){
-        switch(i){
-        case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
-        break;
-        case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
-        break;
-        case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
-        break;
-        case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
-        break;
-        }
+        affiche_erreur(i);
     }
 
     // test de l'oppose d'un vecteur =========================================================================================
@@ -159,7 +141,7 @@ int main(){
 
     cout << "- " << vect1 << " = " << -vect1 << endl;
 
-    cout << "- " << -vect2 << " + " << vect1 << " = "  << -vect2+vect1 << endl << endl;
+    cout << "- " << vect2 << " + " << vect1 << " = "  << -vect2+vect1 << endl << endl;
 
     // test de la multiplication d'un vecteur par un scalaire =========================================================================================
 
@@ -190,16 +172,7 @@ int main(){
     }
 
     catch(int const& i){
-        switch(i){
-            case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
-            break;
-            case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
-            break;
-            case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
-            break;
-            case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
-            break;
-        }
+        affiche_erreur(i);
     }
 
     // test de la norme d'un vecteur et de son carre =========================================================================================
@@ -229,16 +202,7 @@ int main(){
     }
 
     catch(int const& i){
-        switch(i){
-            case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
-            break;
-            case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
-            break;
-            case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
-            break;
-            case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
-            break;
-        }
+        affiche_erreur(i);
     }
 
     // test de la methode augmente =========================================================================================
@@ -270,16 +234,7 @@ int main(){
     }
 
     catch(int const& i){
-        switch(i){
-        case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
-        break;
-        case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
-        break;
-        case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
-        break;
-        case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
-        break;
-        }
+        affiche_erreur(i);
     }
 
     cout << "La composante " << 5 << " du vecteur " << vect2 << " est : ";
@@ -289,16 +244,7 @@ int main(){
     }
 
     catch(int const& i){
-        switch(i){
-        case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
-        break;
-        case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
-        break;
-        case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
-        break;
-        case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
-        break;
-        }
+        affiche_erreur(i);
     }
 
     // test des operateurs += , -= , *= , et ^=  =========================================================================================

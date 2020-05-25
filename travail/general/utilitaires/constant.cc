@@ -23,4 +23,18 @@ double modulo_2pi(double angle) {
     }
     return angle;
 }
- 
+
+
+void affiche_erreur(const int &i)
+{
+    switch(i){
+    case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
+    break;
+    case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
+    break;
+    case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
+    break;
+    case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
+    break;
+    }
+}
