@@ -242,8 +242,10 @@ using namespace std;
 
 
     ostream& ConeSimple::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Cone Simple: "<<endl;
-            this->Toupie::affiche(sortie);
+        sortie<<"Toupie de type Cone Simple: "<<endl
+              <<"Hauteur (m) : " << hauteur << endl
+              <<"Rayon (m) : " << rayon << endl;
+        this->Toupie::affiche(sortie);
         return sortie;
     }
 
@@ -303,9 +305,11 @@ using namespace std;
     }
 
     ostream& ToupieChinoise::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Toupie Chinoise: "<<endl;
-            this->Toupie::affiche(sortie);
-            return sortie;
+        sortie<<"Toupie de type Toupie Chinoise: "<<endl
+              <<"Hauteur tronquee (m) : " << h << endl
+              <<"Rayon (m) : " << R << endl;
+        this->Toupie::affiche(sortie);
+        return sortie;
     }
 
     void ToupieChinoise::dessine() const {
@@ -478,9 +482,10 @@ using namespace std;
     }
 
     ostream& SolideRevolution::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Solide de Revolution: "<<endl;
-            this->Toupie::affiche(sortie);
-            return sortie;
+        sortie<<"Toupie de type Solide de Revolution: "<<endl
+              <<"Hauteur (m) : " << L << endl;
+        this->Toupie::affiche(sortie);
+        return sortie;
     }
 
     void SolideRevolution::dessine() const {
@@ -603,7 +608,7 @@ using namespace std;
         return (EC()+EP());
     }
 
-    Vecteur MasseTombe::OG_G() const
+    Vecteur MasseTombe::OG_O() const
     {
         return P;
     }
@@ -628,12 +633,12 @@ using namespace std;
 
     ostream& Pendule::affiche(std::ostream& sortie) const{
         sortie<<"Pendule : "<<endl
-            <<"Masse (kg) : "<<masse<<endl
-            <<"Longueur (m) : "<<P.get_coord(1)<<endl
-            <<"Accroche en : "<<OA<< endl
-            <<"Vecteur P : "<<P<<endl
-            <<"Derivee de P : "<<P_point<<endl;
-            return sortie;
+              <<"Longueur (m) : "<<P.get_coord(1)<<endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"Accroche en : "<<OA<< endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl;
+        return sortie;
     }
     Vecteur Pendule::eq_mouv() const{
         return Vecteur({0,-g/P.get_coord(1)*sin(P.get_coord(2)),0});

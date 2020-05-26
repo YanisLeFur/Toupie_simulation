@@ -240,7 +240,7 @@ class ToupieChinoise:public Toupie{
 
     Vecteur AG_G() const;   //Vecteur du point de contact au centre de masse dans le référentiel de la toupie
 
-    Vecteur AG_O() const;   //Vecteur du point de contact au centre masse dans le référentiel de la inertiel
+    Vecteur AG_O() const override;   //Vecteur du point de contact au centre masse dans le référentiel de la inertiel
 
     Vecteur vC_O() const; //vitesse du point C dans le repère inertiel
 
@@ -325,7 +325,7 @@ class MasseTombe:public Toupie{
 
     virtual double E() const override;
 
-    virtual Vecteur OG_G() const override;
+    virtual Vecteur OG_O() const override;
 
     virtual void trace_G() override;
 };	

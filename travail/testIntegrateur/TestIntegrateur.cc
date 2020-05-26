@@ -54,7 +54,7 @@ int main(){
 
         //Construction d'une toupie cônique avec:  un support à dessin, une masse, des coefficient d'un tenseur d'inertie (I1,I3),
         //                                         un Vecteur de paramètre, un Vecteur de dérivée des paramètre et un point de contact
-        ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({1,1,1}));
+        ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({0,0,0}));
 
 
 //MasseTombe--------------------------------------------------------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ int main(){
 
         //Construction d'un solide de révolution à partir: d'un support à dessin, une masse volumique, une hauteur, un tableau des rayons différents,
         //                                              un Vecteur de paramètres, un Vecteur dérivée de paramètre, un point de contact
-       SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur());
+        SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,60),Vecteur());
 
 //Toupie_general-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -181,7 +181,7 @@ int main(){
 
     cout << "Energie: " << cone_simple.E() << endl;
 
-    for (int i(0); i <nb_echantillons; i++){
+    /*for (int i(0); i <nb_echantillons; i++){
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
             cout << endl << "LA_a: " << cone_simple.LA_a() <<endl;
             RK.integre(pas_de_temps,cone_simple);
@@ -197,18 +197,24 @@ int main(){
             cout << endl << "EC: " << cone_simple.EC();
 
             cout << endl << "E: " << cone_simple.E();
-    }
+    }*/
 
 ///TOUPIE CHINOISE=====================================================
 
     cout << chinoise << endl;
 
     for (int i(0); i <nb_echantillons; i++){
-        cout << endl << "temps: " << temps+i*pas_de_temps << endl;
+        /*cout << endl << "temps: " << temps+i*pas_de_temps << endl;
         chinoise.dessine();
         EC.integre(pas_de_temps,chinoise);
         cout << "EC: " << chinoise.EC() << endl;
-        cout << "E: " << chinoise.E() << endl;
+        cout << "E: " << chinoise.E() << endl;*/
+        EC.integre(pas_de_temps,sr);
+        EC.integre(pas_de_temps,cone_simple);
+        cout << "Solide de Revolution : " << endl;
+        sr.dessine();
+        cout << "Cone Simple : " << endl;
+        cone_simple.dessine();
     }
 
 	return 0;

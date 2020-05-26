@@ -13,7 +13,10 @@ Dessinable::Dessinable(SupportADessin const& support): support(support.copie()) 
 
 Dessinable::Dessinable(SupportADessin* support): support(support) {}
 
-Dessinable::~Dessinable() { delete support; }
+Dessinable::~Dessinable() {
+    support = nullptr;
+    delete support;
+}
 
 //SupportADessin=====================================================================================
 
