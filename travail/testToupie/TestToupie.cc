@@ -10,64 +10,28 @@ using namespace std;
 
 int main(){
 
-    TextViewer text(cout); //permet l'affichage textuel
-
-//Pendule==========================================================================================================================================================
-
-    cout << "=========PENDULE==========" << endl<<endl;
-	double masse_sinus(1);
-
-    //Construction pendule avec (Support à dessin, masse, Vecteur de paramètre, Vecteur de derivée des paramètres, Point de contact)
-    //on modelise le pendule en coordonnées cylindriques
-    Pendule pendule(&text,masse_sinus,Vecteur({M_PI/6,0,0}),Vecteur({0,0,60}),Vecteur(0,1,2));
-
-    cout<<"--------------------------------------"<<endl;
-
-    // test l'affichage  des attributsd'un pendule
-    cout << pendule;
-
-    cout<<"--------------------------------------"<<endl;
-
-    //donne les composantes du Vecteur paramètre et dérivée des paramètre au temps t=0
-    cout<<"Au temps t=0 :"<<endl;
-    pendule.dessine();
-
-    //donne les équations de mouvements/accélération du pendule au temps t=0
-    cout << "Le vecteur acceleration de la toupie est " << pendule.eq_mouv() << endl;
-
-    //donne la position du centre de masse (G) au temps t=0
-    pendule.trace_G();
-
-    cout<<"--------------------------------------"<<endl;
-
-    //Energie potentielle du pendule
-    cout<<"L'énergie potentielle du pendule est: "<<pendule.EP()<<endl;
-
-    //Energie cinétique du pendule
-    cout<<"L'énergie cinétique du pendule est: "<<pendule.EC()<<endl;
-
-    //Energie totale du pendule
-    cout<<"L'énergie totale du pendule est: "<<pendule.E()<<endl;
-
-    cout<<"--------------------------------------"<<endl<<endl;
-
-
+    TextViewer text(cout); // permet l'affichage textuel
 
 //ConeSimple=======================================================================================================================================================
 
-    cout << endl << "==========CONE SIMPLE==========" << endl<<endl;
+    cout << endl << "==========CONE SIMPLE==========" << endl << endl;
+
 	double masse_volumique_cone(0.1);
 	double hauteur_cone(1.5);
 	double rayon_cone(0.5);
     Vecteur P_cone({0,M_PI/6,0});
 	Vecteur P_point_cone({0,0,60});
 
+    // méthode calculant la masse d'un cône à partir d'une masse volumique, une hauteur et un rayon
 
-    //méthode calculant la masse d'un cône à partir d'une masse volumique, une hauteur et un rayon
     double m_cone(masse_cone(masse_volumique_cone,hauteur_cone,rayon_cone));
 
-    //Construction d'une toupie cônique avec:  un support à dessin, une masse, des coefficient d'un tenseur d'inertie (I1,I3),
-    //                                         un Vecteur de paramètre, un Vecteur de dérivée des paramètre et un point de contact
+    // Construction d'une toupie cônique avec:
+
+    // un support à dessin, une masse, des coefficient d'un tenseur d'inertie (I1,I3),
+
+    // un Vecteur de paramètre, un Vecteur de dérivée des paramètre et un point de contact
+
     ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({1,1,1}));
 
     cout<<"--------------------------------------"<<endl;
@@ -198,19 +162,19 @@ int main(){
 
 //Solide de Révolution==========================================================================================================================================================
 
-        cout << endl << "==========SOLIDE REVOLUTION==========" << endl<<endl;
+    cout << endl << "==========SOLIDE REVOLUTION==========" << endl<<endl;
 
-        //vector des rayons différents
-        vector<double> r_i;
+    //vector des rayons différents
+    vector<double> r_i;
 
-        //premier rayon'
-        double r(0.01);
-        double hauteur_sr(1.5);
-        double masse_volumique_sr(0.1);
+    //premier rayon'
+    double r(0.01);
+    double hauteur_sr(1.5);
+    double masse_volumique_sr(0.1);
 
-        for(int i(0); i<50 ; ++i) {
-            r_i.push_back(r+i*(0.01));
-        }
+    for(int i(0); i<50 ; ++i) {
+        r_i.push_back(r+i*(0.01));
+    }
 
         //Construction d'un solide de révolution à partir: d'un support à dessin, une masse volumique, une hauteur, un tableau des rayons différents,
         //                                              un Vecteur de paramètres, un Vecteur dérivée de paramètre, un point de contact
@@ -234,7 +198,83 @@ int main(){
 
        cout<<"--------------------------------------"<<endl;
 
-//Toupie general==========================================================================================================================================================
+//Pendule==========================================================================================================================================================
+
+       cout << "=========PENDULE==========" << endl << endl;
+
+       double masse_pendule(1);
+
+       // Construction d'un pendule avec (Support à dessin, masse, Vecteur de paramètre, Vecteur de derivée des paramètres, Point de contact)
+
+       // le point de contact du pendule correspond en faite a l'origine du fil au quel il est accroche
+
+       // (avec ses coordonnees exprime en coordonnee cartesiennes)
+
+       // on modelise le pendule en coordonnées cylindriques
+
+       // c'est a dire le vecteur de parametre correspond a (r,theta,z), un rayon, un angle et une hauteur
+
+       // (l'extension des coordonnees polaire en 3 dimensions)
+
+       Pendule pendule(&text,masse_pendule,Vecteur({1,M_PI/6,0}),Vecteur({0,0,0}),Vecteur(0,1,2));
+
+       // ce pendule correspond donc a une masse de 1kg
+
+       // suspendu a un fil de longueur 1m (rayon initiale dans la construction du pendule)
+
+       // tenu initiallement a un angle de 30 degrees par rapport a la verticale (angle initialle de PI/6)
+
+       // lache avec une vitesse initialle nul (vecteur des derivees initiallement nul)
+
+       // avec l'origine du fil situe a (0,1,2) en coordonnee cartesiennes
+
+       cout<<"--------------------------------------"<<endl;
+
+       // test l'affichage  des attributs d'un pendule
+
+       cout << pendule;
+
+       // donne la position du centre de masse (G)
+
+       // qui est equivalent a sa position
+
+       // car le pendule est un point materiel
+
+       pendule.trace_G();
+
+       cout<<"--------------------------------------"<<endl;
+
+       // donne les équations de mouvements/l'accélération du pendule
+
+       cout << "Le vecteur acceleration du pendule est : " << pendule.eq_mouv() << endl;
+
+       // ceci correspond concretement a l'equation characteristique d'un pendule
+
+       // theta_point_point = -g/l * sin(theta)
+
+       cout<<"--------------------------------------"<<endl;
+
+       // Energie potentielle du pendule
+
+       // (correspondant a son energie gravitationelle)
+
+       cout << "L'energie potentielle du pendule est : " << pendule.EP() << endl;
+
+       // Energie cinétique du pendule
+
+       // (proportionnelle a la vitesse du pendule)
+
+       cout << "L'energie cinetique du pendule est : " << pendule.EC() << endl;
+
+       // Energie totale du pendule
+
+       // (reste constante car les forces sont conservatives)
+
+       cout << "L'energie totale du pendule est : " << pendule.E() << endl;
+
+       cout << "--------------------------------------" << endl << endl;
+
+//Toupie generale==========================================================================================================================================================
 
        cout << endl << "==========TOUPIE GENERAL==========" << endl<<endl;
 

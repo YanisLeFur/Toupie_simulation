@@ -622,9 +622,10 @@ using namespace std;
     }
 
     ostream& Pendule::affiche(std::ostream& sortie) const{
-        sortie<<"Toupie de type Pendule : "<<endl
+        sortie<<"Pendule : "<<endl
             <<"Masse (kg) : "<<masse<<endl
             <<"Longueur (m) : "<<P.get_coord(1)<<endl
+            <<"Accroche en : "<<OA<< endl
             <<"Vecteur P : "<<P<<endl
             <<"Derivee de P : "<<P_point<<endl;
             return sortie;
