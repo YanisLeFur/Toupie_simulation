@@ -28,17 +28,11 @@ int main(){
         //pas de temps pour l'integration des toupies
         double pas_de_temps(0.01);
 
-        double nb_echantillons(50);
+        //nombre de fois que la toupie sera integrer selon le pas de temps
+        double nb_echantillons(20);
+
+        //temps initiale de la toupie
         double temps(0);
-
-//Pendule--------------------------------------------------------------------------------------------------------------------------------------
-
-        double masse_sinus(1);
-
-        //Construction pendule avec (Support à dessin, masse, Vecteur de paramètre, Vecteur de derivée des paramètres, Point de contact)
-        //on modelise le pendule en coordonnées cylindriques
-        Pendule pendule(&text,masse_sinus,Vecteur({M_PI/6,0,0}),Vecteur({0,0,60}),Vecteur(0,1,2));
-
 
 //ConeSimple-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -52,16 +46,14 @@ int main(){
         //méthode calculant la masse d'un cône à partir d'une masse volumique, une hauteur et un rayon
         double m_cone(masse_cone(masse_volumique_cone,hauteur_cone,rayon_cone));
 
-        //Construction d'une toupie cônique avec:  un support à dessin, une masse, des coefficient d'un tenseur d'inertie (I1,I3),
-        //                                         un Vecteur de paramètre, un Vecteur de dérivée des paramètre et un point de contact
-        ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({1,1,1}));
+        //Construction d'une toupie cônique pour l'integrateur Euler-Cromer
+        ConeSimple cone_simple_EC(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({1,1,1}));
 
+        //Construction d'une toupie cônique pour l'integrateur de Newmark
+        ConeSimple cone_simple_NM(cone_simple_EC);
 
-//MasseTombe--------------------------------------------------------------------------------------------------------------------------------------
-
-        //Construction d'une masse en chute libre à partir: d'un support à dessin, une masse, un Vecteur de paramètres
-        //                                              un Vecteur dérivée de paramètre
-        MasseTombe masse_tombe(&text,1,Vecteur({10,100,1}), Vecteur({2,2,1}));
+        //Construction d'une toupie cônique pour l'integrateur Runge-Kutta
+        ConeSimple cone_simple_RK(cone_simple_EC);
 
 //ToupieChinoise-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -73,145 +65,163 @@ int main(){
         double m_chinoise(masse_chinoise(masse_volumique,hauteur,rayon));
 
 
-        //Construction d'une Toupie chinoise à partir: d'un support à dessin, une masse, une hauteur, un rayon,
-        //                                              un Vecteur de paramètres, un Vecteur dérivée de paramètre, un point de contact
-        ToupieChinoise chinoise(&text,m_chinoise,hauteur,rayon,Vecteur({0,0.11,0,0,0}),Vecteur({50,0,0,0,0}),Vecteur({1,2,3}));
+        //Construction d'une Toupie chinoise pour l'integrateur Euler-Cromer
+        ToupieChinoise chinoise_EC(&text,m_chinoise,hauteur,rayon,Vecteur({0,0.11,0,0,0}),Vecteur({50,0,0,0,0}),Vecteur({1,2,3}));
+
+        //Construction d'une Toupie chinoise pour l'integrateur de Newmark
+        ToupieChinoise chinoise_NM(chinoise_EC);
+
+        //Construction d'une Toupie chinoise pour l'integrateur Runge-Kutta
+        ToupieChinoise chinoise_RK(chinoise_EC);
 
 
-//SolideRevolution---------------------------------------------------------------------------------------------------------------------------------
+//EULER-CROMER====================================================================================================
 
-        //vector des rayons différents
-        vector<double> r_i;
-
-        //premier rayon
-        double r(0.01);
-        double hauteur_sr(1.5);
-        double masse_volumique_sr(0.1);
-
-        for(int i(0); i<50 ; ++i) {
-            r_i.push_back(r+i*(0.01));
-        }
-
-        //Construction d'un solide de révolution à partir: d'un support à dessin, une masse volumique, une hauteur, un tableau des rayons différents,
-        //                                              un Vecteur de paramètres, un Vecteur dérivée de paramètre, un point de contact
-       SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur());
-
-//Toupie_general-----------------------------------------------------------------------------------------------------------------------------------
-
-        Toupie toupie_general(&text,m_cone,P_cone,P_point_cone,3.*(m_cone/20.)*(rayon_cone*rayon_cone+1./4.*hauteur_cone*hauteur_cone),
-                              3.*m_cone/10.*rayon_cone*rayon_cone,hauteur_cone*3./4.,Vecteur({1,1,1}));
+    cout<<"==================EULER-CROMER=================="<<endl;
+    cout<<"================================================"<<endl;
 
 
-//==================================================================================================================================================
-
-	
-    cout << "Pendule: " << endl;
+    cout << "=========CONE SIMPLE==========" << endl<<endl;
 
     for (int i(0); i <nb_echantillons; i++){
-        cout << endl << "temps: " << temps+i*pas_de_temps << endl;
-        EC.integre(pas_de_temps,pendule);
-        cout << endl << "EC: " << pendule.EC();
-        cout << endl << "EP: " << pendule.EP();
-        cout << endl << "E: " << pendule.E();
-        pendule.dessine();
-    }
 
-    cout << "===================================" << endl;
-
-
-///MASSE TOMBE==================================================================	
-	
-    cout << "Masse qui tombe: " << endl;
-	
-    for (int i(0); i <nb_echantillons; i++){
-        RK.integre(pas_de_temps,masse_tombe);
-        text.dessine(masse_tombe);
-        cout << "EC: " << masse_tombe.EC() << endl;
-        cout << "EP: " << masse_tombe.EP() << endl;
-        cout << "E: " << masse_tombe.E() << endl;
-    }
-
-///CONE SIMPLE==================================================================
-	
-    cout << "Cone simple: " << endl;
-
-    cout << "IG_G: " << endl << cone_simple.IG_G() << endl;
-
-    cout << "IA_G: " << endl << cone_simple.IA_G() << endl;
-
-    cout << "S_: " << endl << cone_simple.S_() << endl;
-
-    cout << "P_G: " << cone_simple.S_()*cone_simple.P_O() << endl;
-
-    cout << "P_O: " << cone_simple.P_O() << endl;
-
-    cout << "G_G: " << cone_simple.G_G() << endl;
-
-    cout << "G_O: " << cone_simple.G_O() << endl;
-
-    cout << "omega_G: " << cone_simple.omega_G() << endl;
-
-    cout << "omega_O: " << cone_simple.omega_O() << endl;
-
-    cout << "omega_e_G: " << cone_simple.omega_e_G() << endl;
-
-    cout << "omega_e_O: " << cone_simple.omega_e_O() << endl;
-
-    cout << "IG_O: " << endl <<cone_simple.IG_O() << endl;
-
-    cout << "IA_O: " << endl << cone_simple.IA_O() << endl;
-
-    cout << "MA_G: " << cone_simple.MA_G() << endl;
-
-    cout << "MA_O: " << cone_simple.MA_O() << endl;
-
-    cout << "LA_G: " << cone_simple.LA_G() << endl;
-
-    cout << "LA_O: " << cone_simple.LA_O() << endl;
-
-    cout << "LG_G: " << cone_simple.LG_G() << endl;
-
-    cout << "LG_O: " << cone_simple.LG_O() << endl;
-
-    cout << "Devrait etre 0: " << cone_simple.LG_O()-cone_simple.S_().transp()*cone_simple.LG_G() << endl;
-
-    cout << "omega_point_G: " << cone_simple.omega_point_G() << endl;
-
-    cout << "eq_mouv: " << cone_simple.eq_mouv() << endl;
-
-    cout << "Energie: " << cone_simple.E() << endl;
-
-    for (int i(0); i <nb_echantillons; i++){
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
-            cout << endl << "LA_a: " << cone_simple.LA_a() <<endl;
-            RK.integre(pas_de_temps,cone_simple);
 
-            cone_simple.dessine();
+            cout<<"--------------------------------------"<<endl;
 
+            cone_simple_EC.dessine();
+            cout << "eq_mouv: " << cone_simple_EC.eq_mouv() << endl;
 
+            cout<<"--------------------------------------"<<endl;
 
-            cout << endl << "LA_a: " << cone_simple.LA_a();
+            //invariants du mouvement du cone
+            cout << endl << "LA_a: " << cone_simple_EC.LA_a() <<endl;
+            cout << endl << "LA_k: " << cone_simple_EC.LA_k();
+            cout << endl << "E: " << cone_simple_EC.E();
+            cout<<endl<<"produit mixte: "<<cone_simple_EC.prod_mixt()<<endl;
 
-            cout << endl << "LA_k: " << cone_simple.LA_k();
-
-            cout << endl << "EC: " << cone_simple.EC();
-
-            cout << endl << "E: " << cone_simple.E();
-
-            cout << endl << "AG: " << cone_simple.AG();
+            EC.integre(pas_de_temps,cone_simple_EC);
     }
 
-///TOUPIE CHINOISE=====================================================
-
-    cout << chinoise << endl;
+    cout << "=========TOUPIE CHINOISE==========" << endl<<endl;
 
     for (int i(0); i <nb_echantillons; i++){
-        cout << endl << "temps: " << temps+i*pas_de_temps << endl;
-        chinoise.dessine();
-        EC.integre(pas_de_temps,chinoise);
-        cout << "EC: " << chinoise.EC() << endl;
-        cout << "E: " << chinoise.E() << endl;
+
+            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            chinoise_EC.dessine();
+            cout << "equations de mouvements: " << chinoise_EC.eq_mouv() << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            //invariants du mouvement du cone
+            cout << endl << "LA_a: " << chinoise_EC.LA_a() <<endl;
+            cout << endl << "LA_k: " << chinoise_EC.LA_k();
+            cout << endl << "E: " << chinoise_EC.E();
+            cout<<endl<<"produit mixte: "<<chinoise_EC.prod_mixt()<<endl;
+            EC.integre(pas_de_temps,chinoise_EC);
     }
+
+    cout<<"==================NEWMARK=================="<<endl;
+    cout<<"================================================"<<endl;
+
+
+    cout << "=========CONE SIMPLE==========" << endl<<endl;
+
+    for (int i(0); i <nb_echantillons; i++){
+
+            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            cone_simple_NM.dessine();
+            cout << "eq_mouv: " << cone_simple_NM.eq_mouv() << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            //invariants du mouvement du cone
+            cout << endl << "LA_a: " << cone_simple_NM.LA_a() <<endl;
+            cout << endl << "LA_k: " << cone_simple_NM.LA_k();
+            cout << endl << "E: " << cone_simple_NM.E();
+            cout<<endl<<"produit mixte: "<<cone_simple_NM.prod_mixt()<<endl;
+
+            NM.integre(pas_de_temps,cone_simple_NM);
+    }
+
+    cout << "=========TOUPIE CHINOISE==========" << endl<<endl;
+
+    for (int i(0); i <nb_echantillons; i++){
+
+            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            chinoise_NM.dessine();
+            cout << "equations de mouvements: " << chinoise_NM.eq_mouv() << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            //invariants du mouvement du cone
+            cout << endl << "LA_a: " << chinoise_NM.LA_a() <<endl;
+            cout << endl << "LA_k: " << chinoise_NM.LA_k();
+            cout << endl << "E: " << chinoise_NM.E();
+            cout<<endl<<"produit mixte: "<<chinoise_NM.prod_mixt()<<endl;
+            NM.integre(pas_de_temps,chinoise_NM);
+    }
+
+
+    cout<<"==================RUNGE-KUTTA=================="<<endl;
+    cout<<"================================================"<<endl;
+
+
+    cout << "=========CONE SIMPLE==========" << endl<<endl;
+
+    for (int i(0); i <nb_echantillons; i++){
+
+            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            cone_simple_RK.dessine();
+            cout << "eq_mouv: " << cone_simple_RK.eq_mouv() << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            //invariants du mouvement du cone
+            cout << endl << "LA_a: " << cone_simple_RK.LA_a() <<endl;
+            cout << endl << "LA_k: " << cone_simple_RK.LA_k();
+            cout << endl << "E: " << cone_simple_RK.E();
+            cout<<endl<<"produit mixte: "<<cone_simple_RK.prod_mixt()<<endl;
+
+            RK.integre(pas_de_temps,cone_simple_RK);
+    }
+
+    cout << "=========TOUPIE CHINOISE==========" << endl<<endl;
+
+    for (int i(0); i <nb_echantillons; i++){
+
+            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            chinoise_RK.dessine();
+            cout << "equations de mouvements: " << chinoise_RK.eq_mouv() << endl;
+
+            cout<<"--------------------------------------"<<endl;
+
+            //invariants du mouvement du cone
+            cout << endl << "LA_a: " << chinoise_RK.LA_a() <<endl;
+            cout << endl << "LA_k: " << chinoise_RK.LA_k();
+            cout << endl << "E: " << chinoise_RK.E();
+            cout<<endl<<"produit mixte: "<<chinoise_RK.prod_mixt()<<endl;
+            RK.integre(pas_de_temps,chinoise_RK);
+    }
+
+
+
+
 
 	return 0;
 }
