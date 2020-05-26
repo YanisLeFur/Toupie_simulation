@@ -177,7 +177,8 @@ void VueOpenGL::trace_G(Pendule& p){
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    p.ajouter_point_memoire(p.G_O()+p.get_OA());
+    Vecteur v(p.getP().get_coord(1)*sin(p.getP().get_coord(2)),p.getP().get_coord(3),-p.getP().get_coord(1)*cos(p.getP().get_coord(2)));
+    p.ajouter_point_memoire(v+p.get_OA());
     if (p.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
         for(size_t i(0);i<p.get_m().GetPoints().size()-1;i++){
