@@ -25,7 +25,7 @@ int main(){
 	double m_cone(masse_cone(masse_volumique_cone,hauteur_cone,rayon_cone)); // test la fonction masse_cone
     Vecteur P_cone({M_PI/6,0,0});
 	Vecteur P_point_cone({0,0,60});
-<<<<<<< Updated upstream
+
     ConeSimple cone_simple(&text,m_cone,1,1,P_cone,P_point_cone,Vecteur()); // test la construction d'un cone simple
 	cout << cone_simple << endl; // test l'affichage d'un cone simple
 	
