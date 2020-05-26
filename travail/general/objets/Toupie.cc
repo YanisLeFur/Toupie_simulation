@@ -657,8 +657,7 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
 
  Vecteur Pendule::G_O() const
  {
-     return Vecteur(P.get_coord(1)*sin(P.get_coord(2)),P.get_coord(3),-P.get_coord(1)*cos(P.get_coord(2)));
-     // (r*cos(theta),r*sin(theta),z)
+     return P;
  }
 
  void Pendule::trace_G(){
