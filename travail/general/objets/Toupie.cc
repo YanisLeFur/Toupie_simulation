@@ -41,11 +41,9 @@ using namespace std;
 
     Toupie::Toupie(SupportADessin* support,double masse,Vecteur P,Vecteur P_point,double I1,double I3,double distance,Vecteur OA,Grandeur_physique grandeur, bool trace_on)
         :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA),grandeur(grandeur),m(Memoire(trace_on)){
-
-        if(masse==0){throw 4;}
-        if(I1==0){throw 6;}
-        if(I3==0){throw 7;}
-
+        if(masse==0){throw 5;}
+        if(I1==0){throw 7;}
+        if(I3==0){throw 8;}
     }
 	
     ostream& Toupie::affiche(ostream& sortie) const {
@@ -230,9 +228,9 @@ using namespace std;
     ConeSimple::ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur, bool trace_on)
     :Toupie(support,m,P,P_point,3.*m/20.*(r*r+1./4.*h*h),3.*m/10.*r*r,h*3./4.,OA,grandeur,trace_on),hauteur(h),rayon(r){
 
-        if(r==0){throw 5;}
-        if(h==0){throw 8;}
-        if(m==0){throw 4;}
+        if(r==0){throw 6;}
+        if(h==0){throw 9;}
+        if(m==0){throw 5;}
     }
 
 
@@ -254,7 +252,7 @@ using namespace std;
 
     Vecteur ConeSimple::eq_mouv() const {
         double I_A1((I1+masse*distance*distance));
-        if(getP().get_coord(2)==0){throw 9;}
+        if(getP().get_coord(2)==0){throw 10;}
         else{
         return Vecteur(getP_point().get_coord(2)/(I_A1*sin(getP().get_coord(2)))*((I3-2.*I_A1)*getP_point().get_coord(1)*cos(getP().get_coord(2))+I3*getP_point().get_coord(3)),
                        1./(I_A1)*(masse*g*distance*sin(getP().get_coord(2))+getP_point().get_coord(1)*sin(getP().get_coord(2))*((I_A1-I3)*getP_point().get_coord(1)*cos(getP().get_coord(2))-I3*getP_point().get_coord(3))),
@@ -291,9 +289,9 @@ using namespace std;
     ToupieChinoise::ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur, bool trace_on) // d???????
         :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA,grandeur,trace_on),h(h),R(R){
 
-        if (R==0){throw 5;}
-        if (R<0){throw 10;}
-        if (h<0){throw 11;}
+        if (R==0){throw 6;}
+        if (R<0){throw 11;}
+        if (h<0){throw 12;}
 
     }
 
@@ -336,7 +334,7 @@ using namespace std;
     }
 
     double ToupieChinoise::f2() const {
-        if(theta()==0) {throw 9;}
+        if(theta()==0) {throw 10;}
         return theta_point() / sin(theta())* f1() *  ( I3* ( I3 + masse * R * R * ( 1 - alpha_chinoise(h,R) * cos(theta()) ) ) / f3() )
                 -2 * psi_point() * theta_point() * cos(theta()) / sin(theta()); //OK
     }
@@ -457,7 +455,7 @@ using namespace std;
     SolideRevolution::SolideRevolution(SupportADessin* support, double rho, double L, std::vector<double> r_i, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur, bool trace_on)
     :Toupie(support,masse_solide_revolution(rho,L,r_i),P,P_point,I1_solide_revolution(rho,L,r_i),I3_solide_revolution(rho,L,r_i),d_solide_revolution(L,r_i),OA,grandeur,trace_on),rho(rho),L(L),r_i(r_i)
     {
-        if(r_i.size()==0){throw 12;}
+        if(r_i.size()==0){throw 13;}
 
         bool nul(true);
         bool negatif(false);
@@ -466,8 +464,8 @@ using namespace std;
             if(r_i[i]!=0){nul=false;}
         }
 
-        if(nul){throw 13;}
-        if(negatif){throw 10;}
+        if(nul){throw 14;}
+        if(negatif){throw 11;}
 
 
     }
@@ -558,7 +556,7 @@ using namespace std;
     MasseTombe::MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point,bool trace_on)
     :Toupie(support,m,P,P_point,1,1,0.5,Vecteur(),null,trace_on)
     {
-        if(m==0){throw 4;}
+        if(m==0){throw 5;}
 
     }
 	
@@ -616,8 +614,8 @@ using namespace std;
     Pendule::Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point, Vecteur OA, bool trace_on)
     :Toupie(support,m,P,P_point,1,1,1,OA,null,trace_on)
     {
-          if(P.get_coord(1)==0){throw 5;}
-          if(m==0){throw 4;}
+          if(P.get_coord(1)==0){throw 6;}
+          if(m==0){throw 5;}
 
     }
 
