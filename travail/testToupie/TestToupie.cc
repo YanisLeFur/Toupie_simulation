@@ -19,7 +19,7 @@ int main(){
 
     //Construction pendule avec (Support à dessin, masse, Vecteur de paramètre, Vecteur de derivée des paramètres, Point de contact)
     //on modelise le pendule en coordonnées cylindriques
-    Pendule pendule(&text,masse_sinus,Vecteur({M_PI/6,0,0,0,0,0}),Vecteur({0,0,60,0,0,0}),Vecteur(0,1,2));
+    Pendule pendule(&text,masse_sinus,Vecteur({M_PI/6,0,0}),Vecteur({0,0,60}),Vecteur(0,1,2));
 
     cout<<"--------------------------------------"<<endl;
 
@@ -101,7 +101,7 @@ int main(){
 
     //Construction d'une masse en chute libre à partir: d'un support à dessin, une masse, un Vecteur de paramètres
     //                                              un Vecteur dérivée de paramètre
-    MasseTombe masse_tombe(&text,1,Vecteur({10,100,0}), Vecteur({2,2,0}));
+    MasseTombe masse_tombe(&text,1,Vecteur({10,100,1}), Vecteur({2,2,1}));
 
     cout<<"--------------------------------------"<<endl;
     // test l'affichage  des attributs d'une masse en chute libre
