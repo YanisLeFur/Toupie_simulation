@@ -556,7 +556,7 @@ using namespace std;
 
 //MasseTombe=====================================================================
     MasseTombe::MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point,bool trace_on)
-    :Toupie(support,m,P,P_point,0,0,0,Vecteur(),null,trace_on)
+    :Toupie(support,m,P,P_point,1,1,0.5,Vecteur(),null,trace_on)
     {
         if(m==0){throw 4;}
 

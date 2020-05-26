@@ -47,10 +47,12 @@ void Systeme::integre(double const& pas_de_temps,unsigned int nb_fois) {
 }
 //=========================================================================================================
 void Systeme::evolue(double const& pas_de_temps,unsigned int nb_fois) {
-    for(auto& toupies:systeme){
-        for (unsigned int i(0); i < nb_fois; ++i){
-           toupies->dessine();
-           integrateur->integre(pas_de_temps,*toupies);
+    for (unsigned int i(0); i < nb_fois; ++i){
+        cout<<" t = "<<i*pas_de_temps<<endl;
+        for(size_t k(0);k<systeme.size();k++){
+            cout<<"dessin de la toupie "<<k+1<<" : ";
+           systeme[k]->dessine();
+           integrateur->integre(pas_de_temps,*systeme[k]);
         }
     }
 }
