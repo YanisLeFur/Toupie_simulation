@@ -145,9 +145,9 @@ int main(){
 
     cout << "P_O: " << cone_simple.P_O() << endl;
 
-    cout << "G_G: " << cone_simple.G_G() << endl;
+    cout << "AG_G: " << cone_simple.AG_G() << endl;
 
-    cout << "G_O: " << cone_simple.G_O() << endl;
+    cout << "AG_O: " << cone_simple.AG_O() << endl;
 
     cout << "omega_G: " << cone_simple.omega_G() << endl;
 
@@ -197,8 +197,6 @@ int main(){
             cout << endl << "EC: " << cone_simple.EC();
 
             cout << endl << "E: " << cone_simple.E();
-
-            cout << endl << "AG: " << cone_simple.AG();
     }
 
 ///TOUPIE CHINOISE=====================================================

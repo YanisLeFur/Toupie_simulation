@@ -17,8 +17,14 @@ int main(){
     cout << endl << "==========CONE SIMPLE==========" << endl << endl;
 
 	double masse_volumique_cone(0.1);
+
+    // on modelise un cone simple par une hauteur et un rayon
+
 	double hauteur_cone(1.5);
 	double rayon_cone(0.5);
+
+    // le vecteur de parametre contient les angles d'Euler (psi,theta,phi)
+
     Vecteur P_cone({0,M_PI/6,0});
 	Vecteur P_point_cone({0,0,60});
 
@@ -37,20 +43,17 @@ int main(){
     cout<<"--------------------------------------"<<endl;
 
     // test l'affichage  des attributs d'un cone simple
+
     cout << cone_simple;
+
+    //donne la position du centre de masse (G)
+
+    cone_simple.trace_G();
 
     cout<<"--------------------------------------"<<endl;
 
-
-    //donne les composantes du Vecteur paramètre et dérivée des paramètre au temps t=0
-    cout<<"Au temps t=0 :"<<endl;
-    cone_simple.dessine();
-
-    //donne les équations de mouvements/accélération d'une toupie conique au temps t=0
-    cout << "Le vecteur acceleration de la toupie est " << cone_simple.eq_mouv() << endl;
-
-    //donne la position du centre de masse (G) au temps t=0
-    cone_simple.trace_G();
+    //donne les équations de mouvements/l'accélération d'une toupie conique
+    cout << "Le vecteur d'acceleration du cone simple est " << cone_simple.eq_mouv() << endl;
 
     cout<<"--------------------------------------"<<endl;
 

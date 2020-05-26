@@ -51,29 +51,29 @@ void TextViewer::dessine(SolideRevolution const& solide) {
 }
 
 void TextViewer::trace_G(Toupie& toupie) {
-    flot<<"Centre de masse : "<< toupie.G_O() << endl;
+    flot<<"Centre de masse : "<< toupie.OG_O() << endl;
 }
 
 void TextViewer::trace_G(ConeSimple& conesimple) {
-    flot<<"Centre de masse : "<< conesimple.G_O() << endl;
+    flot<<"Centre de masse : "<< conesimple.OG_O() << endl;
 }
 
 void TextViewer::trace_G(MasseTombe& massetombe) {
-    flot<<"Centre de masse : "<< massetombe.G_O() << endl;
+    flot<<"Centre de masse : "<< massetombe.OG_O() << endl;
 }
 
 void TextViewer::trace_G(Pendule& pendule) {
-    flot<<"Centre de masse : "<< pendule.G_O() << endl;
+    flot<<"Centre de masse : "<< pendule.OG_O() << endl;
 }
 
 void TextViewer::trace_G(ToupieChinoise & chinoise)
 {
-    flot<<"Centre de masse : "<< chinoise.G_O() << endl;
+    flot<<"Centre de masse : "<< chinoise.OG_O() << endl;
 }
 
 void TextViewer::trace_G(SolideRevolution& solide)
 {
-    flot<<"Centre de masse : "<< solide.G_O() << endl;
+    flot<<"Centre de masse : "<< solide.OG_O() << endl;
 }
 
 SupportADessin* TextViewer::copie() const { return new TextViewer(*this); }

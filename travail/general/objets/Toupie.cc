@@ -53,7 +53,8 @@ using namespace std;
 			<<"I1 : "<<I1<<endl
 			<<"I3 : "<<I3<<endl
 			<<"Vecteur P : "<<P<<endl
-            <<"Derivee de P : "<<P_point<<endl;
+            <<"Derivee de P : "<<P_point<<endl
+            <<"Point de contact : "<<OA<<endl;
 			return sortie;
 	}
 
@@ -116,11 +117,11 @@ using namespace std;
     }
 
     Vecteur Toupie::MA_G() const {
-        return G_G()^P_G();
+        return AG_G()^P_G();
     }
 
     Vecteur Toupie::MA_O() const {
-        return G_O()^P_O();
+        return AG_O()^P_O();
     }
 
     Matrice Toupie::IG_G() const {
@@ -181,18 +182,22 @@ using namespace std;
         return LA_G()*Vecteur({0,0,1});
     }
 
-    Vecteur Toupie::AG() const {
-        return distance*Vecteur(sin(P.get_coord(2))*sin(P.get_coord(1)),
-                                sin(P.get_coord(2))*cos(P.get_coord(1)),
-                                                    cos(P.get_coord(2)));
-    }
-
-    Vecteur Toupie::G_G() const {
+    Vecteur Toupie::AG_G() const {
         return Vecteur(0,0,distance);
     }
 
-    Vecteur Toupie::G_O() const {
-        return GtoO(G_G());
+    Vecteur Toupie::AG_O() const {
+        return GtoO(AG_G());
+    }
+
+    Vecteur Toupie::OG_G() const
+    {
+        return OtoG(OG_O());
+    }
+
+    Vecteur Toupie::OG_O() const
+    {
+        return OA+AG_O();
     }
 
     Vecteur Toupie::P_G() const {
@@ -208,7 +213,7 @@ using namespace std;
     }
 
     double Toupie::E() const {
-        return EC()-P_G()*G_G();
+        return EC()-P_G()*AG_G();
     }
 
     double Toupie::prod_mixt() const {
@@ -563,7 +568,7 @@ using namespace std;
     }
 	
     ostream& MasseTombe::affiche(std::ostream& sortie) const {
-        sortie<<"Toupie de type Masse Tombante : "<<endl
+        sortie<<"Masse Tombante : "<<endl
             <<"Masse (kg) : "<<masse<<endl
             <<"Vecteur P : "<< P<<endl
             <<"Derivee de P : "<<P_point<<endl;
@@ -598,7 +603,7 @@ using namespace std;
         return (EC()+EP());
     }
 
-    Vecteur MasseTombe::G_O() const
+    Vecteur MasseTombe::OG_G() const
     {
         return P;
     }
@@ -658,7 +663,7 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
      return (EC()+EP());
  }
 
- Vecteur Pendule::G_O() const
+ Vecteur Pendule::AG_O() const
  {
      return P;
  }

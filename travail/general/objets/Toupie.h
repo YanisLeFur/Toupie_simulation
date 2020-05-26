@@ -118,11 +118,13 @@ class Toupie:public Dessinable{
 
         double LA_a() const; // projection du moment cinetique de A sur a
 
-        Vecteur AG() const; // vecteur AG calculer avec des considerations geometriques
+        Vecteur AG_G() const; // vecteur du centre du referentiel R_G au point A exprime dans le referentiel R_G
 
-        Vecteur G_G() const; // vecteur du centre du referentiel R_G au point G exprime dans le referentiel R_G
+        virtual Vecteur AG_O() const; // vecteur du centre du referentiel R_O au point A exprime dans le referentiel R_O
 
-        virtual Vecteur G_O() const; // vecteur du centre du referentiel R_O au point G exprime dans le referentiel R_O
+        virtual Vecteur OG_G() const; // vecteur du centre du referentiel R_G au point G exprime dans le referentiel R_G
+
+        virtual Vecteur OG_O() const; // vecteur du centre du referentiel R_O au point G exprime dans le referentiel R_O
 
         Vecteur P_G() const; // vecteur du poids de la toupie dans le referentiel R_G
 
@@ -323,7 +325,7 @@ class MasseTombe:public Toupie{
 
     virtual double E() const override;
 
-    virtual Vecteur G_O() const override;
+    virtual Vecteur OG_G() const override;
 
     virtual void trace_G() override;
 };	
@@ -357,7 +359,7 @@ public:
 
     virtual double E() const override;
 
-    virtual Vecteur G_O() const override;
+    virtual Vecteur AG_O() const override;
 
     virtual void trace_G() override;
 
