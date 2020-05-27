@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
      }
 //======================================================================================================================
 
-    w.transmet(time, y_energie_RK, y_prod_mixt_RK, y_LA_a_RK, y_LA_k_RK,
+    w.give_datas(time, y_energie_RK, y_prod_mixt_RK, y_LA_a_RK, y_LA_k_RK,
                y_energie_NM, y_prod_mixt_NM, y_LA_a_NM, y_LA_k_NM,
                y_energie_EC, y_prod_mixt_EC, y_LA_a_EC, y_LA_k_EC);
     w.plot();
