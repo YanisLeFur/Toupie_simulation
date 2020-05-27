@@ -114,10 +114,10 @@ int main(){
 
 
     //evolution du systme
-    cout<<"Le système évolue et se dessine à chaque pas (dt="<<pas_de_temps<<") :"<<endl;
-    //evolution du systeme selon un pas de temps et un nombre de fois ici 11.
+    cout<<"Le systeme evolue et se dessine a chaque pas de temps (dt="<<pas_de_temps<<") :"<<endl<<endl;
+    //evolution du systeme selon un pas de temps et un nombre de fois ici 10.
     try {
-       systeme.evolue(pas_de_temps,11);
+       systeme.evolue(pas_de_temps,10);
     }catch (int i) {
         switch(i) {
           case 1:cout << "Erreur: division par 0 impossible" << endl;

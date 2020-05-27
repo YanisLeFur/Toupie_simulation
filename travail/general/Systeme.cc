@@ -24,16 +24,16 @@ void Systeme::ajouter_Toupie(Toupie const& toupie) {
 }
 //=========================================================================================================
 ostream& Systeme::affiche(ostream& sortie) const {
-    sortie<<"Le systeme est constitue des "<<systeme.size()<<" toupies suivantes (independantes) :"<<endl;
+    sortie<<"Le systeme est constitue des "<<systeme.size()<<" objets suivants (independants) :"<< endl << endl;
 	for (size_t i(0);i<systeme.size();i++) {
-        sortie<<"==== Toupie "<<i+1<<" :"<<endl;
+        sortie<<"==== Objet "<<i+1<<" :"<<endl;
 		systeme[i]->affiche(sortie);
 		sortie<<endl;
 	}
 
-    sortie << "====" << endl <<"et utilise un ";
+    sortie <<"et utilise un ";
     integrateur->affiche(sortie);
-    sortie << "." << endl;
+    sortie << "." << endl << endl;
 
 	return sortie;
 }
@@ -48,10 +48,11 @@ void Systeme::integre(double const& pas_de_temps,unsigned int nb_fois) {
 //=========================================================================================================
 void Systeme::evolue(double const& pas_de_temps,unsigned int nb_fois) {
     for (unsigned int i(0); i < nb_fois; ++i){
-        cout<<" t = "<<i*pas_de_temps<<endl;
+        cout<<"t = "<<i*pas_de_temps<<endl << endl;
         for(size_t k(0);k<systeme.size();k++){
-            cout<<"dessin de la toupie "<<k+1<<" : ";
+           cout<<"Dessin de la toupie "<<k+1<<" : " << endl << endl;
            systeme[k]->dessine();
+           cout << endl;
            integrateur->integre(pas_de_temps,*systeme[k]);
         }
     }

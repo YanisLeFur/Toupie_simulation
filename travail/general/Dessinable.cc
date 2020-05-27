@@ -27,29 +27,29 @@ SupportADessin::~SupportADessin() {}
 TextViewer::TextViewer(ostream& flot) :flot(flot) {}
 
 void TextViewer::dessine(Toupie const& toupie) {
-    flot<<"Parametre : "<<toupie.getP() << " ; "<<"Derivee : "<<toupie.getP_point()<<endl;
+    flot<<"Parametre : "<< toupie.getP() << endl << "Derivee : " <<toupie.getP_point() << endl;
 }
 
 void TextViewer::dessine(ConeSimple const& conesimple) {
-    flot<<"Parametre : "<<Vecteur(modulo_2pi(conesimple.getP().get_coord(1)),modulo_2pi(conesimple.getP().get_coord(2)),modulo_2pi(conesimple.getP().get_coord(3))) << " ; "
+    flot<<"Parametre : "<<Vecteur(modulo_2pi(conesimple.getP().get_coord(1)),modulo_2pi(conesimple.getP().get_coord(2)),modulo_2pi(conesimple.getP().get_coord(3))) << endl
         <<"Derivee : "<<Vecteur(modulo_2pi(conesimple.getP_point().get_coord(1)),modulo_2pi(conesimple.getP_point().get_coord(2)),modulo_2pi(conesimple.getP_point().get_coord(3)))<<endl;
 }
 
 void TextViewer::dessine(MasseTombe const& massetombe) {
-    flot<<"Parametre : "<< massetombe.getP() << " ; "<<"Derivee : "<< massetombe.getP_point()<<endl;
+    flot<<"Parametre : "<< massetombe.getP() << endl <<"Derivee : "<< massetombe.getP_point()<<endl;
 }
 	
 void TextViewer::dessine(Pendule const& pendule) {
-    flot<<"Parametre : "<<pendule.getP() << " ; " <<"Derivee : "<<pendule.getP_point()<<endl;
+    flot<<"Parametre : "<<pendule.getP() << endl <<"Derivee : "<<pendule.getP_point()<<endl;
 }
 
 void TextViewer::dessine(ToupieChinoise const& chinoise) {
-    flot<<"Parametre : "<<Vecteur({modulo_2pi(chinoise.getP().get_coord(1)),modulo_2pi(chinoise.getP().get_coord(2)),modulo_2pi(chinoise.getP().get_coord(3)),chinoise.getP().get_coord(4),chinoise.getP().get_coord(5)}) << " ; "
+    flot<<"Parametre : "<<Vecteur({modulo_2pi(chinoise.getP().get_coord(1)),modulo_2pi(chinoise.getP().get_coord(2)),modulo_2pi(chinoise.getP().get_coord(3)),chinoise.getP().get_coord(4),chinoise.getP().get_coord(5)}) << endl
         <<"Derivee : "<<Vecteur({modulo_2pi(chinoise.getP_point().get_coord(1)),modulo_2pi(chinoise.getP_point().get_coord(2)),modulo_2pi(chinoise.getP_point().get_coord(3)),chinoise.getP_point().get_coord(4),chinoise.getP_point().get_coord(5)})<<endl;
 }
 
 void TextViewer::dessine(SolideRevolution const& solide) {
-    flot<<"Parametre : "<<Vecteur(modulo_2pi(solide.getP().get_coord(1)),modulo_2pi(solide.getP().get_coord(2)),modulo_2pi(solide.getP().get_coord(3))) <<" ; "
+    flot<<"Parametre : "<<Vecteur(modulo_2pi(solide.getP().get_coord(1)),modulo_2pi(solide.getP().get_coord(2)),modulo_2pi(solide.getP().get_coord(3))) << endl
         <<"Derivee : "<<Vecteur(modulo_2pi(solide.getP_point().get_coord(1)),modulo_2pi(solide.getP_point().get_coord(2)),modulo_2pi(solide.getP_point().get_coord(3)))<<endl;
 }
 

@@ -9,7 +9,8 @@
 using namespace std;
 
 //Toupie================================================================================================
- 	Toupie::~Toupie(){}
+
+Toupie::~Toupie(){}
 
 	Vecteur Toupie::getP() const {return P;}
 
@@ -47,7 +48,8 @@ using namespace std;
     }
 	
     ostream& Toupie::affiche(ostream& sortie) const {
-    sortie  <<"Masse (kg) : "<<masse<<endl
+    sortie  <<"Toupie Generale : " << endl
+            <<"Masse (kg) : "<<masse<<endl
 			<<"I1 : "<<I1<<endl
 			<<"I3 : "<<I3<<endl
 			<<"Vecteur P : "<<P<<endl
@@ -240,10 +242,15 @@ using namespace std;
 
 
     ostream& ConeSimple::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Cone Simple: "<<endl
+        sortie<<"Cone Simple : " << endl
               <<"Hauteur (m) : " << hauteur << endl
-              <<"Rayon (m) : " << rayon << endl;
-        this->Toupie::affiche(sortie);
+              <<"Rayon (m) : " << rayon << endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"I1 : "<<I1<<endl
+              <<"I3 : "<<I3<<endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl
+              <<"Point de contact : "<<OA<<endl;
         return sortie;
     }
 
@@ -304,10 +311,15 @@ using namespace std;
     }
 
     ostream& ToupieChinoise::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Toupie Chinoise: "<<endl
+        sortie<<"Toupie Chinoise : " << endl
               <<"Hauteur tronquee (m) : " << h << endl
-              <<"Rayon (m) : " << R << endl;
-        this->Toupie::affiche(sortie);
+              <<"Rayon (m) : " << R << endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"I1 : "<<I1<<endl
+              <<"I3 : "<<I3<<endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl
+              <<"Point de contact : "<<OA<<endl;
         return sortie;
     }
 
@@ -481,9 +493,14 @@ using namespace std;
     }
 
     ostream& SolideRevolution::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Solide de Revolution: "<<endl
-              <<"Hauteur (m) : " << L << endl;
-        this->Toupie::affiche(sortie);
+        sortie<<"Solide de Revolution : " << endl
+              <<"Hauteur (m) : " << L << endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"I1 : "<<I1<<endl
+              <<"I3 : "<<I3<<endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl
+              <<"Point de contact : "<<OA<<endl;
         return sortie;
     }
 
