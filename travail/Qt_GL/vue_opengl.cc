@@ -150,7 +150,7 @@ void VueOpenGL::trace_G(ConeSimple& c){
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    c.ajouter_point_memoire(c.G_O()+c.get_OA());
+    c.ajouter_point_memoire(c.OG_O());
 
     if (c.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
@@ -169,7 +169,7 @@ void VueOpenGL::trace_G(Toupie& t){
     QMatrix4x4 point_de_vue;
      prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    t.ajouter_point_memoire(t.G_O()+t.get_OA());
+    t.ajouter_point_memoire(t.OG_O());
     if (t.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
         for(size_t i(0);i<t.get_m().GetPoints().size()-1;i++){
@@ -260,7 +260,7 @@ void VueOpenGL::trace_G(MasseTombe& mt){
     QMatrix4x4 point_de_vue;
     prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    mt.ajouter_point_memoire(mt.G_O());
+    mt.ajouter_point_memoire(mt.OG_O());
     if (mt.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
         for(size_t i(0);i<mt.get_m().GetPoints().size()-1;i++){

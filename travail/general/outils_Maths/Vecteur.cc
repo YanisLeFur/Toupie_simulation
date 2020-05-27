@@ -46,9 +46,11 @@ Vecteur::Vecteur(size_t dimension) :vecteur(vector<double>(dimension, 0.0)) {}
 ostream& Vecteur::affiche(ostream& sortie) const {
     sortie << "(";
     for (size_t i(0); i<vecteur.size()-1; ++i) {
-        sortie << setprecision(7) << vecteur[i] << " ";
+        if (vecteur[i]!=0) sortie << setprecision(7) << vecteur[i] << " ";
+        else sortie << 0 << " ";
     }
-    sortie << vecteur.back() << ")";
+    if (vecteur.back()!=0) sortie << vecteur.back() << ")";
+    else sortie << 0 << ")";
     return sortie;
 }
 //=========================================================================================================
