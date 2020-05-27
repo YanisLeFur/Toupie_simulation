@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int main(){    
+int main(){
 
     TextViewer text(cout); // permet l'affichage textuel
 
