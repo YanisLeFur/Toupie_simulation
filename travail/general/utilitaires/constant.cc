@@ -24,7 +24,6 @@ double modulo_2pi(double angle) {
     return angle;
 }
 
-
 void affiche_erreur(const int &i)
 {
     switch(i){
