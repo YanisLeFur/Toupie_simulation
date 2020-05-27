@@ -292,6 +292,7 @@ using namespace std;
         if (R==0){throw 6;}
         if (R<0){throw 11;}
         if (h<0){throw 12;}
+        if(h>R){throw 16;}
 
     }
 

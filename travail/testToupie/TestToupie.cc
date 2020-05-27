@@ -324,78 +324,15 @@ int main(){
            Toupie toupie_erreur_1(&text,1,P_cone,P_point_cone,0,1,1,Vecteur({1,1,1}));
        }
        catch (int i) {
-           switch(i) {
-             case 1:cout << "Erreur: division par 0 impossible" << endl;
-             break;
-             case 2:cout << "Erreur: dimension du vecteur differente de 3" << endl;
-             break;
-             case 3:cout << "Erreur: dimension incompatible avec celle du vecteur" << endl;
-             break;
-             case 4:cout<<"Erreur: masse de la toupie nulle"<<endl;
-             break;
-             case 5:cout<<"Erreur: rayon de la toupie nul"<<endl;
-             break;
-             case 6:cout<<"Erreur: coefficient du tenseur d'inertie (I1) nul"<<endl;
-             break;
-             case 7:cout<<"Erreur: coefficient du tenseur d'inertie (I3) nul"<<endl;
-             break;
-             case 8:cout<<"Erreur: hauteur de la toupie nulle"<<endl;
-             break;
-             case 9:cout<<"Erreur: theta du Vecteur paramètre de la toupie nul"<<endl;
-             break;
-             case 10:cout<<"Erreur: rayon de la toupie négatif"<<endl;
-             break;
-             case 11:cout<<"Erreur: hauteur de la toupie négative"<<endl;
-             break;
-             case 12:cout<<"Erreur: le solide de révolution ne comporte aucun rayon"<<endl;
-             break;
-             case 13:cout<<"Erreur: tous les rayons du solide de revolution sont nuls"<<endl;
-             break;
-             case 14: cout<<"Erreur distance entre le centre de masse et le point de contact est nul"<<endl;
-             break;
-           }
+        affiche_erreur(i);
        }
-
-
-
-
 
        try {
            //test d'une toupie avec une masse nulle
            Toupie toupie_erreur_1(&text,0,P_cone,P_point_cone,1,1,1,Vecteur({1,1,1}));
        }
        catch (int i) {
-           switch(i) {
-             case 1:cout << "Erreur: division par 0 impossible" << endl;
-             break;
-             case 2:cout << "Erreur: dimension du vecteur differente de 3" << endl;
-             break;
-             case 3:cout << "Erreur: dimension incompatible avec celle du vecteur" << endl;
-             break;
-             case 4:cout<<"Erreur: masse de la toupie nulle"<<endl;
-             break;
-             case 5:cout<<"Erreur: rayon de la toupie nul"<<endl;
-             break;
-             case 6:cout<<"Erreur: coefficient du tenseur d'inertie (I1) nul"<<endl;
-             break;
-             case 7:cout<<"Erreur: coefficient du tenseur d'inertie (I3) nul"<<endl;
-             break;
-             case 8:cout<<"Erreur: hauteur de la toupie nulle"<<endl;
-             break;
-             case 9:cout<<"Erreur: theta du Vecteur paramètre de la toupie nul"<<endl;
-             break;
-             case 10:cout<<"Erreur: rayon de la toupie négatif"<<endl;
-             break;
-             case 11:cout<<"Erreur: hauteur de la toupie négative"<<endl;
-             break;
-             case 12:cout<<"Erreur: le solide de révolution ne comporte aucun rayon"<<endl;
-             break;
-             case 13:cout<<"Erreur: tous les rayons du solide de revolution sont nuls"<<endl;
-             break;
-             case 14: cout<<"Erreur distance entre le centre de masse et le point de contact est nul"<<endl;
-             break;
-
-           }
+        affiche_erreur(i);
        }
 
 

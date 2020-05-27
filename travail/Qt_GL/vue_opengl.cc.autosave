@@ -602,7 +602,7 @@ void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
 
   for(unsigned int i(0);i<=25;i++){
     prog.setAttributeValue(CouleurId, 0.0,0.0,0.0);
-    //prog.setAttributeValue(CoordonneeTextureId,r*cos(i*beta)+0.5,r*sin(i*beta)+0.5);
+    prog.setAttributeValue(CoordonneeTextureId,r*cos(i*beta)+0.5,r*sin(i*beta)+0.5);
     prog.setAttributeValue(SommetId, r*cos(i*beta),r*sin(i*beta),abs(cos((20*M_PI)/25)));
   }
 

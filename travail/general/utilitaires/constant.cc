@@ -56,7 +56,8 @@ void affiche_erreur(const int &i)
     break;
     case 14:cout<<"Erreur: tous les rayons du solide de revolution sont nuls"<<endl;
     break;
-    case 15: cout<<"Erreur distance entre le centre de masse et le point de contact est nul"<<endl;
+    case 15: cout<<"Erreur: distance entre le centre de masse et le point de contact est nul"<<endl;
     break;
+    case 16: cout<<"Erreur: hauteur tronque superieur au rayon de la toupie chinoise "<<endl;
     }
 }
