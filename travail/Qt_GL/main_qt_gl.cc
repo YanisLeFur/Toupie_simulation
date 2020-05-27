@@ -41,5 +41,7 @@ int main(int argc, char* argv[])
   w.ajouter_Toupie(sr);
   //w.affiche(std::cout);
   w.show();
+  v = nullptr;
+  delete v;
   return a.exec();
 }
