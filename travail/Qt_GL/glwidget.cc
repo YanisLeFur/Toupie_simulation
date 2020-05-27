@@ -21,7 +21,7 @@ void GLWidget::resizeGL(int width, int height)
    * fenêtre OpenGL doit dessiner.
    * Ici on lui demande de dessiner sur toute la fenêtre.
    */
-  glViewport(0, 0, width, height);
+    glViewport(0, 0, width, height);
 
   /* Puis on modifie la matrice de projection du shader.
    * Pour ce faire on crée une matrice identité (constructeur 

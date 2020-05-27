@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
 {
   QApplication a(argc, argv);
   GLWidget w;
+  w.setMinimumSize(1080,720);
   VueOpenGL* v(w.get_Vue_ptr());
   TextViewer t(std::cout);
   Pendule p(v,1,Vecteur(2,3*M_PI/4,0),Vecteur(0,0,0),Vecteur(0,0,5),2);
