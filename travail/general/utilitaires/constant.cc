@@ -35,5 +35,28 @@ void affiche_erreur(const int &i)
     break;
     case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
     break;
+    case 5:cout<<"Erreur: masse de la toupie nulle"<<endl;
+    break;
+    case 6:cout<<"Erreur: rayon de la toupie nul"<<endl;
+    break;
+    case 7:cout<<"Erreur: coefficient du tenseur d'inertie (I1) nul"<<endl;
+    break;
+    case 8:cout<<"Erreur: coefficient du tenseur d'inertie (I3) nul"<<endl;
+    break;
+    case 9:cout<<"Erreur: hauteur de la toupie nulle"<<endl;
+    break;
+    case 10:cout<<"Erreur: theta du Vecteur paramètre de la toupie nul"<<endl;
+    break;
+    case 11:cout<<"Erreur: rayon de la toupie négatif"<<endl;
+    break;
+    case 12:cout<<"Erreur: hauteur de la toupie négative"<<endl;
+    break;
+    case 13:cout<<"Erreur: le solide de révolution ne comporte aucun rayon"<<endl;
+    break;
+    case 14:cout<<"Erreur: tous les rayons du solide de revolution sont nuls"<<endl;
+    break;
+    case 15: cout<<"Erreur: distance entre le centre de masse et le point de contact est nul"<<endl;
+    break;
+    case 16: cout<<"Erreur: hauteur tronque superieur au rayon de la toupie chinoise "<<endl;
     }
 }
