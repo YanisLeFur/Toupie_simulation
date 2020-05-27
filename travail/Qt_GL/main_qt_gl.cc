@@ -34,11 +34,11 @@ int main(int argc, char* argv[])
   SolideRevolution sr(v,rho,L,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(),phi_point,false);
   //w.ajouter_Toupie(p);
   //w.ajouter_Toupie(mt);
-  w.ajouter_Toupie(tc1);
+  //w.ajouter_Toupie(tc1);
   //w.ajouter_Toupie(tc2);
   //w.ajouter_Toupie(c1);
   //w.ajouter_Toupie(c2);
-  //w.ajouter_Toupie(sr);
+  w.ajouter_Toupie(sr);
   //w.affiche(std::cout);
   w.show();
   return a.exec();
