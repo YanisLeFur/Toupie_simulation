@@ -18,7 +18,7 @@ public:
 
     void clearData();
     void plot();
-    void transmet(QVector<double> time, QVector<double> y_energie_RK,                                       //transmet les coordonées prise pour les invariant d'une toupie au widget
+    void give_datas(QVector<double> time, QVector<double> y_energie_RK,                                       //transmet les coordonées prise pour les invariant d'une toupie au widget
                   QVector<double> y_prod_mixt_RK, QVector<double> y_LA_a_RK, QVector<double> y_LA_k_RK,
                   QVector<double> y_energie_NM, QVector<double> y_prod_mixt_NM,
                   QVector<double> y_LA_a_NM, QVector<double> y_LA_k_NM, QVector<double> y_energie_EC,

@@ -16,8 +16,8 @@ int main(){
     TextViewer text(cout);      //permet l'affichage textuel
 
     //Intégrateurs---------------------
-    //IntegrateurRungeKutta RK;
-    //IntegrateurNewmark NM;
+    IntegrateurRungeKutta RK;
+    IntegrateurNewmark NM;
     IntegrateurEulerCromer EC;
     //----------------------------------
 
@@ -157,5 +157,5 @@ int main(){
 
 
 
-	return 0;
+    return 0;
 }

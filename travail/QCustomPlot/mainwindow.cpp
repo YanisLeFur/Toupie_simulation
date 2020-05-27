@@ -64,7 +64,7 @@ void MainWindow::plot()
 
 }
 //=================================================================================================================
-void MainWindow::transmet(QVector<double> time_plot,QVector<double> y_energie_RK, QVector<double> y_prod_mixt_RK,
+void MainWindow::give_datas(QVector<double> time_plot,QVector<double> y_energie_RK, QVector<double> y_prod_mixt_RK,
                           QVector<double> y_LA_a_RK,QVector<double> y_LA_k_RK,
                           QVector<double> y_energie_NM, QVector<double> y_prod_mixt_NM,
                           QVector<double> y_LA_a_NM,QVector<double> y_LA_k_NM,
