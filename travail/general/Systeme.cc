@@ -50,7 +50,7 @@ void Systeme::evolue(double const& pas_de_temps,unsigned int nb_fois) {
     for (unsigned int i(0); i < nb_fois; ++i){
         cout<<"t = "<<i*pas_de_temps<<endl << endl;
         for(size_t k(0);k<systeme.size();k++){
-           cout<<"Dessin de la toupie "<<k+1<<" : " << endl << endl;
+           cout<<"Dessin de l'objet "<<k+1<<" : " << endl << endl;
            systeme[k]->dessine();
            cout << endl;
            integrateur->integre(pas_de_temps,*systeme[k]);

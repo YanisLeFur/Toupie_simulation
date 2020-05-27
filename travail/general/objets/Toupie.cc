@@ -42,9 +42,10 @@ Toupie::~Toupie(){}
 
     Toupie::Toupie(SupportADessin* support,double masse,Vecteur P,Vecteur P_point,double I1,double I3,double distance,Vecteur OA,Grandeur_physique grandeur, bool trace_on)
         :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA),grandeur(grandeur),m(Memoire(trace_on)){
-        if(masse==0){throw 5;}
-        if(I1==0){throw 7;}
-        if(I3==0){throw 8;}
+        if (masse<=0) throw 5;
+        if (I1<=0) throw 7;
+        if (I3<=0) throw 8;
+        if (distance<=0) throw 13;
     }
 	
     ostream& Toupie::affiche(ostream& sortie) const {
@@ -233,11 +234,11 @@ Toupie::~Toupie(){}
 //ConeSimple================================================================================================
 
     ConeSimple::ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur, bool trace_on)
-    :Toupie(support,m,P,P_point,3.*m/20.*(r*r+1./4.*h*h),3.*m/10.*r*r,h*3./4.,OA,grandeur,trace_on),hauteur(h),rayon(r){
-
-        if(r==0){throw 6;}
-        if(h==0){throw 9;}
-        if(m==0){throw 5;}
+    :Toupie(support,m,P,P_point,3.*m/20.*(r*r+1./4.*h*h),3.*m/10.*r*r,h*3./4.,OA,grandeur,trace_on),hauteur(h),rayon(r)
+    {
+        if(r<=0) throw 6;
+        if(h<=0) throw 9;
+        if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 18;
     }
 
 
@@ -303,11 +304,10 @@ Toupie::~Toupie(){}
     ToupieChinoise::ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur, bool trace_on) // d???????
         :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA,grandeur,trace_on),h(h),R(R){
 
-        if (R==0){throw 6;}
-        if (R<0){throw 11;}
-        if (h<0){throw 12;}
-        if(h>R){throw 16;}
-
+        if (R<=0) throw 6;
+        if (h<0) throw 15;
+        if (h>R) throw 14;
+        if ((P.dimension()!=5) or (P_point.dimension()!=5)) throw 19;
     }
 
     ostream& ToupieChinoise::affiche(ostream& sortie) const {
@@ -477,19 +477,17 @@ Toupie::~Toupie(){}
     SolideRevolution::SolideRevolution(SupportADessin* support, double rho, double L, std::vector<double> r_i, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur, bool trace_on)
     :Toupie(support,masse_solide_revolution(rho,L,r_i),P,P_point,I1_solide_revolution(rho,L,r_i),I3_solide_revolution(rho,L,r_i),d_solide_revolution(L,r_i),OA,grandeur,trace_on),rho(rho),L(L),r_i(r_i)
     {
-        if(r_i.size()==0){throw 13;}
+        if (L<=0) throw 9;
+        if (rho<=0) throw 16;
+        if (r_i.size()==0) throw 11;
 
-        bool nul(true);
-        bool negatif(false);
+        bool probleme(false);
         for(size_t i(0);i<r_i.size();i++){
-            if(r_i[i]<0){negatif=true;}
-            if(r_i[i]!=0){nul=false;}
+            if(r_i[i]<=0){probleme=true;}
         }
 
-        if(nul){throw 14;}
-        if(negatif){throw 11;}
-
-
+        if (probleme) throw 12;
+        if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 20;
     }
 
     ostream& SolideRevolution::affiche(ostream& sortie) const {
@@ -584,8 +582,8 @@ Toupie::~Toupie(){}
     MasseTombe::MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point,bool trace_on)
     :Toupie(support,m,P,P_point,1,1,0.5,Vecteur(),null,trace_on)
     {
-        if(m==0){throw 5;}
-
+        if (m<=0) throw 5;
+        if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 21;
     }
 	
     ostream& MasseTombe::affiche(std::ostream& sortie) const {
@@ -642,9 +640,9 @@ Toupie::~Toupie(){}
     Pendule::Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point, Vecteur OA, bool trace_on)
     :Toupie(support,m,P,P_point,1,1,1,OA,null,trace_on)
     {
-          if(P.get_coord(1)==0){throw 6;}
-          if(m==0){throw 5;}
-
+          if (P.get_coord(1)<=0) throw 17;
+          if (m<=0) throw 5;
+          if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 22;
     }
 
     ostream& Pendule::affiche(std::ostream& sortie) const{

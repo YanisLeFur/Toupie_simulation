@@ -27,36 +27,48 @@ double modulo_2pi(double angle) {
 void affiche_erreur(const int &i)
 {
     switch(i){
-    case 1:cout << endl << endl << "Erreur: division par 0 impossible" << endl << endl;
+    case 1:cout << endl << endl << "Erreur : division par 0 impossible" << endl << endl;
     break;
-    case 2:cout << endl << endl << "Erreur: dimension differente de 3" << endl << endl;
+    case 2:cout << endl << endl << "Erreur : dimension differente de 3" << endl << endl;
     break;
-    case 3:cout << endl << endl << "Erreur: dimensions des vecteurs incompatibles" << endl << endl;
+    case 3:cout << endl << endl << "Erreur : dimensions des vecteurs incompatibles" << endl << endl;
     break;
-    case 4:cout << endl << endl << "Erreur: la composante voulu n'existe pas" << endl << endl;
+    case 4:cout << endl << endl << "Erreur : la composante voulu n'existe pas" << endl << endl;
     break;
-    case 5:cout<<"Erreur: masse de la toupie nulle"<<endl;
+    case 5:cout << endl << endl << "Erreur : masse de la toupie negative ou nulle"<< endl <<endl;
     break;
-    case 6:cout<<"Erreur: rayon de la toupie nul"<<endl;
+    case 6:cout << endl << endl << "Erreur : rayon de la toupie negatif ou nul"<< endl <<endl;
     break;
-    case 7:cout<<"Erreur: coefficient du tenseur d'inertie (I1) nul"<<endl;
+    case 7:cout << endl << endl << "Erreur : coefficient du tenseur d'inertie (I1) negatif ou nul"<< endl << endl;
     break;
-    case 8:cout<<"Erreur: coefficient du tenseur d'inertie (I3) nul"<<endl;
+    case 8:cout << endl << endl << "Erreur : coefficient du tenseur d'inertie (I3) negatif ou nul"<< endl << endl;
     break;
-    case 9:cout<<"Erreur: hauteur de la toupie nulle"<<endl;
+    case 9:cout << endl << endl << "Erreur : hauteur de la toupie negatif ou nulle"<< endl << endl;
     break;
-    case 10:cout<<"Erreur: theta du Vecteur paramètre de la toupie nul"<<endl;
+    case 10:cout << endl << endl << "Erreur : theta du Vecteur parametre de la toupie nul"<< endl << endl;
     break;
-    case 11:cout<<"Erreur: rayon de la toupie négatif"<<endl;
+    case 11:cout << endl << endl << "Erreur : le solide de révolution ne comporte aucun rayon"<< endl << endl;
     break;
-    case 12:cout<<"Erreur: hauteur de la toupie négative"<<endl;
+    case 12:cout << endl << endl << "Erreur : un des rayons du solide de revolution est negatif ou nul"<< endl << endl;
     break;
-    case 13:cout<<"Erreur: le solide de révolution ne comporte aucun rayon"<<endl;
+    case 13:cout << endl << endl << "Erreur : distance entre le centre de masse et le point de contact est negatif ou nul"<< endl << endl;
     break;
-    case 14:cout<<"Erreur: tous les rayons du solide de revolution sont nuls"<<endl;
+    case 14:cout << endl << endl << "Erreur : hauteur tronque superieur au rayon de la toupie chinoise"<< endl << endl;
     break;
-    case 15: cout<<"Erreur: distance entre le centre de masse et le point de contact est nul"<<endl;
+    case 15:cout << endl << endl << "Erreur : hauteur tronque nul" << endl << endl;
     break;
-    case 16: cout<<"Erreur: hauteur tronque superieur au rayon de la toupie chinoise "<<endl;
+    case 16:cout << endl << endl << "Erreur : masse volumique du solide de revolution est negative ou nulle" << endl << endl;
+    break;
+    case 17:cout << endl << endl << "Erreur : longueur du pendule negatif ou nul" << endl << endl;
+    break;
+    case 18:cout << endl << endl << "Erreur : cone simple avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
+    break;
+    case 19:cout << endl << endl << "Erreur : toupie chinoise avec un vecteur de parametre ou de derivee de dimension differente de 5" << endl << endl;
+    break;
+    case 20:cout << endl << endl << "Erreur : solide de revolution avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
+    break;
+    case 21:cout << endl << endl << "Erreur : masse qui tombe avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
+    break;
+    case 22:cout << endl << endl << "Erreur : pendule avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
     }
 }

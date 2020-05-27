@@ -4,7 +4,7 @@
 #include "constant.h"
 #include "Vecteur.h"
 #include "Dessinable.h"
-#include <cmath>
+#include <vector>
 
 using namespace std;
 
@@ -369,13 +369,41 @@ int main(){
 
 //Gestion des erreurs==========================================================================================================================================================
 
-    // test d'une toupie avec un coefficient d'inertie I1 nul
+    // test d'une toupie avec un coefficient d'inertie I1 negatif
+
+    cout << "On essaye de construire une Toupie avec un coefficient d'inertie I1 negatif : ";
 
     try {
-        Toupie toupie_erreur(&text,1,P_cone,P_point_cone,1,0,1,Vecteur({1,1,1}));
+        Toupie toupie_erreur_1(&text,1,P_cone,P_point_cone,-1,1,1,Vecteur());
     }
 
     catch(int const& i) {
+        affiche_erreur(i);
+    }
+
+    // test d'un solide de revolution avec un de ses rayons negatif
+
+    cout << "On essaye de construire un Solide de Revolution avec un de ses rayons negatif : ";
+
+    vector<double> r_i_2({1,-1,1});
+
+    try {
+        SolideRevolution toupie_erreur_3(&text,1,1,r_i_2,P_cone,P_point_cone,Vecteur());
+    }
+
+    catch (int const& i) {
+        affiche_erreur(i);
+    }
+
+    // test d'une toupie chinoise avec un vecteur de parametre de dimension 3
+
+    cout << "On essaye de construire une ToupieChinoise avec un vecteur de parametre de dimension 3 : ";
+
+    try {
+        ToupieChinoise chinoise(&text,m_chinoise,hauteur,rayon,Vecteur({0,0.11,0}),Vecteur({50,0,0,0,0}),Vecteur({1,2,3}));
+    }
+
+    catch (int const& i) {
         affiche_erreur(i);
     }
 
