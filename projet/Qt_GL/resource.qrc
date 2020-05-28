@@ -2,8 +2,8 @@
     <qresource prefix="/">
         <file>fragment_shader.glsl</file>
         <file>vertex_shader.glsl</file>
-        <file>wood_texture_208389.jpg</file>
         <file>cat.jpeg</file>
         <file>optical_illusion.jpg</file>
+        <file>wood-texture.jpg</file>
     </qresource>
 </RCC>

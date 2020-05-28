@@ -24,8 +24,8 @@ void GLSphereCoupe::initialize(GLuint slices, GLuint stacks)
     for (GLuint j(0); j < slices; ++j) {
       float r = sin(i*alpha);
       float z = cos(i*alpha);
-      if((i<=20)and(i!=0)){z = cos(i*alpha);}
-      else{ z =0.5;}
+      if((i<=20)and(i!=0)){z = cos(i*alpha);} //arrete la création de point au dessus de z=cos(20*alpha)
+      else{ z =0.5;}                          // et donc tronque la sphere
       float y = sin(j*beta)*r;
       float x = cos(j*beta) * r;
 

@@ -1,0 +1,85 @@
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QMainWindow>
+#include <QVector>
+
+
+/*Ce Widget  sert à l'affichage de nos graphs crées par QCustomPlot. 
+ * Il n'est pas necessaire d'inclure les fichiers qcustomplot.h  dans nos fichier mainwindow.h 
+ * et mainwindow.cc car ce widget "comparaison" a été promu QCustomPlot dans le fichier comparaison.ui
+ * */
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
+   //suppprimer les données dans qv_x qv_y_cone qv_y_revolution
+    void clearData();
+    
+   //fonction permettant de créer les graphs des valeurs demandé (fait majoritairement par QCustomPlot)
+    void plot();
+    
+    //transmet les données collectées par le main jusqu'au QWidget
+    void give_datas(QVector<double> time, QVector<double> y_energie_RK,                                       //transmet les coordonées prise pour les invariant d'une toupie au widget
+                  QVector<double> y_prod_mixt_RK, QVector<double> y_LA_a_RK, QVector<double> y_LA_k_RK,
+                  QVector<double> y_energie_NM, QVector<double> y_prod_mixt_NM,
+                  QVector<double> y_LA_a_NM, QVector<double> y_LA_k_NM, QVector<double> y_energie_EC,
+                  QVector<double> y_prod_mixt_EC, QVector<double> y_LA_a_EC, QVector<double> y_LA_k_EC);
+
+private slots:
+
+    //gestion des boutons du Widget
+    void on_Clear_Button_clicked(); 
+
+    void on_Energie_button_clicked();
+
+    void on_Prod_mixt_button_2_clicked();
+
+    void on_LA_a_button_3_clicked();
+
+    void on_LA_k_button_clicked();
+
+    void on_Scale_button_clicked();
+
+private:
+    Ui::MainWindow *ui;
+
+//données a mettre en graphe-------------------------
+    QVector<double> qv_x;
+    QVector<double> qv_y_RK;
+    QVector<double> qv_y_NM;
+    QVector<double> qv_y_EC;
+//----------------------------------------------------    
+
+    /*valeurs temporaires qui seront transmises aux données à mettre en graphe lorsque leur bouton respectif sera pressé 
+     * cela permet la simplification de la méthode clear data et de pouvoir reutilise les valeur pour les differents 
+     * invariants et de ne pas les supprimer totalement du widget
+     * */
+
+    QVector<double> time_temp;
+
+    QVector<double> qv_y_energie_RK;
+    QVector<double> qv_y_prod_mixt_RK;
+    QVector<double> qv_y_LA_a_RK;
+    QVector<double> qv_y_LA_k_RK;
+
+    QVector<double> qv_y_energie_NM;
+    QVector<double> qv_y_prod_mixt_NM;
+    QVector<double> qv_y_LA_a_NM;
+    QVector<double> qv_y_LA_k_NM;
+
+    QVector<double> qv_y_energie_EC;
+    QVector<double> qv_y_prod_mixt_EC;
+    QVector<double> qv_y_LA_a_EC;
+    QVector<double> qv_y_LA_k_EC;
+};
+#endif // MAINWINDOW_H

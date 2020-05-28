@@ -10,6 +10,7 @@ using namespace std;
 void GLWidget::initializeGL()
 {
   vue.init();
+  //donne un background bleu à notre widget
   glClearColor(0.678f, 0.847f, 0.902f, 0.0f);
   timerId = startTimer(20);
 }
@@ -41,8 +42,9 @@ void GLWidget::resizeGL(int width, int height)
 void GLWidget::paintGL()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+//dessine le systeme en attribut dans GLWidget
   s.dessine();
+  //trace le point G des Toupie appartenant au même systeme
   s.trace_G();
 }
 
@@ -128,6 +130,7 @@ void GLWidget::timerEvent(QTimerEvent* event)
 
   double dt = chronometre.restart() / 1000.0;
 
+   //integre les toupie du systeme appartenant au GlWidget
   s.integre(dt);
   update();
 }
@@ -147,6 +150,7 @@ void GLWidget::pause()
 }
 //=========================================================================================================
 void GLWidget::ajouter_Toupie(Toupie const& toupie) {
+    //ajoute une toupie au systeme appartenant au GlWidget
     s.ajouter_Toupie(toupie);
 }
 //=========================================================================================================
@@ -154,7 +158,8 @@ VueOpenGL* GLWidget::get_Vue_ptr() {
     return &vue;
 }
 //=========================================================================================================
-ostream& GLWidget::affiche(ostream& sortie) const {
+void GLWidget::affiche(ostream& sortie) const {
+   //affiche de manière textuelle les toupies du systeme
     s.affiche(sortie);
 }
 
@@ -163,7 +168,7 @@ void GLWidget::mousePressEvent(QMouseEvent* event)
   lastMousePosition = event->pos();
 }
 
-// ======================================================================
+// ========================================================================================================
 void GLWidget::mouseMoveEvent(QMouseEvent* event)
 {
   /* If mouse tracking is disabled (the default), the widget only receives
