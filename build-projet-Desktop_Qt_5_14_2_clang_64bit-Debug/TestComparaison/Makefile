@@ -955,7 +955,48 @@ main.o: ../../projet/TestComparaison/main.cpp ../../projet/TestComparaison/compa
 comparaison.o: ../../projet/TestComparaison/comparaison.cpp ../../projet/TestComparaison/comparaison.h \
 		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_comparaison.h
+		ui_comparaison.h \
+		../../projet/TestComparaison/qcustomplot.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QPointer \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/QPainter \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDateTime \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QMultiMap \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QFlags \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/QVector2D \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtGui.framework/Headers/qvector2d.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QStack \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QCache \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QMargins \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtPrintSupport.framework/Headers/QPrinter \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtPrintSupport.framework/Headers/qprinter.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtPrintSupport.framework/Headers/QPrintEngine \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtPrintSupport.framework/Headers/qprintengine.h \
+		/Users/Yanis/Qt/5.14.2/clang_64/lib/QtCore.framework/Headers/QtNumeric
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o comparaison.o ../../projet/TestComparaison/comparaison.cpp
 
 qcustomplot.o: ../../projet/TestComparaison/qcustomplot.cpp ../../projet/TestComparaison/qcustomplot.h \
