@@ -44,12 +44,6 @@ int main(){
 
     // sont expliques la-bas
 
-//Pendule--------------------------------------------------------------------------------------------------------------------------------------
-
-    double masse_pendule(1);
-
-    Pendule pendule(&text,masse_pendule,Vecteur({M_PI/6,0,0}),Vecteur({0,0,60}),Vecteur(0,1,2));
-
 //ConeSimple-----------------------------------------------------------------------------------------------------------------------------------
 
     double masse_volumique_cone(0.1);
@@ -61,11 +55,6 @@ int main(){
     double m_cone(masse_cone(masse_volumique_cone,hauteur_cone,rayon_cone));
 
     ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({1,1,1}));
-
-
-//MasseTombe--------------------------------------------------------------------------------------------------------------------------------------
-
-    MasseTombe masse_tombe(&text,1,Vecteur({10,100,1}), Vecteur({2,2,1}));
 
 //ToupieChinoise-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -89,21 +78,14 @@ int main(){
 
     SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur());
 
-//Toupie_general-----------------------------------------------------------------------------------------------------------------------------------
-
-    Toupie toupie_general(&text,m_cone,P_cone,P_point_cone,3.*(m_cone/20.)*(rayon_cone*rayon_cone+1./4.*hauteur_cone*hauteur_cone),
-                          3.*m_cone/10.*rayon_cone*rayon_cone,hauteur_cone*3./4.,Vecteur({1,1,1}));
-
 //==================================================================================================================================================
 
     // place les objets déclarées plus haut dans le systeme lui aussi déclaré tout en haut
 
-    systeme.ajouter_Toupie(pendule);
     systeme.ajouter_Toupie(cone_simple);
-    systeme.ajouter_Toupie(masse_tombe);
-    systeme.ajouter_Toupie(chinoise);
     systeme.ajouter_Toupie(sr);
-    systeme.ajouter_Toupie(toupie_general);
+    systeme.ajouter_Toupie(chinoise);
+
 
     // affiche tout les objets dans le systeme
 
@@ -113,9 +95,19 @@ int main(){
 
     cout<<"Le systeme evolue et se dessine a chaque pas de temps (dt="<<pas_de_temps<<") :"<<endl<<endl;
 
-    // evolution du systeme selon un pas de temps et un nombre de fois (ici 10).
+    // evolution du systeme selon un pas de temps et un nombre de fois (ici 2).
 
-    systeme.evolue(pas_de_temps,10);
+    systeme.evolue(pas_de_temps,2);
+
+    // on change maintenant l'integrateur a celui d'Euler-Cromer
+
+    // tout les objets de notre systeme sont maintenant
+
+    // simule avec cette integrateur
+
+    systeme.changer_integrateur(EC);
+
+
 
     }
 

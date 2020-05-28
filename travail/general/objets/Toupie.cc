@@ -61,22 +61,17 @@ Toupie::~Toupie(){}
 			return sortie;
 	}
 
-
-    Vecteur Toupie::eq_mouv() const {
-        return Vecteur(psi_point_point(),theta_point_point(),phi_point_point());
-    }
-
     void Toupie::dessine() const {
       support->dessine(*this);
     }
 
-    unique_ptr<Toupie> Toupie::copie() const {
+    /*unique_ptr<Toupie> Toupie::copie() const {
         return clone();
     }
 
     unique_ptr<Toupie> Toupie::clone() const {
         return unique_ptr<Toupie>(new Toupie(*this));
-    }
+    }*/
 
     Vecteur Toupie::omega_G() const {
         return Vecteur(getP_point().get_coord(2),
@@ -528,6 +523,11 @@ Toupie::~Toupie(){}
     std::vector<double> SolideRevolution::get_r_i() const
     {
         return r_i;
+    }
+
+    Vecteur SolideRevolution::eq_mouv() const
+    {
+        return Vecteur(psi_point_point(),theta_point_point(),phi_point_point());
     }
 
     ostream& operator<<(ostream& sortie, SolideRevolution const& etre_affiche) {

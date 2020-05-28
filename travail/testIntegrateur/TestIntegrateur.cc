@@ -12,35 +12,37 @@ using namespace std;
 
 int main(){
 
+    // notre support a dessin textuelle
 
+    TextViewer text(cout);
 
-//Implémentation éléments====================================================================================================================
+    //Intégrateurs---------------------
 
+    IntegrateurRungeKutta RK;
+    IntegrateurNewmark NM;
+    IntegrateurEulerCromer EC;
 
-        TextViewer text(cout);      //permet l'affichage textuel
+    //----------------------------------
 
-        //Intégrateurs---------------------
-        IntegrateurRungeKutta RK;
-        IntegrateurNewmark NM;
-        IntegrateurEulerCromer EC;
-        //----------------------------------
+    // pas de temps pour l'integration des toupies
 
-        //pas de temps pour l'integration des toupies
-        double pas_de_temps(0.01);
+    double pas_de_temps(0.01);
 
-        //nombre de fois que la toupie sera integrer selon le pas de temps
-        double nb_echantillons(20);
+    // nombre de fois que la toupie sera integrer selon le pas de temps
 
-        //temps initiale de la toupie
-        double temps(0);
+    size_t nb_echantillons(20);
+
+    // temps initiale de la toupie
+
+    double temps(0);
 
 //ConeSimple-----------------------------------------------------------------------------------------------------------------------------------
 
-        double masse_volumique_cone(0.1);
-        double hauteur_cone(1.5);
-        double rayon_cone(0.5);
-        Vecteur P_cone({0,M_PI/6,0});
-        Vecteur P_point_cone({0,0,60});
+    double masse_volumique_cone(0.1);
+    double hauteur_cone(1.5);
+    double rayon_cone(0.5);
+    Vecteur P_cone({0,M_PI/6,0});
+    Vecteur P_point_cone({0,0,60});
 
 
         //méthode calculant la masse d'un cône à partir d'une masse volumique, une hauteur et un rayon
