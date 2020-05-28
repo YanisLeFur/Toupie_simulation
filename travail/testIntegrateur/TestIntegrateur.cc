@@ -12,6 +12,8 @@ using namespace std;
 
 int main(){
 
+    try{
+
     // notre support a dessin textuelle
 
     TextViewer text(cout);
@@ -67,112 +69,50 @@ int main(){
     cout << "certaines de nos grandeur physique." << endl << endl;
 
     for (size_t i(0); i<nb_echantillons ; ++i) {
-        cout << endl << "temps: " << temps+i*pas_de_temps << endl;
+        cout << "temps: " << temps+i*pas_de_temps << endl;
 
+        // dessin textuelle des toupies
 
+        cout << endl << "Euler-Cromer : " << endl << endl;
 
+        cone_simple_EC.dessine();
 
+        cout << endl << "Newmark : " << endl << endl;
+
+        cone_simple_NM.dessine();
+
+        cout << endl << "Runge-Kutta : " << endl << endl;
+
+        cone_simple_RK.dessine();
 
         // invariants du mouvement du cone
 
-        cout << endl << "LA_a : " << cone_simple_RK.LA_a();
+        cout << endl << "Invariants : " << endl;
 
-        cout << endl << "LA_k : " << cone_simple_RK.LA_k();
+        cout << endl << "Energie totale : " << cone_simple_RK.E();
 
-        cout << endl << "E : " << cone_simple_RK.E();
+        cout << endl << "Projection sur k du moment cinetique en A : " << cone_simple_RK.LA_k();
 
-        cout << endl << "produit mixte : " << cone_simple_RK.prod_mixt()<<endl;
+        cout << endl << "Projection sur a du moment cinetique en A : " << cone_simple_RK.LA_a();
+
+        cout << endl << "Le produit mixte de omega, L, et a : " << cone_simple_RK.prod_mixt() << endl << endl;
+
+        // integration de la toupie suivant les Integrateurs differents
 
         EC.integre(pas_de_temps,cone_simple_EC);
 
         NM.integre(pas_de_temps,cone_simple_NM);
+
+        RK.integre(pas_de_temps,cone_simple_RK);
     }
-
-//EULER-CROMER====================================================================================================
-
-    cout<<"==================EULER-CROMER=================="<<endl;
-    cout<<"================================================"<<endl;
-
-
-    cout << "=========CONE SIMPLE==========" << endl<<endl;
-
-    for (size_t i(0); i <nb_echantillons; i++){
-
-            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
-
-            cout<<"--------------------------------------"<<endl;
-
-            cone_simple_EC.dessine();
-            cout << "eq_mouv: " << cone_simple_EC.eq_mouv() << endl;
-
-            cout<<"--------------------------------------"<<endl;
-
-            //invariants du mouvement du cone
-            cout << endl << "LA_a: " << cone_simple_EC.LA_a();
-            cout << endl << "LA_k: " << cone_simple_EC.LA_k();
-            cout << endl << "E: " << cone_simple_EC.E();
-            cout << endl <<"produit mixte: "<< cone_simple_EC.prod_mixt()<<endl;
-
-            EC.integre(pas_de_temps,cone_simple_EC);
-    }
-
-
-    cout<<"==================NEWMARK=================="<<endl;
-    cout<<"================================================"<<endl;
-
-
-    cout << "=========CONE SIMPLE==========" << endl<<endl;
-
-    for (size_t i(0); i <nb_echantillons; i++){
-
-            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
-
-            cout<<"--------------------------------------"<<endl;
-
-            cone_simple_NM.dessine();
-            cout << "eq_mouv: " << cone_simple_NM.eq_mouv() << endl;
-
-            cout<<"--------------------------------------"<<endl;
-
-            //invariants du mouvement du cone
-            cout << endl << "LA_a: " << cone_simple_NM.LA_a() <<endl;
-            cout << endl << "LA_k: " << cone_simple_NM.LA_k();
-            cout << endl << "E: " << cone_simple_NM.E();
-            cout<<endl<<"produit mixte: "<<cone_simple_NM.prod_mixt()<<endl;
-
 
     }
 
+    // la liste des erreurs gere se trouve dans le fichier constant.cc
 
-
-
-    cout<<"==================RUNGE-KUTTA=================="<<endl;
-    cout<<"================================================"<<endl;
-
-
-    cout << "=========CONE SIMPLE==========" << endl<<endl;
-
-    for (size_t i(0); i <nb_echantillons; i++){
-
-            cout << endl << "temps: " << temps+i*pas_de_temps << endl;
-
-            cout<<"--------------------------------------"<<endl;
-
-            cone_simple_RK.dessine();
-            cout << "eq_mouv: " << cone_simple_RK.eq_mouv() << endl;
-
-            cout<<"--------------------------------------"<<endl;
-
-            //invariants du mouvement du cone
-            cout << endl << "LA_a: " << cone_simple_RK.LA_a() <<endl;
-            cout << endl << "LA_k: " << cone_simple_RK.LA_k();
-            cout << endl << "E: " << cone_simple_RK.E();
-            cout<<endl<<"produit mixte: "<<cone_simple_RK.prod_mixt()<<endl;
-
-            RK.integre(pas_de_temps,cone_simple_RK);
+    catch(int const& i) {
+        affiche_erreur(i);
     }
-
-
 
 	return 0;
 }
