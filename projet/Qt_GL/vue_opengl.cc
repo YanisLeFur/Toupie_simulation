@@ -277,7 +277,7 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
 void VueOpenGL::dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur)
 {
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    prog.setUniformValue("textureId", 5);
+  prog.setUniformValue("textureId", 5);//donne une texture vide aux axes
   glBegin(GL_LINES);
 
   // axe X
@@ -306,6 +306,7 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
 {
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
 
+    //initialise la texture du bois 
     prog.setUniformValue("textureId", 0);
     QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
     glFuncs->glActiveTexture(GL_TEXTURE0);
@@ -313,22 +314,14 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
 
     glBegin(GL_POLYGON);
 
-    /*prog.setAttributeValue(CouleurId, 0.707, 0.395, 0.113); // bleu
-    prog.setAttributeValue(SommetId, 1000.0, 1000.0, 0.0);
-    prog.setAttributeValue(SommetId, 50.0, -50.0, 0.0);
-    prog.setAttributeValue(SommetId, -50.0, 50.0, 0.0);
-    prog.setAttributeValue(SommetId, -50.0, -50.0, 0.0);*/
-
     double r(100);
     double slices(50);
     double theta(2*M_PI/slices);
 
     for(unsigned int i(0);i<=slices;i++){
-
         prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.0);
         prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
         prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),0);
-
    }
 
    glEnd();
@@ -364,19 +357,22 @@ void VueOpenGL::init()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
     // Autres variantes au lieu de GL_MIRRORED_REPEAT : GL_REPEAT, GL_CLAMP_TO_EDGE
 
-    // Préparation d'une seconde texture.
-    // S'il y devait y en avoir plus, on ferait bien sûr une fonction ;-)
+    //préparation seconde texture
     textureBois= context->bindTexture(QPixmap(":/wood-texture.jpg"), GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-
+    
+    //préparation troisieme texture
     textureOptique= context->bindTexture(QPixmap(":/optical_illusion.jpg"), GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
-
+   
+  //initialise la sphère (resp. sphère tronquée) à l'aide de la class GlSphere (resp. GLSphereCoupe)
   sphere.initialize();
   sphere_coupe.initialize();
+  
+  //initialisation de la matrice du point de vue
   initializePosition();
 }
 //=========================================================================================================
@@ -497,7 +493,7 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
 
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
 
-    /// Attribut la texture 'textureDeChat' à la texture numéro 0 du shader
+    // Attribut la texture 'textureDeChat' à la texture numéro 0 du shader
     QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
     glFuncs->glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureOptique);
@@ -510,6 +506,7 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     prog.setUniformValue("textureId", 5);
     glBegin(GL_TRIANGLES);
 
+    //apro
     for(unsigned int i(0);i<=slices;i++){
         prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
         switch (grandeur) {
@@ -534,6 +531,7 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
    }
     glEnd();
 
+    //aproxime un cercle et application dessus de la texture précédemment mise en place
     prog.setUniformValue("textureId", 0);
     glBegin(GL_POLYGON);
 
@@ -552,8 +550,10 @@ void VueOpenGL::dessineSphere (QMatrix4x4 const& point_de_vue,
                               Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_)
 {
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-  prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
+  //prends une texture vide pour pouvoir dessiner en couleur
+  prog.setUniformValue("textureId", 5);
 
+  //fais varier la couleur de la sphère en fonction des grandeurs physiques rentrées en paramètre
   switch (grandeur) {
 
       case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
@@ -565,17 +565,18 @@ void VueOpenGL::dessineSphere (QMatrix4x4 const& point_de_vue,
       case null:prog.setAttributeValue(CouleurId,0.0,1.0,1.0);
       break;
   }
-  sphere.draw(prog, SommetId);                           // dessine la sphère
+  // dessine la sphère avec GLSphère
+  sphere.draw(prog, SommetId);                           
 }
 //=========================================================================================================
 void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
                                Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_)
 {
-
+    //prends une texture vide pour pouvoir dessiner en couleur
     prog.setUniformValue("textureId", 5);
 
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-
+  //fais varier la couleur de la sphère en fonction des grandeurs physiques rentrées en paramètre
     switch (grandeur) {
 
         case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
@@ -587,10 +588,10 @@ void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
         case null:prog.setAttributeValue(CouleurId, 0.0,1.0,1.0);
         break;
     }
-
+    // dessine la sphère tronqué avec GLSphèreCoupé
     sphere_coupe.draw(prog, SommetId);
 
-
+   //initialise la texture de chat à la texture 0 et initialise la texture de l'objet à la texture 0
    prog.setUniformValue("textureId", 0);
    QOpenGLFunctions *glFuncs = QOpenGLContext::currentContext()->functions();
    glFuncs->glActiveTexture(GL_TEXTURE0);
@@ -600,8 +601,8 @@ void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
    double beta(2*M_PI/slices);
    double r(0.5877);
 
+   //approxime un cercle avec la texture precedemment mise sur le haut de la sphere tronque
   glBegin(GL_POLYGON);
-
   for(unsigned int i(0);i<=25;i++){
     prog.setAttributeValue(CouleurId, 0.0,0.0,0.0);
     prog.setAttributeValue(CoordonneeTextureId,r*cos(i*beta)+0.5,r*sin(i*beta)+0.5);
