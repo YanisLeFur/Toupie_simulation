@@ -358,7 +358,7 @@ Toupie::~Toupie(){}
     }
 
     double ToupieChinoise::f2() const {
-        if(theta()==0) {throw 10;}
+        if (theta()==0) {throw 10;}
         return theta_point() / sin(theta())* f1() *  ( I3* ( I3 + masse * R * R * ( 1 - alpha_chinoise(h,R) * cos(theta()) ) ) / f3() )
                 -2 * psi_point() * theta_point() * cos(theta()) / sin(theta()); //OK
     }
