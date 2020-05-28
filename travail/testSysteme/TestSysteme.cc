@@ -54,7 +54,7 @@ int main(){
 
     double m_cone(masse_cone(masse_volumique_cone,hauteur_cone,rayon_cone));
 
-    ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur({1,1,1}));
+    ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur());
 
 //ToupieChinoise-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -68,15 +68,15 @@ int main(){
 //SolideRevolution---------------------------------------------------------------------------------------------------------------------------------
 
     vector<double> r_i;
-    double r(0.01);
+    double r(0.001);
     double hauteur_sr(1.5);
     double masse_volumique_sr(0.1);
 
-    for(int i(0); i<50 ; ++i) {
-        r_i.push_back(r+i*(0.01));
+    for(int i(0); i<500 ; ++i) {
+        r_i.push_back(r+i*(0.001));
     }
 
-    SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur());
+    SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,60),Vecteur());
 
 //==================================================================================================================================================
 
@@ -91,23 +91,43 @@ int main(){
 
     cout<<systeme;
 
-    // evolution du systeme
-
-    cout<<"Le systeme evolue et se dessine a chaque pas de temps (dt="<<pas_de_temps<<") :"<<endl<<endl;
-
-    // evolution du systeme selon un pas de temps et un nombre de fois (ici 2).
-
-    systeme.evolue(pas_de_temps,2);
-
     // on change maintenant l'integrateur a celui d'Euler-Cromer
 
     // tout les objets de notre systeme sont maintenant
 
     // simule avec cette integrateur
 
+    cout << "On change la methode d'integration a celle d'Euler-Cromer." << endl << endl;
+
     systeme.changer_integrateur(EC);
 
+    // on a aussi la possibilite d'enlever la derniere toupie dans notre systeme
 
+    cout << "On enleve la derniere Toupie de notre systeme." << endl << endl;
+
+    systeme.enlever_Toupie();
+
+    // affichage du systeme pour montrer ce qui a change
+
+    cout << systeme;
+
+    // evolution du systeme
+
+    // on compare ici le comportement d'une toupie de type ConeSimple
+
+    // avec celle d'une modelisation plus generale : un Solide de Revolution
+
+    // avec une liste de rayons permettant d'approximer une forme conique
+
+    cout << "Comparaison textuelle d'un ConeSimple et d'un Solide de Revolution (toupie generale) : " << endl << endl;
+
+    cout<<"Le systeme evolue et se dessine a chaque pas de temps (dt="<<pas_de_temps<<") :"<<endl<<endl;
+
+    // evolution du systeme selon un pas de temps et un nombre de fois (ici 300)
+
+    // ici la simulation se deroule pendant 3 secondes
+
+    systeme.evolue(pas_de_temps,300);
 
     }
 
