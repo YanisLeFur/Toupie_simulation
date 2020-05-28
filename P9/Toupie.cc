@@ -9,7 +9,8 @@
 using namespace std;
 
 //Toupie================================================================================================
- 	Toupie::~Toupie(){}
+
+Toupie::~Toupie(){}
 
 	Vecteur Toupie::getP() const {return P;}
 
@@ -25,23 +26,38 @@ using namespace std;
 
     void Toupie::changer_grandeur(Grandeur_physique g) {grandeur=g;}
 
-	void Toupie::setP(Vecteur const& v) {P=v;}
+    void Toupie::setP(Vecteur const& v) {
+      if(P.dimension()!=v.dimension()){throw 3;}
+        P=v;
+    }
 
-    void Toupie::setP_point(Vecteur const& v) {P_point=v;}
+    void Toupie::setP_point(Vecteur const& v) {
+        if(P.dimension()!=v.dimension()){throw 3;}
+        P_point=v;
+    }
 
     void Toupie::ajouter_point_memoire(Vecteur const& v){
         m.ajouter_point(v);
     }
 
     Toupie::Toupie(SupportADessin* support,double masse,Vecteur P,Vecteur P_point,double I1,double I3,double distance,Vecteur OA,Grandeur_physique grandeur, bool trace_on)
-        :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA),grandeur(grandeur),m(Memoire(trace_on)){}
+        :Dessinable(support),masse(masse),P(P),P_point(P_point),I1(I1),I3(I3),distance(distance),OA(OA),grandeur(grandeur),m(Memoire(trace_on)){
+        if (masse<=0) throw 5;
+        if (I1<=0) throw 7;
+        if (I3<=0) throw 8;
+        if (distance<=0) throw 13;
+        if (OA.dimension()!=3) throw 23;
+        if (OA.get_coord(3)<0) throw 24;
+    }
 	
     ostream& Toupie::affiche(ostream& sortie) const {
-    sortie  <<"Masse (kg) : "<<masse<<endl
+    sortie  <<"Toupie Generale : " << endl
+            <<"Masse (kg) : "<<masse<<endl
 			<<"I1 : "<<I1<<endl
 			<<"I3 : "<<I3<<endl
 			<<"Vecteur P : "<<P<<endl
-            <<"Derivee de P : "<<P_point<<endl;
+            <<"Derivee de P : "<<P_point<<endl
+            <<"Point de contact : "<<OA<<endl;
 			return sortie;
 	}
 
@@ -104,11 +120,11 @@ using namespace std;
     }
 
     Vecteur Toupie::MA_G() const {
-        return G_G()^P_G();
+        return AG_G()^P_G();
     }
 
     Vecteur Toupie::MA_O() const {
-        return G_O()^P_O();
+        return AG_O()^P_O();
     }
 
     Matrice Toupie::IG_G() const {
@@ -169,18 +185,22 @@ using namespace std;
         return LA_G()*Vecteur({0,0,1});
     }
 
-    Vecteur Toupie::AG() const {
-        return distance*Vecteur(sin(P.get_coord(2))*sin(P.get_coord(1)),
-                                sin(P.get_coord(2))*cos(P.get_coord(1)),
-                                                    cos(P.get_coord(2)));
-    }
-
-    Vecteur Toupie::G_G() const {
+    Vecteur Toupie::AG_G() const {
         return Vecteur(0,0,distance);
     }
 
-    Vecteur Toupie::G_O() const {
-        return GtoO(G_G());
+    Vecteur Toupie::AG_O() const {
+        return GtoO(AG_G());
+    }
+
+    Vecteur Toupie::OG_G() const
+    {
+        return OtoG(OG_O());
+    }
+
+    Vecteur Toupie::OG_O() const
+    {
+        return OA+AG_O();
     }
 
     Vecteur Toupie::P_G() const {
@@ -196,7 +216,7 @@ using namespace std;
     }
 
     double Toupie::E() const {
-        return EC()-P_G()*G_G();
+        return EC()-P_G()*AG_G();
     }
 
     double Toupie::prod_mixt() const {
@@ -216,12 +236,24 @@ using namespace std;
 //ConeSimple================================================================================================
 
     ConeSimple::ConeSimple(SupportADessin* support, double m, double h, double r, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur, bool trace_on)
-    :Toupie(support,m,P,P_point,3.*m/20.*(r*r+1./4.*h*h),3.*m/10.*r*r,h*3./4.,OA,grandeur,trace_on),hauteur(h),rayon(r){}
+    :Toupie(support,m,P,P_point,3.*m/20.*(r*r+1./4.*h*h),3.*m/10.*r*r,h*3./4.,OA,grandeur,trace_on),hauteur(h),rayon(r)
+    {
+        if(r<=0) throw 6;
+        if(h<=0) throw 9;
+        if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 18;
+    }
 
 
     ostream& ConeSimple::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Cone Simple: "<<endl;
-            this->Toupie::affiche(sortie);
+        sortie<<"Cone Simple : " << endl
+              <<"Hauteur (m) : " << hauteur << endl
+              <<"Rayon (m) : " << rayon << endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"I1 : "<<I1<<endl
+              <<"I3 : "<<I3<<endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl
+              <<"Point de contact : "<<OA<<endl;
         return sortie;
     }
 
@@ -237,9 +269,12 @@ using namespace std;
 
     Vecteur ConeSimple::eq_mouv() const {
         double I_A1((I1+masse*distance*distance));
+        if(getP().get_coord(2)==0){throw 10;}
+        else{
         return Vecteur(getP_point().get_coord(2)/(I_A1*sin(getP().get_coord(2)))*((I3-2.*I_A1)*getP_point().get_coord(1)*cos(getP().get_coord(2))+I3*getP_point().get_coord(3)),
                        1./(I_A1)*(masse*g*distance*sin(getP().get_coord(2))+getP_point().get_coord(1)*sin(getP().get_coord(2))*((I_A1-I3)*getP_point().get_coord(1)*cos(getP().get_coord(2))-I3*getP_point().get_coord(3))),
                        getP_point().get_coord(2)/(I_A1*sin(getP().get_coord(2)))*((I_A1-(I3-I_A1)*cos(getP().get_coord(2))*cos(getP().get_coord(2)))*getP_point().get_coord(1)-I3*getP_point().get_coord(3)*cos(getP().get_coord(2))));
+        }
     }
 
     void ConeSimple::dessine() const {
@@ -269,12 +304,25 @@ using namespace std;
 //ToupieChinoise==============================================================
 	
     ToupieChinoise::ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur, bool trace_on) // d???????
-        :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA,grandeur,trace_on),h(h),R(R){}
+        :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA,grandeur,trace_on),h(h),R(R){
+
+        if (R<=0) throw 6;
+        if (h<0) throw 15;
+        if (h>R) throw 14;
+        if ((P.dimension()!=5) or (P_point.dimension()!=5)) throw 19;
+    }
 
     ostream& ToupieChinoise::affiche(ostream& sortie) const {
-        sortie<<"Toupie de type Toupie Chinoise: "<<endl;
-            this->Toupie::affiche(sortie);
-            return sortie;
+        sortie<<"Toupie Chinoise : " << endl
+              <<"Hauteur tronquee (m) : " << h << endl
+              <<"Rayon (m) : " << R << endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"I1 : "<<I1<<endl
+              <<"I3 : "<<I3<<endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl
+              <<"Point de contact : "<<OA<<endl;
+        return sortie;
     }
 
     void ToupieChinoise::dessine() const {
@@ -310,6 +358,7 @@ using namespace std;
     }
 
     double ToupieChinoise::f2() const {
+        if(theta()==0) {throw 10;}
         return theta_point() / sin(theta())* f1() *  ( I3* ( I3 + masse * R * R * ( 1 - alpha_chinoise(h,R) * cos(theta()) ) ) / f3() )
                 -2 * psi_point() * theta_point() * cos(theta()) / sin(theta()); //OK
     }
@@ -425,14 +474,122 @@ using namespace std;
         return etre_affiche.affiche(sortie);
     }
 
+//SolideRevolution===============================================================
+
+    SolideRevolution::SolideRevolution(SupportADessin* support, double rho, double L, std::vector<double> r_i, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur, bool trace_on)
+    :Toupie(support,masse_solide_revolution(rho,L,r_i),P,P_point,I1_solide_revolution(rho,L,r_i),I3_solide_revolution(rho,L,r_i),d_solide_revolution(L,r_i),OA,grandeur,trace_on),rho(rho),L(L),r_i(r_i)
+    {
+        if (L<=0) throw 9;
+        if (rho<=0) throw 16;
+        if (r_i.size()==0) throw 11;
+
+        bool probleme(false);
+        for(size_t i(0);i<r_i.size();i++){
+            if(r_i[i]<=0){probleme=true;}
+        }
+
+        if (probleme) throw 12;
+        if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 20;
+    }
+
+    ostream& SolideRevolution::affiche(ostream& sortie) const {
+        sortie<<"Solide de Revolution : " << endl
+              <<"Hauteur (m) : " << L << endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"I1 : "<<I1<<endl
+              <<"I3 : "<<I3<<endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl
+              <<"Point de contact : "<<OA<<endl;
+        return sortie;
+    }
+
+    void SolideRevolution::dessine() const {
+      support->dessine(*this);
+    }
+
+    unique_ptr<Toupie> SolideRevolution::copie() const {
+        return clone();
+    }
+
+    unique_ptr<SolideRevolution> SolideRevolution::clone() const {
+        return unique_ptr<SolideRevolution>(new SolideRevolution(*this));
+    }
+
+    void SolideRevolution::trace_G(){
+        support->trace_G(*this);
+    }
+
+    double SolideRevolution::get_L() const
+    {
+        return L;
+    }
+
+    std::vector<double> SolideRevolution::get_r_i() const
+    {
+        return r_i;
+    }
+
+    ostream& operator<<(ostream& sortie, SolideRevolution const& etre_affiche) {
+        return etre_affiche.affiche(sortie);
+    }
+
+    double masse_solide_revolution(double rho, double L, const std::vector<double> &r_i)
+    {
+        double somme_r_i_carre(0.0);
+        double N(r_i.size());
+        for (auto r:r_i) {
+            somme_r_i_carre += r*r;
+        }
+        return M_PI*rho*L/N*somme_r_i_carre;
+    }
+
+    double d_solide_revolution(double L, const std::vector<double> &r_i)
+    {
+        double somme_numerateur(0.0);
+        double somme_denominateur(0.0);
+        double N(r_i.size());
+        for (size_t i(1); i<=r_i.size(); ++i) {
+            somme_numerateur += ((2*i-1)/2.0)*(L/N)*pow(r_i[i-1],2);
+            somme_denominateur += pow(r_i[i-1],2);
+        }
+        return somme_numerateur/somme_denominateur;
+    }
+
+    double I3_solide_revolution(double rho, double L, const std::vector<double> &r_i)
+    {
+        double somme(0.0);
+        double N(r_i.size());
+        for(auto r:r_i){
+            somme += pow(r,4);
+        }
+        return M_PI/2*rho*L/N*somme;
+    }
+
+    double I1_solide_revolution(double rho, double L, const std::vector<double> &r_i)
+    {
+        double somme(0.0);
+        double N(r_i.size());
+        for (size_t i(1); i<=r_i.size(); ++i) {
+            somme += pow(((2*i-1)/2.0)*(L/N)*r_i[i-1],2);
+        }
+        return 0.5*I3_solide_revolution(rho,L,r_i)+M_PI*rho*L/N*somme
+        -masse_solide_revolution(rho,L,r_i)*pow(d_solide_revolution(L,r_i),2);
+    }
+
+//Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur OA,Grandeur_physique grandeur=null, bool trace_on = true);
+
 
 //MasseTombe=====================================================================
     MasseTombe::MasseTombe(SupportADessin* support, double m,Vecteur P,Vecteur P_point,bool trace_on)
-    :Toupie(support,m,P,P_point,0,0,0,Vecteur(),null,trace_on)
-	{}
+    :Toupie(support,m,P,P_point,1,1,0.5,Vecteur(),null,trace_on)
+    {
+        if (m<=0) throw 5;
+        if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 21;
+    }
 	
     ostream& MasseTombe::affiche(std::ostream& sortie) const {
-        sortie<<"Toupie de type Masse Tombante : "<<endl
+        sortie<<"Masse Tombante : "<<endl
             <<"Masse (kg) : "<<masse<<endl
             <<"Vecteur P : "<< P<<endl
             <<"Derivee de P : "<<P_point<<endl;
@@ -467,7 +624,7 @@ using namespace std;
         return (EC()+EP());
     }
 
-    Vecteur MasseTombe::G_O() const
+    Vecteur MasseTombe::OG_O() const
     {
         return P;
     }
@@ -482,22 +639,25 @@ using namespace std;
     }
 
 //Pendule======================================================================================================
-    Pendule::Pendule(SupportADessin* support, double m,Vecteur P,Vecteur P_point,Vecteur OA,double longueur,bool trace_on)
-    :Toupie(support,m,P,P_point,1,1,1,OA,null,trace_on), longueur(longueur)
-    {}
-
-    double Pendule::get_l() const { return longueur; }
+    Pendule::Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point, Vecteur OA, bool trace_on)
+    :Toupie(support,m,P,P_point,1,1,1,OA,null,trace_on)
+    {
+          if (P.get_coord(1)<=0) throw 17;
+          if (m<=0) throw 5;
+          if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 22;
+    }
 
     ostream& Pendule::affiche(std::ostream& sortie) const{
-        sortie<<"Toupie de type Pendule : "<<endl
-            <<"Masse (kg) : "<<masse<<endl
-            <<"Longueur (m) : "<<longueur<<endl
-            <<"Vecteur P : "<<P<<endl
-            <<"Derivee de P : "<<P_point<<endl;
-            return sortie;
+        sortie<<"Pendule : "<<endl
+              <<"Longueur (m) : "<<P.get_coord(1)<<endl
+              <<"Masse (kg) : "<<masse<<endl
+              <<"Accroche en : "<<OA<< endl
+              <<"Vecteur P : "<<P<<endl
+              <<"Derivee de P : "<<P_point<<endl;
+        return sortie;
     }
     Vecteur Pendule::eq_mouv() const{
-        return Vecteur({0,-g/longueur*sin(getP().get_coord(2)),0});
+        return Vecteur({0,-g/P.get_coord(1)*sin(P.get_coord(2)),0});
     }
 
     unique_ptr<Toupie> Pendule::copie() const {
@@ -524,7 +684,7 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
      return (EC()+EP());
  }
 
- Vecteur Pendule::G_O() const
+ Vecteur Pendule::AG_O() const
  {
      return P;
  }
@@ -538,3 +698,5 @@ return 1/2.*masse*pow(P.get_coord(1)*P_point.get_coord(2),2);
  ostream& operator<<(std::ostream& sortie,Pendule const& etre_affiche) {
      return etre_affiche.affiche(sortie);
  }
+
+

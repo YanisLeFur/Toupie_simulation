@@ -123,7 +123,7 @@ double Matrice::det() const {
 	double det( matrice[0][0]*(matrice[1][1]*matrice[2][2]-matrice[1][2]*matrice[2][1])
 	-matrice[0][1]*(matrice[1][0]*matrice[2][2]-matrice[1][2]*matrice[2][0])
 	+matrice[0][2]*(matrice[1][0]*matrice[2][1]-matrice[1][1]*matrice[2][0]));
-	if(abs(det)<=precision){return 0;}
+    if(abs(det)<=precision){return 0;}
 	else return det;
 }
 //=========================================================================================================

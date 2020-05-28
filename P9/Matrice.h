@@ -8,6 +8,7 @@
 
 class Matrice{
 	private:
+
 	std::array<std::array<double, 3>, 3> matrice; // on utilise la convention que le premier indice indique la ligne et le deuxieme la colonne 
 	
 	Matrice cofacteur() const; // retourne le matrice des cofacteurs de l'instance courante
@@ -15,6 +16,7 @@ class Matrice{
 	Matrice& verifier() ; // verifie si un des coefficient est < à une precision (par convention 1e-15) et le mettre à 0 si c'est le cas
 	
 	public:
+
 	Matrice(double diag1=1.0, double diag2=1.0, double diag3=1.0); // constructeur qui construit une matrice diagonale en prenant 3 arguments
 	
 	Matrice(double a11, double a12, double a13, double a21, double a22, double a23, double a31, double a32, double a33); // constructeur d'une matrice generale

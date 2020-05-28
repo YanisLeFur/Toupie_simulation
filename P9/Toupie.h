@@ -10,8 +10,6 @@
 #ifndef T
 #define T
 
-//enum invariants{energie,produit_mixte,moment_cinetique};
-
 //Toupie===================================================================================================
 class Toupie:public Dessinable{
 	protected:
@@ -58,9 +56,9 @@ class Toupie:public Dessinable{
 
         void ajouter_point_memoire(Vecteur const&);
 		
-        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur A,Grandeur_physique grandeur=null, bool trace_on = true);
+        Toupie(SupportADessin* support, double masse, Vecteur P, Vecteur P_point, double I1, double I3,double distance,Vecteur OA,Grandeur_physique grandeur=null, bool trace_on = true);
 		
-        virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristique de la toupies(masse,I1,I3...)
+        virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristiques de la toupies(masse,I1,I3...)
 		
         virtual Vecteur eq_mouv() const; // equation de mouvement de la toupie
 
@@ -120,11 +118,13 @@ class Toupie:public Dessinable{
 
         double LA_a() const; // projection du moment cinetique de A sur a
 
-        Vecteur AG() const; // vecteur AG calculer avec des considerations geometriques
+        Vecteur AG_G() const; // vecteur du centre du referentiel R_G au point A exprime dans le referentiel R_G
 
-        Vecteur G_G() const; // vecteur du centre du referentiel R_G au point G exprime dans le referentiel R_G
+        virtual Vecteur AG_O() const; // vecteur du centre du referentiel R_O au point A exprime dans le referentiel R_O
 
-        virtual Vecteur G_O() const; // vecteur du centre du referentiel R_O au point G exprime dans le referentiel R_O
+        virtual Vecteur OG_G() const; // vecteur du centre du referentiel R_G au point G exprime dans le referentiel R_G
+
+        virtual Vecteur OG_O() const; // vecteur du centre du referentiel R_O au point G exprime dans le referentiel R_O
 
         Vecteur P_G() const; // vecteur du poids de la toupie dans le referentiel R_G
 
@@ -162,11 +162,11 @@ class ConeSimple:public Toupie{
 
         double get_rayon() const;
 		
-		Vecteur eq_mouv() const override;
+        Vecteur eq_mouv() const override;  //equation du mouvement du cone
 		
-		virtual void dessine() const override;
+        virtual void dessine() const override; //retourne les parametres et dérivées des parametres
 		
-		virtual std::unique_ptr<Toupie> copie() const override;
+        virtual std::unique_ptr<Toupie> copie() const override;
 		
 		std::unique_ptr<ConeSimple> clone() const;
 
@@ -216,7 +216,7 @@ class ToupieChinoise:public Toupie{
 
     std::unique_ptr<ToupieChinoise> clone() const;
 
-    virtual  Vecteur get_OA() const override;
+    virtual  Vecteur get_OA() const override;  //retourne le point de contact
 
     virtual Vecteur eq_mouv() const override;
 
@@ -226,25 +226,25 @@ class ToupieChinoise:public Toupie{
 
     virtual double phi_point_point() const override; // derivée seconde de phi
 
-    double P4_point_point() const;
+    double P4_point_point() const;  // dérivée du déplacement en x du centre géométrique de la toupie chinoise
 
-    double P5_point_point() const;
+    double P5_point_point() const; // dérivée du déplacement en y du centre géométrique de la toupie chinoise
 
-    Vecteur GC_G() const;
+    Vecteur GC_G() const;  //Vecteur du centre de masse au centre géométrique dans le référentiel de la toupie
 
-    Vecteur GC_O() const;
+    Vecteur GC_O() const;   //Vecteur du centre de masse au centre géométrique dans le référentiel inertiel
 
-    Vecteur AC_G() const;
+    Vecteur AC_G() const;   //Vecteur du point de contact au centre géométrique dans le référentiel de la toupie
 
-    Vecteur AC_O() const;
+    Vecteur AC_O() const;   //Vecteur du point de contact au centre géométrique dans le référentiel de la inertiel
 
-    Vecteur AG_G() const;
+    Vecteur AG_G() const;   //Vecteur du point de contact au centre de masse dans le référentiel de la toupie
 
-    Vecteur AG_O() const;
+    Vecteur AG_O() const override;   //Vecteur du point de contact au centre masse dans le référentiel de la inertiel
 
-    Vecteur vC_O() const;
+    Vecteur vC_O() const; //vitesse du point C dans le repère inertiel
 
-    virtual void trace_G() override;
+    virtual void trace_G() override;  //done la trace du centre de masse de la toupie chinoise
 
 };
 
@@ -256,12 +256,52 @@ double alpha_chinoise(double h, double R);
 
 double integrale_z_carre(double m, double h, double R);
 
-double I1_chinoise(double m, double h, double R);
+double I1_chinoise(double m, double h, double R); //retourne le coefficient I1 du tenseur d'inertie de la toupie chinoise
 
-double I3_chinoise(double m, double h, double R);
+double I3_chinoise(double m, double h, double R); //retourne le coefficient I3 du tenseur d'inertie de la toupie chinoise
 
 
 std::ostream& operator<<(std::ostream&,ToupieChinoise const& etre_affiche);
+
+//SolideRevolution==========================================================
+
+class SolideRevolution:public Toupie {
+    private:
+
+    double rho; // masse volumique
+
+    double L; // hauteur
+
+    std::vector<double> r_i; // ensemble de distances a l'axe
+
+    public:
+
+    SolideRevolution(SupportADessin* support, double rho, double L, std::vector<double> r_i, Vecteur P, Vecteur P_point, Vecteur OA, Grandeur_physique grandeur=null, bool trace_on = true);
+
+    std::ostream& affiche(std::ostream& sortie) const override;
+
+    virtual void dessine() const override;
+
+    virtual std::unique_ptr<Toupie> copie() const override;
+
+    std::unique_ptr<SolideRevolution> clone() const;
+
+    virtual void trace_G() override;
+
+    double get_L() const;
+
+    std::vector<double> get_r_i() const;
+};
+
+std::ostream& operator<<(std::ostream&,SolideRevolution const& etre_affiche);
+
+double masse_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
+
+double d_solide_revolution(double L, std::vector<double>  const& r_i);
+
+double I1_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
+
+double I3_solide_revolution(double rho, double L, std::vector<double>  const& r_i);
 
 //MasseTombe================================================================
 class MasseTombe:public Toupie{
@@ -285,7 +325,7 @@ class MasseTombe:public Toupie{
 
     virtual double E() const override;
 
-    virtual Vecteur G_O() const override;
+    virtual Vecteur OG_O() const override;
 
     virtual void trace_G() override;
 };	
@@ -294,16 +334,14 @@ std::ostream& operator<<(std::ostream&,MasseTombe const& etre_affiche);
 
 
 //Pendule================================================================
-class Pendule:public Toupie{
-private:
 
-    double longueur;
+// le vecteur de degres de liberte est (r,theta,z) ou on utilise les coordonnes cylindriques
+
+class Pendule:public Toupie{
 
 public:
 
-    double get_l() const;//donne la longeur du fil
-
-    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point,Vecteur OA, double longueur, bool trace_on = true);
+    Pendule(SupportADessin* support, double m, Vecteur P, Vecteur P_point,Vecteur OA, bool trace_on = true);
 
     std::ostream& affiche (std::ostream& sortie) const override;
 
@@ -321,7 +359,7 @@ public:
 
     virtual double E() const override;
 
-    virtual Vecteur G_O() const override;
+    virtual Vecteur AG_O() const override;
 
     virtual void trace_G() override;
 
