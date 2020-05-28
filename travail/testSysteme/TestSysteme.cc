@@ -133,6 +133,12 @@ int main(){
 
     // la liste des erreurs peut se trouver dans le fichier constant.cc
 
+    // pour la classe systeme la seul erreur pertinante est celle
+
+    // qu'on affiche quand on essaye d'enlever une toupie
+
+    // a un systeme vide
+
     catch (int const& i) {
        affiche_erreur(i);
     }
