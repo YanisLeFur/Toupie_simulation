@@ -59,7 +59,7 @@ void affiche_erreur(const int &i)
     break;
     case 16:cout << endl << endl << "Erreur : masse volumique du solide de revolution est negative ou nulle" << endl << endl;
     break;
-    case 17:cout << endl << endl << "Erreur : longueur du pendule negatif ou nul" << endl << endl;
+    case 17:cout << endl << endl << "Erreur : longueur du pendule negative ou nulle" << endl << endl;
     break;
     case 18:cout << endl << endl << "Erreur : cone simple avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
     break;
@@ -70,5 +70,9 @@ void affiche_erreur(const int &i)
     case 21:cout << endl << endl << "Erreur : masse qui tombe avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
     break;
     case 22:cout << endl << endl << "Erreur : pendule avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
+    break;
+    case 23:cout << endl << endl << "Erreur : point de contact du referentiel R_O de dimension differente de 3" << endl << endl;
+    break;
+    case 24:cout << endl << endl << "Erreur : coordonnee z du point de contact negatif" << endl << endl; // pour l'affichage graphique    
     }
 }
