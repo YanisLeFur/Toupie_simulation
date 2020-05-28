@@ -1,0 +1,67 @@
+#include <QApplication>
+#include "glwidget.h"
+#include "Toupie.h"
+#include "Dessinable.h"
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+int main(int argc, char* argv[])
+{
+  QApplication a(argc, argv);
+
+//Implementation éléments=====================================================================================================
+
+//Creation Widget-------------------------------------------------------------------------------------------------------------
+
+  GLWidget w;
+  //crée une fenêtre plus grande dès l'execution
+  w.setMinimumSize(1080,720);
+
+//Implémentation de la vue----------------------------------------------------------------------------------------------------
+  VueOpenGL* v(w.get_Vue_ptr());
+
+//Implémentation de toupies----------------------------------------------------------------------------------------------------
+  Pendule p(v,1,Vecteur(2,3*M_PI/4,0),Vecteur(0,0,0),Vecteur(0,0,5),2);
+  MasseTombe mt(v,1,Vecteur(0,0,0),Vecteur(0,5,5));
+  ConeSimple c1(v,0.039270,1.5,0.5,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(4,4,0),null);
+  ConeSimple c2(v,0.039270,3,1.5,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(),phi_point,false);
+  ToupieChinoise tc1(v,masse_chinoise(0.1,0.02,0.15),0.02,0.15,Vecteur({0,0.11,0,0,0}),Vecteur({50,0,0,0,0}),Vecteur(0,0,0),phi_point);
+  ToupieChinoise tc2(v,0.7,0.1,0.3,Vecteur({0,0.5,0,0,0}),Vecteur({15,0,0,0,0}),Vecteur(0,0,0));
+
+  vector<double> r_i;
+
+  double r(0.01);
+  double L(1.5);
+  double rho(0.1);
+
+  for(int i(0); i<50 ; ++i) {
+      r_i.push_back(r+i*(0.01));
+  }
+
+  SolideRevolution sr(v,rho,L,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(),phi_point,false);
+
+//ajout de Toupies=================================================================================================
+
+//*****************************modifier ici****************************
+//*********************************************************************
+
+  w.ajouter_Toupie(p);
+  //w.ajouter_Toupie(mt);
+  //w.ajouter_Toupie(tc1);
+  //w.ajouter_Toupie(tc2);
+  w.ajouter_Toupie(c1);
+  w.ajouter_Toupie(c2);
+  //w.ajouter_Toupie(sr);
+  //w.affiche(std::cout);
+
+  //*********************************************************************
+  //*********************************************************************
+
+  w.show();
+  v = nullptr;
+  delete v;
+  return a.exec();
+}
