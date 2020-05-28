@@ -46,6 +46,8 @@ Toupie::~Toupie(){}
         if (I1<=0) throw 7;
         if (I3<=0) throw 8;
         if (distance<=0) throw 13;
+        if (OA.dimension()!=3) throw 23;
+        if (OA.get_coord(3)<0) throw 24;
     }
 	
     ostream& Toupie::affiche(ostream& sortie) const {

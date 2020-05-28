@@ -431,7 +431,7 @@ int main(){
         break;
         case 9:cout << endl << endl << "Erreur : hauteur de la toupie negatif ou nulle"<< endl << endl;
         break;
-        case 10:cout << endl << endl << "Erreur : theta du Vecteur parametre de la toupie nul"<< endl << endl;
+        case 10:cout << endl << endl << "Erreur : theta du Vecteur de parametre de la toupie nul"<< endl << endl;
         break;
         case 11:cout << endl << endl << "Erreur : le solide de révolution ne comporte aucun rayon"<< endl << endl;
         break;
@@ -441,7 +441,7 @@ int main(){
         break;
         case 14:cout << endl << endl << "Erreur : hauteur tronque superieur au rayon de la toupie chinoise"<< endl << endl;
         break;
-        case 15:cout << endl << endl << "Erreur : hauteur tronque nul" << endl << endl;
+        case 15:cout << endl << endl << "Erreur : hauteur tronque negative" << endl << endl;
         break;
         case 16:cout << endl << endl << "Erreur : masse volumique du solide de revolution est negative ou nulle" << endl << endl;
         break;
@@ -456,6 +456,10 @@ int main(){
         case 21:cout << endl << endl << "Erreur : masse qui tombe avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
         break;
         case 22:cout << endl << endl << "Erreur : pendule avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
+        break;
+        case 23:cout << endl << endl << "Erreur : point de contact du referentiel R_O de dimension differente de 3" << endl << endl;
+        break;
+        case 24:cout << endl << endl << "Erreur : coordonnee z du point de contact negatif" << endl << endl; // pour l'affichage graphique
         }
     }
 
