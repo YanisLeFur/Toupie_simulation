@@ -11,8 +11,10 @@ using namespace std;
 int main(){
 
     try{
+        
+    // notre support a dessin textuel    
 
-    TextViewer text(cout); // permet l'affichage textuel
+    TextViewer text(cout); 
 
 //ConeSimple=======================================================================================================================================================
 
