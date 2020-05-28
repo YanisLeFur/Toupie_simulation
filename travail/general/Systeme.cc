@@ -23,10 +23,11 @@ void Systeme::ajouter_Toupie(Toupie const& toupie) {
     systeme.push_back(toupie.copie());
 }
 
-/*void Systeme::enlever_Toupie()
+void Systeme::enlever_Toupie()
 {
-    if (systeme.size()==0) throw
-}*/
+    if (systeme.size()==0) throw 25;
+    else systeme.pop_back();
+}
 //=========================================================================================================
 ostream& Systeme::affiche(ostream& sortie) const {
     sortie<<"Le systeme est constitue des "<<systeme.size()<<" objets suivants (independants) :"<< endl << endl;

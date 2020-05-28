@@ -85,7 +85,7 @@ int main(){
 
     cout << "=========CONE SIMPLE==========" << endl<<endl;
 
-    for (int i(0); i <nb_echantillons; i++){
+    for (size_t i(0); i <nb_echantillons; i++){
 
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
 
@@ -107,7 +107,7 @@ int main(){
 
     cout << "=========TOUPIE CHINOISE==========" << endl<<endl;
 
-    for (int i(0); i <nb_echantillons; i++){
+    for (size_t i(0); i <nb_echantillons; i++){
 
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
 
@@ -132,7 +132,7 @@ int main(){
 
     cout << "=========CONE SIMPLE==========" << endl<<endl;
 
-    for (int i(0); i <nb_echantillons; i++){
+    for (size_t i(0); i <nb_echantillons; i++){
 
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
 
@@ -154,7 +154,7 @@ int main(){
 
     cout << "=========TOUPIE CHINOISE==========" << endl<<endl;
 
-    for (int i(0); i <nb_echantillons; i++){
+    for (size_t i(0); i <nb_echantillons; i++){
 
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
 
@@ -180,7 +180,7 @@ int main(){
 
     cout << "=========CONE SIMPLE==========" << endl<<endl;
 
-    for (int i(0); i <nb_echantillons; i++){
+    for (size_t i(0); i <nb_echantillons; i++){
 
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
 
@@ -202,7 +202,7 @@ int main(){
 
     cout << "=========TOUPIE CHINOISE==========" << endl<<endl;
 
-    for (int i(0); i <nb_echantillons; i++){
+    for (size_t i(0); i <nb_echantillons; i++){
 
             cout << endl << "temps: " << temps+i*pas_de_temps << endl;
 
@@ -220,10 +220,6 @@ int main(){
             cout<<endl<<"produit mixte: "<<chinoise_RK.prod_mixt()<<endl;
             RK.integre(pas_de_temps,chinoise_RK);
     }
-
-
-
-
 
 	return 0;
 }

@@ -72,5 +72,7 @@ void affiche_erreur(const int &i)
     case 23:cout << endl << endl << "Erreur : point de contact du referentiel R_O de dimension differente de 3" << endl << endl;
     break;
     case 24:cout << endl << endl << "Erreur : coordonnee z du point de contact negatif" << endl << endl; // pour l'affichage graphique
+    break;
+    case 25:cout << endl << endl << "Erreur : on ne peut pas enlever d'objet a un systeme vide" << endl << endl;
     }
 }

@@ -24,7 +24,7 @@ class Systeme{
 		
         void ajouter_Toupie(Toupie const& toupie); // ajoute une toupie dans le systeme
 
-        //void enlever_Toupie(); // enleve la derniere toupie dans le systeme
+        void enlever_Toupie(); // enleve la derniere toupie dans le systeme
 		
         std::ostream& affiche(std::ostream& sortie) const; // appelle la fonction afficher des toupies du systeme
 		
