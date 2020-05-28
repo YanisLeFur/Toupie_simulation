@@ -10,15 +10,13 @@ extern const Vecteur grav({0.0,0.0,-9.81});
 
 extern const double precision(1e-15);
 
-//extern const double PI(3.1415926535);
-
 extern const double epsilon(1e-8);
 
 double modulo_2pi(double angle) {
     while (angle>=2*M_PI) {
         angle-=2*M_PI;
     }
-    while (angle<=0) {
+    while (angle<0) {
         angle+=2*M_PI;
     }
     return angle;
@@ -70,5 +68,11 @@ void affiche_erreur(const int &i)
     case 21:cout << endl << endl << "Erreur : masse qui tombe avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
     break;
     case 22:cout << endl << endl << "Erreur : pendule avec un vecteur de parametre ou de derivee de dimension differente de 3" << endl << endl;
+    break;
+    case 23:cout << endl << endl << "Erreur : point de contact du referentiel R_O de dimension differente de 3" << endl << endl;
+    break;
+    case 24:cout << endl << endl << "Erreur : coordonnee z du point de contact negatif" << endl << endl; // pour l'affichage graphique
+    break;
+    case 25:cout << endl << endl << "Erreur : on ne peut pas enlever d'objet a un systeme vide" << endl << endl;
     }
 }
