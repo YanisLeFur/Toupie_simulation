@@ -12,7 +12,7 @@ int main(){
 
     try{
 
-    // notre support a dessin textuelle
+    // notre support a dessin textuel
 
     TextViewer text(cout);
 

@@ -14,7 +14,7 @@ int main(){
 
     try{
 
-    // notre support a dessin textuelle
+    // notre support a dessin textuel
 
     TextViewer text(cout);
 
@@ -66,10 +66,10 @@ int main(){
 
     cout << "nos divers Integrateurs et de verifier l'invariance de ";
 
-    cout << "certaines de nos grandeur physique." << endl << endl;
+    cout << "certaines de nos grandeurs physiques." << endl << endl;
 
     for (size_t i(0); i<nb_echantillons ; ++i) {
-        cout << "temps: " << temps+i*pas_de_temps << endl;
+        cout << "temps : " << temps+i*pas_de_temps << endl;
 
         // dessin textuelle des toupies
 
@@ -85,9 +85,9 @@ int main(){
 
         cone_simple_RK.dessine();
 
-        // invariants du mouvement du cone
+        // invariants du mouvement du cone (selon Runge-Kutta)
 
-        cout << endl << "Invariants : " << endl;
+        cout << endl << "Invariants (selon Runge-Kutta) : " << endl;
 
         cout << endl << "Energie totale : " << cone_simple_RK.E();
 
