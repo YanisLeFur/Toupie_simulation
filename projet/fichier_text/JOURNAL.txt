@@ -140,6 +140,7 @@ Implémentation de la classe Vecteur:
 	- Implémentation d'un classe Mémoire (attribut de VueOpenGL) ce qui nous permet de dessiner la trace du point de centre de masse d'un cône.
 
 
+
 --------------------------------------------------
 ## Semaine 11 :
 
@@ -195,6 +196,14 @@ Implémentation de la classe Vecteur:
 --------------------------------------------------
 ## Semaine 14 :
 
+-restructuration des mains
+-revu du commentaire de touts les .cc et .h de notre projet
+-création d'un autre Widget pour comparer le solide de revolution et le coneSimple
+-fix des principaux warning possible
+-trace pour toutes les toupies
+-changement de couleur en fonction d'une grandeur physique pour les sphères et shpèrecoupe
+-revu de vue tangentielle
+-création readme, fichier conception(image+ details en texte)
 
 
 
