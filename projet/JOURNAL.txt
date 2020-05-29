@@ -196,15 +196,21 @@ Implémentation de la classe Vecteur:
 --------------------------------------------------
 ## Semaine 14 :
 
--restructuration des mains
--revu du commentaire de touts les .cc et .h de notre projet
--création d'un autre Widget pour comparer le solide de revolution et le coneSimple
--fix des principaux warning possible
--trace pour toutes les toupies
--changement de couleur en fonction d'une grandeur physique pour les sphères et shpèrecoupe
--revu de vue tangentielle
--création readme, fichier conception(image+ details en texte)
--solide de revolution de forme differente
+	- Nous avons complétement peaufiner tout nos exécutables.
 
+	- Nous avons commenté les aspects interessants de nos fichiers .cc et .h
 
-!!!! SI ON MODIFIE TESTSYSTEME NE PAS OUBLIER DE LE CHANGER DANS P9 AUSSI !!!!
+	- Création du sous-projet testComparaison visant à comparer nos ConeSimple à nos SolideRevolution
+
+	- Gestion de la plupart des warning.
+
+	- Mise en place de la trace pour tout type de Toupie.
+
+	- La Classe Toupie est maintenant abstraite et notre Solide de Revolution représente notre cadre d'une toupie générale.
+
+	- Mise en place du changement de couleur par rapport à une grandeur physique pour les Solides de révolution, les toupies chinoises et les sphères (pendule, masse qui tombe)
+
+	- Création du fichier README et test de notre projet sur une VM
+
+	- Création d'un Solide de Revolution de forme différente
+
