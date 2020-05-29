@@ -8,7 +8,7 @@
 #include "memoire.h"
 using namespace std;
 
-//Toupie================================================================================================
+//Toupie====================================================================================================================================
 
 Toupie::~Toupie(){}
 
@@ -61,17 +61,22 @@ Toupie::~Toupie(){}
 			return sortie;
 	}
 
+
+    Vecteur Toupie::eq_mouv() const {
+        return Vecteur(psi_point_point(),theta_point_point(),phi_point_point());
+    }
+
     void Toupie::dessine() const {
       support->dessine(*this);
     }
 
-    /*unique_ptr<Toupie> Toupie::copie() const {
+    unique_ptr<Toupie> Toupie::copie() const {
         return clone();
     }
 
     unique_ptr<Toupie> Toupie::clone() const {
         return unique_ptr<Toupie>(new Toupie(*this));
-    }*/
+    }
 
     Vecteur Toupie::omega_G() const {
         return Vecteur(getP_point().get_coord(2),
@@ -353,7 +358,7 @@ Toupie::~Toupie(){}
     }
 
     double ToupieChinoise::f2() const {
-        if(theta()==0) {throw 10;}
+        if (theta()==0) {throw 10;}
         return theta_point() / sin(theta())* f1() *  ( I3* ( I3 + masse * R * R * ( 1 - alpha_chinoise(h,R) * cos(theta()) ) ) / f3() )
                 -2 * psi_point() * theta_point() * cos(theta()) / sin(theta()); //OK
     }
@@ -373,6 +378,11 @@ Toupie::~Toupie(){}
     Vecteur ToupieChinoise::get_OA() const
     {
         return Vecteur(OA.get_coord(1)+P_point.get_coord(4),OA.get_coord(2)+P_point.get_coord(5),OA.get_coord(3));
+    }
+
+    double ToupieChinoise::get_rayon() const
+    {
+        return R;
     }
 
     Vecteur ToupieChinoise::eq_mouv() const {
@@ -523,11 +533,6 @@ Toupie::~Toupie(){}
     std::vector<double> SolideRevolution::get_r_i() const
     {
         return r_i;
-    }
-
-    Vecteur SolideRevolution::eq_mouv() const
-    {
-        return Vecteur(psi_point_point(),theta_point_point(),phi_point_point());
     }
 
     ostream& operator<<(ostream& sortie, SolideRevolution const& etre_affiche) {
