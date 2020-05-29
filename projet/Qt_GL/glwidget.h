@@ -10,9 +10,7 @@
 #include "Integrateur.h"
 
 class GLWidget : public QOpenGLWidget
-/* La fenêtre hérite de QOpenGLWidget ;
- * les événements (clavier, souris, temps) sont des méthodes virtuelles à redéfinir.
- */
+// La fenêtre hérite de QOpenGLWidget ;
 {
 public:
   GLWidget(QWidget* parent = nullptr)
@@ -25,7 +23,7 @@ public:
 
   VueOpenGL* get_Vue_ptr(); // retourne un pointeur sur le VueOpenGL du widget
 
-  std::ostream& affiche(std::ostream& sortie) const; // appelle la fonction afficher des toupies du systeme du widget
+  void affiche(std::ostream& sortie) const; // appelle la fonction afficher des toupies du systeme du widget
 
 
 

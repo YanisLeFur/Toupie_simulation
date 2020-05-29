@@ -1,0 +1,12 @@
+Toupie.o
+Vecteur.o
+constant.o
+main_qt_gl.o
+glwidget.o
+vue_opengl.o
+glchinoise.o
+glsphere.o
+integrateur.o
+memoire.o
+Dessinable.o
+qrc_resource.o

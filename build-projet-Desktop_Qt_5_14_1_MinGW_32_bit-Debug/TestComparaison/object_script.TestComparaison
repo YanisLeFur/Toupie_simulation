@@ -1,0 +1,12 @@
+main.o
+comparaison.o
+qcustomplot.o
+Toupie.o
+Vecteur.o
+Dessinable.o
+constant.o
+Integrateur.o
+Matrice.o
+memoire.o
+moc_comparaison.o
+moc_qcustomplot.o

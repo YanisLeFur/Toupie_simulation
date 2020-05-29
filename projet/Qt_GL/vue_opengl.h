@@ -34,6 +34,7 @@ class VueOpenGL : public SupportADessin {
   // méthode utilitaire offerte pour simplifier
   void dessineCube(QMatrix4x4 const& point_de_vue = QMatrix4x4() );
 
+  //methode rajoutée pour dessiner d'autres formes
   void dessineCylindre(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double z_0 = 0, double z_1 = 0, double r_i = 0);
 
   void dessineSolideRevolution(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double L=0, std::vector<double> r_i = std::vector<double>(0));
@@ -41,6 +42,20 @@ class VueOpenGL : public SupportADessin {
   void dessineCone(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double h = 1.5, double r = 0.5,
                    Grandeur_physique=phi_point,double =0,double =0,double=0);
 
+  void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
+
+  void dessinePlateforme(QMatrix4x4 const& point_de_vue);
+
+  void dessinePolygon(QMatrix4x4 const& point_de_vue, double h, double r);
+
+  void dessineSphere(QMatrix4x4 const& point_de_vue,
+                       Grandeur_physique grandeur=null,double =0,double =0,double =0);
+
+ //permet de représenter graphiquement la toupie chinoise
+  void dessineSphereCoupe(QMatrix4x4 const& point_de_vue,
+                       Grandeur_physique grandeur=null,double =0,double =0,double =0);
+
+//dessin graphique des toupies à partir de leurs paramètres et des formes crées plus haut
   virtual void dessine(ConeSimple const&) override;
 
   virtual void dessine(Pendule const&) override;
@@ -53,6 +68,7 @@ class VueOpenGL : public SupportADessin {
 
   virtual void dessine(SolideRevolution const&) override;
 
+  //trace graphique du centre de masse des toupies
   virtual void trace_G(Toupie&) override;
 
   virtual void trace_G(ConeSimple&) override;
@@ -65,17 +81,8 @@ class VueOpenGL : public SupportADessin {
 
   virtual void trace_G(SolideRevolution&) override;
 
+//point de vue placé sur
   void vue_tangentielle(ConeSimple const&);
-
-  void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
-
-  void dessinePlateforme(QMatrix4x4 const& point_de_vue);
-
-  void dessineSphere(QMatrix4x4 const& point_de_vue,
-                       Grandeur_physique grandeur=null,double =0,double =0,double =0);
-
-  void dessineSphereCoupe(QMatrix4x4 const& point_de_vue,                       //permet de représenter graphiquement la toupie chinoise
-                       Grandeur_physique grandeur=null,double =0,double =0,double =0);
 
   // méthode(s) de dessin (héritée(s) de SupportADessin)
   virtual SupportADessin* copie() const override;

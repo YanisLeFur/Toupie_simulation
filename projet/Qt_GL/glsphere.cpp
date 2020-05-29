@@ -18,7 +18,7 @@ void GLSphere::initialize(GLuint slices, GLuint stacks)
   const double alpha(M_PI / double(stacks));
   const double beta(2.0*M_PI / double(slices));
 
-  positions << 0.0 << 0.0 << 1.0;
+  positions << 0.0 << 0.0 << 1.0; //point max de la sphere
 
   for (GLuint i(1); i < stacks; ++i) {
     for (GLuint j(0); j < slices; ++j) {
@@ -31,7 +31,7 @@ void GLSphere::initialize(GLuint slices, GLuint stacks)
     }
   }
 
-  positions << 0.0 << 0.0 << -1.0;
+  positions << 0.0 << 0.0 << -1.0;//point min de la sphere
 
   indices0.reserve(slices+2);
   for (GLuint i(0); i <= slices; ++i)

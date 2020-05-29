@@ -12,33 +12,35 @@ int main(){
 
     try{
 
-    TextViewer text(cout); // permet l'affichage textuel
+    // notre support a dessin textuel
+
+    TextViewer text(cout);
 
 //ConeSimple=======================================================================================================================================================
 
     cout << endl << "==========CONE SIMPLE==========" << endl << endl;
 
-	double masse_volumique_cone(0.1);
+    double masse_volumique_cone(0.1);
 
     // on modelise un cone simple par une hauteur et un rayon
 
-	double hauteur_cone(1.5);
-	double rayon_cone(0.5);
+    double hauteur_cone(1.5);
+    double rayon_cone(0.5);
 
     // le vecteur de parametre contient les angles d'Euler (psi,theta,phi)
 
     Vecteur P_cone({0,M_PI/6,0});
-	Vecteur P_point_cone({0,0,60});
+    Vecteur P_point_cone({0,0,60});
 
     // méthode calculant la masse d'un cône à partir d'une masse volumique, une hauteur et un rayon
 
     double m_cone(masse_cone(masse_volumique_cone,hauteur_cone,rayon_cone));
 
-    // Construction d'une toupie cônique avec:
+    // construction d'une toupie cônique avec:
 
-    // un support à dessin, une masse, des coefficient d'un tenseur d'inertie (I1,I3),
+    // un support à dessin, une masse, une hauteur, un rayon , un Vecteur de paramètre,
 
-    // un Vecteur de paramètre, un Vecteur de dérivée des paramètre et un point de contact
+    // un Vecteur de dérivée des paramètre et un point de contact
 
     ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur());
 
@@ -70,6 +72,8 @@ int main(){
 
     cout << endl << "==========SOLIDE REVOLUTION==========" << endl << endl;
 
+    // le Solide de Revolution est le cadre le plus generale de notre toupie
+
     // on modelise un solide de revolution avec une hauteur
 
     double hauteur_sr(1.5);
@@ -86,23 +90,31 @@ int main(){
 
     // premier rayon
 
-    double r(0.01);
+    double r(0.001);
 
     // une boucle for qui cree une liste de rayon qui augmente lineairement
 
     // ce qui approximerait un cone
 
-    for(int i(0); i<50 ; ++i) {
-        r_i.push_back(r+i*(0.01));
+    for(int i(0); i<500 ; ++i) {
+        r_i.push_back(r+i*(0.001));
     }
 
-    //Construction d'un solide de révolution à partir:
+    // Construction d'un solide de révolution à partir:
 
     // d'un support à dessin, une masse volumique, une hauteur,
 
     // un tableau des rayons différents, un Vecteur de paramètres,
 
     // un Vecteur dérivée de paramètre, un point de contact
+
+    // à noter: ici on construit un solide de revolution
+
+    // avec des attributs similaires
+
+    // au cône vu plus haut pour vérifier que les
+
+    // deux toupies ont les mêmes valeurs
 
     SolideRevolution sr(&text,masse_volumique_sr,hauteur_sr,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,60),Vecteur());
 
@@ -319,69 +331,9 @@ int main(){
 
     cout<<"--------------------------------------"<<endl;
 
-//Toupie generale==========================================================================================================================================================
-
-    cout << endl << "==========TOUPIE GENERAL==========" << endl<<endl;
-
-    // Construction d'une toupie general à partir :
-
-    // d'un support à dessin, une masse,un Vecteur de parametres,
-
-    // un Vecteur dérivée de paramètres,
-
-    // des coefficients du tenseur d'inertie(I1,I3)
-
-    double I1(3.*(m_cone/20.)*(rayon_cone*rayon_cone+1./4.*hauteur_cone*hauteur_cone));
-
-    double I3(3.*m_cone/10.*rayon_cone*rayon_cone);
-
-    // une distance (entre le centre de masse et le point de contact)
-
-    double d(hauteur_cone*3./4.);
-
-    // et un point de contact
-
-    // à noter: ici on construit une toupie générale
-
-    // avec des attributs similaires
-
-    // au cône vu plus haut pour vérifier que les
-
-    // deux toupies ont les mêmes valeurs
-
-    Toupie toupie_general(&text,m_cone,P_cone,P_point_cone,I1,I3,d,Vecteur({0,0,0}));
-
-    cout<<"--------------------------------------"<<endl;
-
-    cout<<"Toupie de type general : " << endl << toupie_general;
-
-    cout<<"--------------------------------------"<<endl;
-
-    // donne les équations de mouvements/l'accélération de la toupie general
-
-    cout << "Le vecteur d'acceleration de la toupie est : " << toupie_general.eq_mouv() << endl;
-
-    cout<<"--------------------------------------"<<endl;
-
-    // Energie totale de la toupie general
-
-    cout<<"L'energie totale de la toupie general est: "<<toupie_general.E()<<endl;
-
-    cout<<"--------------------------------------"<<endl;
-
 //Gestion des erreurs==========================================================================================================================================================
 
-    // test d'une toupie avec un coefficient d'inertie I1 negatif
-
-    cout << "On essaye de construire une Toupie avec un coefficient d'inertie I1 negatif : ";
-
-    try {
-        Toupie toupie_erreur_1(&text,1,P_cone,P_point_cone,-1,1,1,Vecteur());
-    }
-
-    catch(int const& i) {
-        affiche_erreur(i);
-    }
+    cout << endl << "==========GESTION D'ERREURS==========" << endl << endl;
 
     // test d'un solide de revolution avec un de ses rayons negatif
 
@@ -408,6 +360,22 @@ int main(){
     catch (int const& i) {
         affiche_erreur(i);
     }
+
+    // la liste des erreurs qu'on gere
+
+    // a noter que dans certain cas, l'erreur affiche peut
+
+    // paraitre differente de ce que l'on pensait avoir
+
+    // par exemple, un rayon nul d'un ConeSimple
+
+    // implique que le constructeur de Toupie construit
+
+    // une toupie avec un coefficient d'inertie I1 nul
+
+    // car I1 est proportionelle au rayon pour un ConeSimple
+
+    // l'erreur affiche serait donc celle de I1
 
     }
 

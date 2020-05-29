@@ -218,6 +218,8 @@ class ToupieChinoise:public Toupie{
 
     virtual  Vecteur get_OA() const override;  //retourne le point de contact
 
+    double get_rayon() const; // retourne le rayon de la toupie chinoise
+
     virtual Vecteur eq_mouv() const override;
 
     virtual double psi_point_point() const override; // derivée seconde de psi

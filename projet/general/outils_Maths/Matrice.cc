@@ -8,8 +8,8 @@
 using namespace std;
 //=========================================================================================================
 //=========================================================================================================
-Matrice& Matrice::verifier() {
-	for (size_t i(0); i < matrice.size(); i++){
+Matrice& Matrice::verifier() {                          //permet de vérifier si touts les coefficients de la matrices
+    for (size_t i(0); i < matrice.size(); i++){         //sont égaux à 0 selon une precision mit dans le fichier constant
 		for (size_t j(0); j < matrice[0].size(); j++){
 			if (abs(matrice[i][j])<=precision) matrice[i][j]=0;
 			else if (matrice[i][j]==0) matrice[i][j]=0;
