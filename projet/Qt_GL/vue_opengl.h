@@ -46,6 +46,8 @@ class VueOpenGL : public SupportADessin {
 
   void dessinePlateforme(QMatrix4x4 const& point_de_vue);
 
+  void dessinePolygon(QMatrix4x4 const& point_de_vue, double h, double r);
+
   void dessineSphere(QMatrix4x4 const& point_de_vue,
                        Grandeur_physique grandeur=null,double =0,double =0,double =0);
 

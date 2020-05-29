@@ -60,11 +60,11 @@ int main(int argc, char* argv[]) {
 
   // on construit une autre masse tombante, de masse 0.5kg,
 
-  // initiallement a (0,1,1), avec une vitesse initialle de (-5,20,20)
+  // initiallement a (-20,-24,5), avec une vitesse initialle de (12,0,15)
 
   // sans trace de son centre de masse
 
-  MasseTombe mt2(v,0.5,Vecteur(0,1,1),Vecteur(-5,20,20),false);
+  MasseTombe mt2(v,0.5,Vecteur(-20,24,5),Vecteur(12,0,15),false);
 
   // on construit un cone simple (dessine avec VueOpenGL),
 
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 
   // avec une trace de son centre de masse
 
-  ConeSimple c1(v,0.039270,1.5,0.5,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(4,4,0),null,true);
+  ConeSimple c1(v,masse_cone(0.1,1.5,0.5),1.5,0.5,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(4,4,0),null,true);
 
   // on construit un autre cone simple (dessine avec VueOpenGL),
 
@@ -96,7 +96,9 @@ int main(int argc, char* argv[]) {
 
   // avec comme point de contact (-4,4,0),
 
-  // qui varie de couleur (d'un vert claire a un vert fonce)
+  // qui varie de couleur (d'un vert claire a un vert fonce) en dependance
+
+  // de la grandeur de sa vitesse angulaire de nutation (theta point)
 
   // sans trace de son centre de masse
 
@@ -104,31 +106,73 @@ int main(int argc, char* argv[]) {
 
   // on construit une toupie chinoise (dessine avec VueOpenGL)
 
-  // de masse volumique 0.1kg/m^3, de hauteur tronquee 0.02m,
+  // de masse volumique 0.1kg/m^3, de hauteur tronquee 0.25m,
 
-  // de rayon 0.15m, incline initiallement d'un angle de 0.11 radians
+  // de rayon 2m, incline initiallement d'un angle de 0.5 radians
 
   // par rapport a la verticale, avec une precession initialle
 
-  // de 25 radians par seconde, avec un point de contact en (0,4,0)
+  // de 20 radians par seconde, avec un point de contact initiallement en (-5,6,0)
 
+  // qui varie de couleur (d'un bleu claire a un bleu fonce) en dependance
 
+  // de la grandeur de la vitesse de rotation propre (phi point)
 
+  // sans trace de son centre de masse
 
-  ToupieChinoise tc1(v,masse_chinoise(0.1,0.02,0.15),0.02,0.15,Vecteur({0,0.11,0,0,0}),Vecteur({25,0,0,0,0}),Vecteur(0,4,0),phi_point);
-  ToupieChinoise tc2(v,0.7,0.1,0.3,Vecteur({0,0.5,0,0,0}),Vecteur({15,0,0,0,0}),Vecteur(0,0,0));
+  ToupieChinoise tc1(v,masse_chinoise(0.1,0.25,2),0.25,2,Vecteur({0,0.5,0,0,0}),Vecteur({20,0,0,0,0}),Vecteur(-5,6,0),phi_point,false);
 
-  vector<double> r_i;
+  // on construit une autre toupie chinoise (dessine avec VueOpenGL)
 
-  double r(0.01);
-  double L(1.5);
-  double rho(0.1);
+  // avec une masse de 0.7kg, une hauteur tronquee de 0.1m, un rayon 0.3m,
 
-  for(int i(0); i<50 ; ++i) {
-      r_i.push_back(r+i*(0.01));
+  // incline initiallement d'un angle de 0.5 radians
+
+  // par rapport a la verticale, avec une precession initialle
+
+  // de 15 radians par seconde, avec un point de contact initiallement en (3,4,0)
+
+  // qui ne varie pas de couleur, avec la trace de son centre de masse
+
+  ToupieChinoise tc2(v,0.7,0.1,0.3,Vecteur({0,0.5,0,0,0}),Vecteur({15,0,5,0,0}),Vecteur(5,4,0),null,true);
+
+  // on construit maintenant un solide de revolution
+
+  // (dessine sur VueOpenGL), avec une masse volumique de 0.1kg/m^3,
+
+  // une hauteur de 1.5m, un ensemble de rayons correspondant
+
+  // a la forme d'un cone de hauteur 1.5m et de rayon 0.5m,
+
+  // initiallement incline d'un angle de PI/6 radians par rapport a la verticale
+
+  // avec une rotation propre initialle de 200 radians par seconde
+
+  // avec comme point de contact (4,4,0),
+
+  // qui ne varie pas de couleur
+
+  // avec une trace de son centre de masse
+
+  vector<double> r_i_1;
+
+  double r_0_1(0.001);
+
+  for(int i(0); i<500 ; ++i) {
+      r_i_1.push_back(r_0_1+i*(0.001));
   }
 
-  SolideRevolution sr(v,rho,L,r_i,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(),phi_point,false);
+  SolideRevolution sr1(v,0.1,1.5,r_i_1,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(4,4,0),null,true);
+
+  vector<double> r_i_2;
+
+  double r_0_2(0.0183);
+
+  for(int i(0); i<400; ++i) {
+      r_i_2.push_back(r_0_2+exp(-pow(((i*0.01)-2),2)));
+  }
+
+  SolideRevolution sr2(v,0.1,4,r_i_2,Vecteur(0,M_PI/12,0),Vecteur(5,0,200),Vecteur(-4,4,0),null,false);
 
 //ajout de Toupies=================================================================================================
 
@@ -141,10 +185,11 @@ int main(int argc, char* argv[]) {
   //w.ajouter_Toupie(mt2);
   //w.ajouter_Toupie(c1);
   //w.ajouter_Toupie(c2);
-  w.ajouter_Toupie(tc1);
+  //w.ajouter_Toupie(tc1);
   //w.ajouter_Toupie(tc2);
-  //w.ajouter_Toupie(sr);
-  w.affiche(std::cout);
+  //w.ajouter_Toupie(sr1);
+  w.ajouter_Toupie(sr2);
+  w.affiche(cout);
 
   //*********************************************************************
   //*********************************************************************
