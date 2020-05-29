@@ -24,7 +24,23 @@ int main(int argc, char* argv[]) {
 
   VueOpenGL* v(w.get_Vue_ptr());
 
-//Implémentation des objets----------------------------------------------------------------------------------------------------
+//Nos integrateurs-----------------------------------------------------------------------------------------------------------
+
+  // notre widget contient un systeme qui utilise un integrateur
+
+  // de Runge-Kutta par default (car c'est le plus performant)
+
+  // si l'utilisateur voudrais utiliser un autre integrateur
+
+  // il suffit d'utiliser la methode changer_integrateur
+
+  // du widget (par exemple w.changer_integrateur(EC))
+
+  IntegrateurEulerCromer EC;
+  IntegrateurNewmark NM;
+  IntegrateurRungeKutta RK;
+
+//Implémentation des objets----------------------------------------------------------------------------------------------------  
 
   // on construit un pendule (dessine avec VueOpenGL), de masse 1kg
 
@@ -144,7 +160,7 @@ int main(int argc, char* argv[]) {
 
   // a la forme d'un cone de hauteur 1.5m et de rayon 0.5m,
 
-  // initiallement incline d'un angle de PI/6 radians par rapport a la verticale
+  // initiallement incline d'un angle de PI/6 radians par rapport a la verticale,
 
   // avec une rotation propre initialle de 200 radians par seconde
 
@@ -162,7 +178,25 @@ int main(int argc, char* argv[]) {
       r_i_1.push_back(r_0_1+i*(0.001));
   }
 
-  SolideRevolution sr1(v,0.1,1.5,r_i_1,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(4,4,0),null,true);
+  SolideRevolution sr1(v,0.1,1.5,r_i_1,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(0,3,0),null,true);
+
+  // on construit un autre solide de revolution (dessine par VueOpenGL),
+
+  // avec une masse volumique de 0.1kg/m^3,
+
+  // une hauteur de 4m, et un vecteur de rayon donnant une forme interessante,
+
+  // initiallement incline d'un angle de PI/12 radians par rapport a la verticale,
+
+  // avec une precession initialle de 5 radians par seconde,
+
+  // avec une rotation propre initialle de 200 radians par seconde,
+
+  // avec un point de contact en (-4,-4,0),
+
+  // qui ne varie pas de couleur
+
+  // sans trace de son centre de masse
 
   vector<double> r_i_2;
 
@@ -172,23 +206,74 @@ int main(int argc, char* argv[]) {
       r_i_2.push_back(r_0_2+exp(-pow(((i*0.01)-2),2)));
   }
 
-  SolideRevolution sr2(v,0.1,4,r_i_2,Vecteur(0,M_PI/12,0),Vecteur(5,0,200),Vecteur(-4,4,0),null,false);
+  SolideRevolution sr2(v,0.1,4,r_i_2,Vecteur(0,M_PI/12,0),Vecteur(5,0,200),Vecteur(0,3,0),null,false);
 
-//ajout de Toupies=================================================================================================
+  // construction d'un ConeSimple et un Solide de Revolution pour
+
+  // la comparaison entre une toupie de type ConeSimple
+
+  // et une toupie generale (SolideRevolution)
+
+  ConeSimple c3(v,masse_cone(0.1,1.5,0.5),1.5,0.5,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(0,3,0),null,false);
+
+  SolideRevolution sr3(v,0.1,1.5,r_i_1,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(0,3,0),null,false);
+
+//Ajout de Toupies=================================================================================================
 
 //*****************************modifier ici****************************
 //*********************************************************************
 
-  //w.ajouter_Toupie(p1);
-  //w.ajouter_Toupie(p2);
-  //w.ajouter_Toupie(mt1);
-  //w.ajouter_Toupie(mt2);
-  //w.ajouter_Toupie(c1);
-  //w.ajouter_Toupie(c2);
+//Nos Cones Simples==============================================================================================
+
+  w.ajouter_Toupie(c1);
+  w.ajouter_Toupie(c2);
+
+//Nos Toupies Chinoises===========================================================================================
+
   //w.ajouter_Toupie(tc1);
   //w.ajouter_Toupie(tc2);
-  w.ajouter_Toupie(sr1);
-  w.ajouter_Toupie(sr2);
+
+//Comparaison entre un ConeSimple et un Solide de Revolution (Toupie Generale)=====================================
+
+  //w.ajouter_Toupie(c3);
+  //w.ajouter_Toupie(sr3);
+
+//Nos Solides de Revolutions=======================================================================================
+
+  // a simuler un par un pour des raisons de lag
+
+  // cone
+
+  //w.ajouter_Toupie(sr1);
+
+  // cree par une revolution de la courbe Gaussienne autour de l'axe z
+
+  //w.ajouter_Toupie(sr2);
+
+//La vue tangentielle sur un ConeSimple==================================================================================
+
+  // appuyer sur la touche V pour activer
+
+  // et desactiver la vue tangentielle
+
+  // on choisi ici de ne pas prendre la rotation propre
+
+  // en compte car on ne peut rien y voir
+
+  //w.ajouter_Toupie(c2);
+
+//Nos Pendules============================================================================================================
+
+  //w.ajouter_Toupie(p1);
+  //w.ajouter_Toupie(p2);
+
+//Nos Masse Tombante======================================================================================================
+
+  //w.ajouter_Toupie(mt1);
+  //w.ajouter_Toupie(mt2);
+
+
+
   w.affiche(cout);
 
   //*********************************************************************
