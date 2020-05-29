@@ -93,6 +93,18 @@ int main(){
 
     cout << "Test du calcul de l'inverse d'une Matrice singuliere : " << endl << endl;
 
+    // on choisi ici de ne pas retourner la matrice nul
+
+    // dans le cas d'un determinant quasi-nul
+
+    // et plutot de lancer une erreur
+
+    // en effet si la matrice est non inversible,
+
+    // essayer de prendre son inverse est une erreur
+
+    // qui devrait arreter la simulation physique
+
     try{
         cout << "(mat)^-1 = " << mat.inv() << endl << endl;
     }

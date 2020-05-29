@@ -60,10 +60,12 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
     double Ax(a_dessiner.get_OA().get_coord(1));
     double Ay(a_dessiner.get_OA().get_coord(2));
     double Az(a_dessiner.get_OA().get_coord(3));
-    matrice.translate(Ax,Ay,Az+1);
+    double R(a_dessiner.get_rayon());
+    matrice.translate(Ax,Ay,Az+R);
     matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
     matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
     matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
+    matrice.scale(R);
     dessineSphereCoupe(matrice,
                        a_dessiner.get_Grandeur(),
                        a_dessiner.getP_point().get_coord(1),
@@ -75,7 +77,6 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
 void VueOpenGL::dessine(const SolideRevolution& a_dessiner)
 {
     QMatrix4x4 matrice;
-
 
     dessineAxes(matrice);
     dessinePlateforme(matrice);
@@ -169,7 +170,7 @@ void VueOpenGL::trace_G(ConeSimple& c){
 //Toupie generale----------------------------------------------------------------------------------------------------
 void VueOpenGL::trace_G(Toupie& t){
     QMatrix4x4 point_de_vue;
-     prog.setUniformValue("textureId", 5);
+    prog.setUniformValue("textureId", 5);
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     t.ajouter_point_memoire(t.OG_O());
     if (t.get_m().GetPoints().size()>=2){
@@ -207,6 +208,8 @@ void VueOpenGL::trace_G(ToupieChinoise& tc)
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     tc.ajouter_point_memoire(tc.AG_O()+tc.get_OA());
 
+    //tc.ajouter_point_memoire(tc.get_OA());
+
     if (tc.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
         for(size_t i(0);i<tc.get_m().GetPoints().size()-1;i++){
@@ -218,9 +221,21 @@ void VueOpenGL::trace_G(ToupieChinoise& tc)
     }
 }
 //SolideRevolution--------------------------------------------------------------------------------------------------------
-void VueOpenGL::trace_G(SolideRevolution &)
+void VueOpenGL::trace_G(SolideRevolution & sr)
 {
-
+    QMatrix4x4 point_de_vue;
+    prog.setUniformValue("textureId", 5);
+    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+    sr.ajouter_point_memoire(sr.OG_O());
+    if (sr.get_m().GetPoints().size()>=2){
+        glBegin(GL_LINES);
+        for(size_t i(0);i<sr.get_m().GetPoints().size()-1;i++){
+            prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
+            prog.setAttributeValue(SommetId, sr.get_m().GetPoints()[i].get_coord(1), sr.get_m().GetPoints()[i].get_coord(2), sr.get_m().GetPoints()[i].get_coord(3));
+            prog.setAttributeValue(SommetId, sr.get_m().GetPoints()[i+1].get_coord(1), sr.get_m().GetPoints()[i+1].get_coord(2), sr.get_m().GetPoints()[i+1].get_coord(3));
+        }
+        glEnd();
+    }
 }
 //MasseTombe--------------------------------------------------------------------------------------------------------
 void VueOpenGL::trace_G(MasseTombe& mt){
@@ -322,6 +337,23 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
         prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.0);
         prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
         prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),0);
+   }
+
+    glEnd();
+}
+
+void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double r)
+{
+    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    glBegin(GL_POLYGON);
+
+    double slices(50);
+    double theta(2*M_PI/slices);
+
+    for(unsigned int i(0);i<=slices;++i){
+        prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
+        prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),h);
    }
 
    glEnd();
@@ -461,13 +493,13 @@ void VueOpenGL::dessineCylindre(const QMatrix4x4 &point_de_vue, double z_0, doub
     double slices(50);
     double theta(2*M_PI/slices);
 
-    for(unsigned int i(0);i<slices;i++){
+    for(unsigned int i(0);i<slices;++i){
         glBegin(GL_POLYGON);
-        prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
+        prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge 
         prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_0);
         prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_1);
-        prog.setAttributeValue(SommetId, r_i*cos((i+1)*theta),r_i*sin((i+1)*theta),z_1);
-        prog.setAttributeValue(SommetId, r_i*cos((i+1)*theta),r_i*sin((i+1)*theta),z_0);
+        prog.setAttributeValue(SommetId, r_i*sin((i+1)*theta),r_i*cos((i+1)*theta),z_1);
+        prog.setAttributeValue(SommetId, r_i*sin((i+1)*theta),r_i*cos((i+1)*theta),z_0);
         glEnd();
     }
 }
@@ -480,10 +512,13 @@ void VueOpenGL::dessineSolideRevolution(const QMatrix4x4 &point_de_vue, double L
 
     dessineCylindre(point_de_vue,0,L/(2*N),r_i[0]);
 
+    dessinePolygon(point_de_vue,L/(2*N),r_i[0]);
+
     for(size_t i(1); i<N; ++i) {
         double z_0(((2*i-1)/2.0)*L/N);
         double z_1(((2*(i+1)-1)/2.0)*L/N);
         dessineCylindre(point_de_vue,z_0,z_1,r_i[i]);
+        dessinePolygon(point_de_vue,z_1,r_i[i]);
     }
 }
 //=========================================================================================================
@@ -507,7 +542,7 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     glBegin(GL_TRIANGLES);
 
     //apro
-    for(unsigned int i(0);i<=slices;i++){
+    for(unsigned int i(0);i<=slices;++i){
         prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
         switch (grandeur) {
 

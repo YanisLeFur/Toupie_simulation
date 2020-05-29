@@ -36,11 +36,11 @@ int main(){
 
     double m_cone(masse_cone(masse_volumique_cone,hauteur_cone,rayon_cone));
 
-    // Construction d'une toupie cônique avec:
+    // construction d'une toupie cônique avec:
 
-    // un support à dessin, une masse, des coefficient d'un tenseur d'inertie (I1,I3),
+    // un support à dessin, une masse, une hauteur, un rayon , un Vecteur de paramètre,
 
-    // un Vecteur de paramètre, un Vecteur de dérivée des paramètre et un point de contact
+    // un Vecteur de dérivée des paramètre et un point de contact
 
     ConeSimple cone_simple(&text,m_cone,hauteur_cone,rayon_cone,P_cone,P_point_cone,Vecteur());
 
