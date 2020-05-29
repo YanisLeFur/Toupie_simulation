@@ -206,7 +206,7 @@ int main(int argc, char* argv[]) {
       r_i_2.push_back(r_0_2+exp(-pow(((i*0.01)-2),2)));
   }
 
-  SolideRevolution sr2(v,0.1,4,r_i_2,Vecteur(0,M_PI/12,0),Vecteur(5,0,200),Vecteur(0,3,0),null,false);
+  SolideRevolution sr2(v,0.1,4,r_i_2,Vecteur(0,M_PI/12,0),Vecteur(5,0,200),Vecteur(0,3,0),theta_point,false);
 
   // construction d'un ConeSimple et un Solide de Revolution pour
 
@@ -226,7 +226,7 @@ int main(int argc, char* argv[]) {
 //Nos Cones Simples==============================================================================================
 
   w.ajouter_Toupie(c1);
-  w.ajouter_Toupie(c2);
+  //w.ajouter_Toupie(c2);
 
 //Nos Toupies Chinoises===========================================================================================
 

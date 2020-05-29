@@ -35,9 +35,11 @@ class VueOpenGL : public SupportADessin {
   void dessineCube(QMatrix4x4 const& point_de_vue = QMatrix4x4() );
 
   //methode rajoutée pour dessiner d'autres formes
-  void dessineCylindre(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double z_0 = 0, double z_1 = 0, double r_i = 0);
+  void dessineCylindre(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double z_0 = 0, double z_1 = 0, double r_i = 0,
+                       Grandeur_physique grandeur = null, double psi_point_ = 0, double theta_point_ = 0, double phi_point_ = 0);
 
-  void dessineSolideRevolution(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double L=0, std::vector<double> r_i = std::vector<double>(0));
+  void dessineSolideRevolution(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double L=0, std::vector<double> r_i = std::vector<double>(0),
+          Grandeur_physique grandeur = null,double psi_point_ = 0,double theta_point_ = 0,double phi_point_ = 0);
 
   void dessineCone(QMatrix4x4 const& point_de_vue = QMatrix4x4(), double h = 1.5, double r = 0.5,
                    Grandeur_physique=phi_point,double =0,double =0,double=0);
@@ -46,7 +48,8 @@ class VueOpenGL : public SupportADessin {
 
   void dessinePlateforme(QMatrix4x4 const& point_de_vue);
 
-  void dessinePolygon(QMatrix4x4 const& point_de_vue, double h, double r);
+  void dessinePolygon(QMatrix4x4 const& point_de_vue, double h, double r,
+                      Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_);
 
   void dessineSphere(QMatrix4x4 const& point_de_vue,
                        Grandeur_physique grandeur=null,double =0,double =0,double =0);
