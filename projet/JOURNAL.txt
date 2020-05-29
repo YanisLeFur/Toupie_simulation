@@ -204,7 +204,7 @@ Implémentation de la classe Vecteur:
 -changement de couleur en fonction d'une grandeur physique pour les sphères et shpèrecoupe
 -revu de vue tangentielle
 -création readme, fichier conception(image+ details en texte)
-
+-solide de revolution de forme differente
 
 
 !!!! SI ON MODIFIE TESTSYSTEME NE PAS OUBLIER DE LE CHANGER DANS P9 AUSSI !!!!
