@@ -36,19 +36,14 @@ SED           = $(QMAKE) -install sed
 MOVE          = move
 SUBTARGETS    =  \
 		sub-TestComparaison \
-		sub-TestIntegrateur-testIntegrateur-pro \
-		sub-TestMatrice-testMatrice-pro \
-		sub-TestToupie-testToupie-pro \
-		sub-TestVecteur-testVecteur-pro \
-		sub-TestSysteme-testSysteme-pro \
-		sub-general-general-pro \
+		sub-TestIntegrateur \
+		sub-TestMatrice \
+		sub-TestToupie \
+		sub-TestVecteur \
+		sub-TestSysteme \
+		sub-general \
 		sub-testInvariants \
-		sub-testVecteur-testVecteur-pro \
-		sub-testMatrice-testMatrice-pro \
-		sub-testToupie-testToupie-pro \
-		sub-testIntegrateur-testIntegrateur-pro \
-		sub-testSysteme-testSysteme-pro \
-		sub-Qt_GL-Qt_Gl-pro
+		sub-Qt_GL
 
 
 sub-TestComparaison-qmake_all:  FORCE
@@ -76,154 +71,154 @@ sub-TestComparaison-install_subtargets: FORCE
 sub-TestComparaison-uninstall_subtargets: FORCE
 	@if not exist TestComparaison\ mkdir TestComparaison\ & if not exist TestComparaison\ exit 1
 	cd TestComparaison\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestComparaison\TestComparaison.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-TestIntegrateur-testIntegrateur-pro-qmake_all:  FORCE
+sub-TestIntegrateur-qmake_all:  FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd TestIntegrateur\ && $(MAKE) -f Makefile.testIntegrateur qmake_all
-sub-TestIntegrateur-testIntegrateur-pro: FORCE
+	cd TestIntegrateur\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd TestIntegrateur\ && $(MAKE) -f Makefile qmake_all
+sub-TestIntegrateur: FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur
-sub-TestIntegrateur-testIntegrateur-pro-make_first: FORCE
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+sub-TestIntegrateur-make_first: FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur 
-sub-TestIntegrateur-testIntegrateur-pro-all: FORCE
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+sub-TestIntegrateur-all: FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur all
-sub-TestIntegrateur-testIntegrateur-pro-clean: FORCE
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+sub-TestIntegrateur-clean: FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur clean
-sub-TestIntegrateur-testIntegrateur-pro-distclean: FORCE
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+sub-TestIntegrateur-distclean: FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur distclean
-sub-TestIntegrateur-testIntegrateur-pro-install_subtargets: FORCE
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+sub-TestIntegrateur-install_subtargets: FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur install
-sub-TestIntegrateur-testIntegrateur-pro-uninstall_subtargets: FORCE
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+sub-TestIntegrateur-uninstall_subtargets: FORCE
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur uninstall
-sub-TestMatrice-testMatrice-pro-qmake_all:  FORCE
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+sub-TestMatrice-qmake_all:  FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd TestMatrice\ && $(MAKE) -f Makefile.testMatrice qmake_all
-sub-TestMatrice-testMatrice-pro: FORCE
+	cd TestMatrice\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd TestMatrice\ && $(MAKE) -f Makefile qmake_all
+sub-TestMatrice: FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice
-sub-TestMatrice-testMatrice-pro-make_first: FORCE
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+sub-TestMatrice-make_first: FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice 
-sub-TestMatrice-testMatrice-pro-all: FORCE
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+sub-TestMatrice-all: FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice all
-sub-TestMatrice-testMatrice-pro-clean: FORCE
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+sub-TestMatrice-clean: FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice clean
-sub-TestMatrice-testMatrice-pro-distclean: FORCE
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+sub-TestMatrice-distclean: FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice distclean
-sub-TestMatrice-testMatrice-pro-install_subtargets: FORCE
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+sub-TestMatrice-install_subtargets: FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice install
-sub-TestMatrice-testMatrice-pro-uninstall_subtargets: FORCE
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+sub-TestMatrice-uninstall_subtargets: FORCE
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice uninstall
-sub-TestToupie-testToupie-pro-qmake_all:  FORCE
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+sub-TestToupie-qmake_all:  FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd TestToupie\ && $(MAKE) -f Makefile.testToupie qmake_all
-sub-TestToupie-testToupie-pro: FORCE
+	cd TestToupie\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd TestToupie\ && $(MAKE) -f Makefile qmake_all
+sub-TestToupie: FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie
-sub-TestToupie-testToupie-pro-make_first: FORCE
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+sub-TestToupie-make_first: FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie 
-sub-TestToupie-testToupie-pro-all: FORCE
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+sub-TestToupie-all: FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie all
-sub-TestToupie-testToupie-pro-clean: FORCE
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+sub-TestToupie-clean: FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie clean
-sub-TestToupie-testToupie-pro-distclean: FORCE
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+sub-TestToupie-distclean: FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie distclean
-sub-TestToupie-testToupie-pro-install_subtargets: FORCE
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+sub-TestToupie-install_subtargets: FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie install
-sub-TestToupie-testToupie-pro-uninstall_subtargets: FORCE
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+sub-TestToupie-uninstall_subtargets: FORCE
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie uninstall
-sub-TestVecteur-testVecteur-pro-qmake_all:  FORCE
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+sub-TestVecteur-qmake_all:  FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd TestVecteur\ && $(MAKE) -f Makefile.testVecteur qmake_all
-sub-TestVecteur-testVecteur-pro: FORCE
+	cd TestVecteur\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd TestVecteur\ && $(MAKE) -f Makefile qmake_all
+sub-TestVecteur: FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur
-sub-TestVecteur-testVecteur-pro-make_first: FORCE
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+sub-TestVecteur-make_first: FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur 
-sub-TestVecteur-testVecteur-pro-all: FORCE
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+sub-TestVecteur-all: FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur all
-sub-TestVecteur-testVecteur-pro-clean: FORCE
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+sub-TestVecteur-clean: FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur clean
-sub-TestVecteur-testVecteur-pro-distclean: FORCE
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+sub-TestVecteur-distclean: FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur distclean
-sub-TestVecteur-testVecteur-pro-install_subtargets: FORCE
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+sub-TestVecteur-install_subtargets: FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur install
-sub-TestVecteur-testVecteur-pro-uninstall_subtargets: FORCE
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+sub-TestVecteur-uninstall_subtargets: FORCE
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur uninstall
-sub-TestSysteme-testSysteme-pro-qmake_all:  FORCE
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+sub-TestSysteme-qmake_all:  FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd TestSysteme\ && $(MAKE) -f Makefile.testSysteme qmake_all
-sub-TestSysteme-testSysteme-pro: FORCE
+	cd TestSysteme\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd TestSysteme\ && $(MAKE) -f Makefile qmake_all
+sub-TestSysteme: FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme
-sub-TestSysteme-testSysteme-pro-make_first: FORCE
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+sub-TestSysteme-make_first: FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme 
-sub-TestSysteme-testSysteme-pro-all: FORCE
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+sub-TestSysteme-all: FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme all
-sub-TestSysteme-testSysteme-pro-clean: FORCE
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+sub-TestSysteme-clean: FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme clean
-sub-TestSysteme-testSysteme-pro-distclean: FORCE
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+sub-TestSysteme-distclean: FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme distclean
-sub-TestSysteme-testSysteme-pro-install_subtargets: FORCE
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+sub-TestSysteme-install_subtargets: FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme install
-sub-TestSysteme-testSysteme-pro-uninstall_subtargets: FORCE
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+sub-TestSysteme-uninstall_subtargets: FORCE
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme uninstall
-sub-general-general-pro-qmake_all:  FORCE
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
+sub-general-qmake_all:  FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 	cd general\ && $(MAKE) -f Makefile qmake_all
-sub-general-general-pro: FORCE
+sub-general: FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
-sub-general-general-pro-make_first: FORCE
+sub-general-make_first: FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
-sub-general-general-pro-all: FORCE
+sub-general-all: FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
-sub-general-general-pro-clean: FORCE
+sub-general-clean: FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
-sub-general-general-pro-distclean: FORCE
+sub-general-distclean: FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
-sub-general-general-pro-install_subtargets: FORCE
+sub-general-install_subtargets: FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
-sub-general-general-pro-uninstall_subtargets: FORCE
+sub-general-uninstall_subtargets: FORCE
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
 sub-testInvariants-qmake_all:  FORCE
@@ -251,156 +246,31 @@ sub-testInvariants-install_subtargets: FORCE
 sub-testInvariants-uninstall_subtargets: FORCE
 	@if not exist testInvariants\ mkdir testInvariants\ & if not exist testInvariants\ exit 1
 	cd testInvariants\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testInvariants\testInvariants.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-testVecteur-testVecteur-pro-qmake_all:  FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd testVecteur\ && $(MAKE) -f Makefile qmake_all
-sub-testVecteur-testVecteur-pro: FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
-sub-testVecteur-testVecteur-pro-make_first: FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
-sub-testVecteur-testVecteur-pro-all: FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
-sub-testVecteur-testVecteur-pro-clean: FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
-sub-testVecteur-testVecteur-pro-distclean: FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
-sub-testVecteur-testVecteur-pro-install_subtargets: FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
-sub-testVecteur-testVecteur-pro-uninstall_subtargets: FORCE
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-testMatrice-testMatrice-pro-qmake_all:  FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd testMatrice\ && $(MAKE) -f Makefile qmake_all
-sub-testMatrice-testMatrice-pro: FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
-sub-testMatrice-testMatrice-pro-make_first: FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
-sub-testMatrice-testMatrice-pro-all: FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
-sub-testMatrice-testMatrice-pro-clean: FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
-sub-testMatrice-testMatrice-pro-distclean: FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
-sub-testMatrice-testMatrice-pro-install_subtargets: FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
-sub-testMatrice-testMatrice-pro-uninstall_subtargets: FORCE
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-testToupie-testToupie-pro-qmake_all:  FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd testToupie\ && $(MAKE) -f Makefile qmake_all
-sub-testToupie-testToupie-pro: FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
-sub-testToupie-testToupie-pro-make_first: FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
-sub-testToupie-testToupie-pro-all: FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
-sub-testToupie-testToupie-pro-clean: FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
-sub-testToupie-testToupie-pro-distclean: FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
-sub-testToupie-testToupie-pro-install_subtargets: FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
-sub-testToupie-testToupie-pro-uninstall_subtargets: FORCE
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-testIntegrateur-testIntegrateur-pro-qmake_all:  FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd testIntegrateur\ && $(MAKE) -f Makefile qmake_all
-sub-testIntegrateur-testIntegrateur-pro: FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
-sub-testIntegrateur-testIntegrateur-pro-make_first: FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
-sub-testIntegrateur-testIntegrateur-pro-all: FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
-sub-testIntegrateur-testIntegrateur-pro-clean: FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
-sub-testIntegrateur-testIntegrateur-pro-distclean: FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
-sub-testIntegrateur-testIntegrateur-pro-install_subtargets: FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
-sub-testIntegrateur-testIntegrateur-pro-uninstall_subtargets: FORCE
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-testSysteme-testSysteme-pro-qmake_all:  FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd testSysteme\ && $(MAKE) -f Makefile qmake_all
-sub-testSysteme-testSysteme-pro: FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
-sub-testSysteme-testSysteme-pro-make_first: FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
-sub-testSysteme-testSysteme-pro-all: FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
-sub-testSysteme-testSysteme-pro-clean: FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
-sub-testSysteme-testSysteme-pro-distclean: FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
-sub-testSysteme-testSysteme-pro-install_subtargets: FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
-sub-testSysteme-testSysteme-pro-uninstall_subtargets: FORCE
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-Qt_GL-Qt_Gl-pro-qmake_all:  FORCE
+sub-Qt_GL-qmake_all:  FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd Qt_GL\ && $(MAKE) -f Makefile.Qt_Gl qmake_all
-sub-Qt_GL-Qt_Gl-pro: FORCE
+	cd Qt_GL\ && $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
+	cd Qt_GL\ && $(MAKE) -f Makefile qmake_all
+sub-Qt_GL: FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl
-sub-Qt_GL-Qt_Gl-pro-make_first: FORCE
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
+sub-Qt_GL-make_first: FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl 
-sub-Qt_GL-Qt_Gl-pro-all: FORCE
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
+sub-Qt_GL-all: FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl all
-sub-Qt_GL-Qt_Gl-pro-clean: FORCE
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
+sub-Qt_GL-clean: FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl clean
-sub-Qt_GL-Qt_Gl-pro-distclean: FORCE
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
+sub-Qt_GL-distclean: FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl distclean
-sub-Qt_GL-Qt_Gl-pro-install_subtargets: FORCE
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
+sub-Qt_GL-install_subtargets: FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl install
-sub-Qt_GL-Qt_Gl-pro-uninstall_subtargets: FORCE
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
+sub-Qt_GL-uninstall_subtargets: FORCE
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl uninstall
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
 
 Makefile: ../projet/projet.pro C:/Qt/5.14.1/mingw73_32/mkspecs/win32-g++/qmake.conf C:/Qt/5.14.1/mingw73_32/mkspecs/features/spec_pre.prf \
 		C:/Qt/5.14.1/mingw73_32/mkspecs/qdevice.pri \
@@ -578,6 +448,7 @@ Makefile: ../projet/projet.pro C:/Qt/5.14.1/mingw73_32/mkspecs/win32-g++/qmake.c
 		C:/Qt/5.14.1/mingw73_32/mkspecs/features/qt_config.prf \
 		C:/Qt/5.14.1/mingw73_32/mkspecs/win32-g++/qmake.conf \
 		C:/Qt/5.14.1/mingw73_32/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		C:/Qt/5.14.1/mingw73_32/mkspecs/features/exclusive_builds.prf \
 		C:/Qt/5.14.1/mingw73_32/mkspecs/features/toolchain.prf \
 		C:/Qt/5.14.1/mingw73_32/mkspecs/features/default_pre.prf \
@@ -772,6 +643,7 @@ C:/Qt/5.14.1/mingw73_32/mkspecs/features/qt_functions.prf:
 C:/Qt/5.14.1/mingw73_32/mkspecs/features/qt_config.prf:
 C:/Qt/5.14.1/mingw73_32/mkspecs/win32-g++/qmake.conf:
 C:/Qt/5.14.1/mingw73_32/mkspecs/features/spec_post.prf:
+.qmake.stash:
 C:/Qt/5.14.1/mingw73_32/mkspecs/features/exclusive_builds.prf:
 C:/Qt/5.14.1/mingw73_32/mkspecs/features/toolchain.prf:
 C:/Qt/5.14.1/mingw73_32/mkspecs/features/default_pre.prf:
@@ -792,104 +664,74 @@ C:/Qt/5.14.1/mingw73_32/mkspecs/features/lex.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\projet\projet.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 
-qmake_all: sub-TestComparaison-qmake_all sub-TestIntegrateur-testIntegrateur-pro-qmake_all sub-TestMatrice-testMatrice-pro-qmake_all sub-TestToupie-testToupie-pro-qmake_all sub-TestVecteur-testVecteur-pro-qmake_all sub-TestSysteme-testSysteme-pro-qmake_all sub-general-general-pro-qmake_all sub-testInvariants-qmake_all sub-testVecteur-testVecteur-pro-qmake_all sub-testMatrice-testMatrice-pro-qmake_all sub-testToupie-testToupie-pro-qmake_all sub-testIntegrateur-testIntegrateur-pro-qmake_all sub-testSysteme-testSysteme-pro-qmake_all sub-Qt_GL-Qt_Gl-pro-qmake_all FORCE
+qmake_all: sub-TestComparaison-qmake_all sub-TestIntegrateur-qmake_all sub-TestMatrice-qmake_all sub-TestToupie-qmake_all sub-TestVecteur-qmake_all sub-TestSysteme-qmake_all sub-general-qmake_all sub-testInvariants-qmake_all sub-Qt_GL-qmake_all FORCE
 
-make_first: sub-TestComparaison-make_first sub-TestIntegrateur-testIntegrateur-pro-make_first sub-TestMatrice-testMatrice-pro-make_first sub-TestToupie-testToupie-pro-make_first sub-TestVecteur-testVecteur-pro-make_first sub-TestSysteme-testSysteme-pro-make_first sub-general-general-pro-make_first sub-testInvariants-make_first sub-testVecteur-testVecteur-pro-make_first sub-testMatrice-testMatrice-pro-make_first sub-testToupie-testToupie-pro-make_first sub-testIntegrateur-testIntegrateur-pro-make_first sub-testSysteme-testSysteme-pro-make_first sub-Qt_GL-Qt_Gl-pro-make_first  FORCE
-all: sub-TestComparaison-all sub-TestIntegrateur-testIntegrateur-pro-all sub-TestMatrice-testMatrice-pro-all sub-TestToupie-testToupie-pro-all sub-TestVecteur-testVecteur-pro-all sub-TestSysteme-testSysteme-pro-all sub-general-general-pro-all sub-testInvariants-all sub-testVecteur-testVecteur-pro-all sub-testMatrice-testMatrice-pro-all sub-testToupie-testToupie-pro-all sub-testIntegrateur-testIntegrateur-pro-all sub-testSysteme-testSysteme-pro-all sub-Qt_GL-Qt_Gl-pro-all  FORCE
-clean: sub-TestComparaison-clean sub-TestIntegrateur-testIntegrateur-pro-clean sub-TestMatrice-testMatrice-pro-clean sub-TestToupie-testToupie-pro-clean sub-TestVecteur-testVecteur-pro-clean sub-TestSysteme-testSysteme-pro-clean sub-general-general-pro-clean sub-testInvariants-clean sub-testVecteur-testVecteur-pro-clean sub-testMatrice-testMatrice-pro-clean sub-testToupie-testToupie-pro-clean sub-testIntegrateur-testIntegrateur-pro-clean sub-testSysteme-testSysteme-pro-clean sub-Qt_GL-Qt_Gl-pro-clean  FORCE
-distclean: sub-TestComparaison-distclean sub-TestIntegrateur-testIntegrateur-pro-distclean sub-TestMatrice-testMatrice-pro-distclean sub-TestToupie-testToupie-pro-distclean sub-TestVecteur-testVecteur-pro-distclean sub-TestSysteme-testSysteme-pro-distclean sub-general-general-pro-distclean sub-testInvariants-distclean sub-testVecteur-testVecteur-pro-distclean sub-testMatrice-testMatrice-pro-distclean sub-testToupie-testToupie-pro-distclean sub-testIntegrateur-testIntegrateur-pro-distclean sub-testSysteme-testSysteme-pro-distclean sub-Qt_GL-Qt_Gl-pro-distclean  FORCE
+make_first: sub-TestComparaison-make_first sub-TestIntegrateur-make_first sub-TestMatrice-make_first sub-TestToupie-make_first sub-TestVecteur-make_first sub-TestSysteme-make_first sub-general-make_first sub-testInvariants-make_first sub-Qt_GL-make_first  FORCE
+all: sub-TestComparaison-all sub-TestIntegrateur-all sub-TestMatrice-all sub-TestToupie-all sub-TestVecteur-all sub-TestSysteme-all sub-general-all sub-testInvariants-all sub-Qt_GL-all  FORCE
+clean: sub-TestComparaison-clean sub-TestIntegrateur-clean sub-TestMatrice-clean sub-TestToupie-clean sub-TestVecteur-clean sub-TestSysteme-clean sub-general-clean sub-testInvariants-clean sub-Qt_GL-clean  FORCE
+distclean: sub-TestComparaison-distclean sub-TestIntegrateur-distclean sub-TestMatrice-distclean sub-TestToupie-distclean sub-TestVecteur-distclean sub-TestSysteme-distclean sub-general-distclean sub-testInvariants-distclean sub-Qt_GL-distclean  FORCE
 	-$(DEL_FILE) Makefile
 	-$(DEL_FILE) .qmake.stash
-install_subtargets: sub-TestComparaison-install_subtargets sub-TestIntegrateur-testIntegrateur-pro-install_subtargets sub-TestMatrice-testMatrice-pro-install_subtargets sub-TestToupie-testToupie-pro-install_subtargets sub-TestVecteur-testVecteur-pro-install_subtargets sub-TestSysteme-testSysteme-pro-install_subtargets sub-general-general-pro-install_subtargets sub-testInvariants-install_subtargets sub-testVecteur-testVecteur-pro-install_subtargets sub-testMatrice-testMatrice-pro-install_subtargets sub-testToupie-testToupie-pro-install_subtargets sub-testIntegrateur-testIntegrateur-pro-install_subtargets sub-testSysteme-testSysteme-pro-install_subtargets sub-Qt_GL-Qt_Gl-pro-install_subtargets FORCE
-uninstall_subtargets: sub-TestComparaison-uninstall_subtargets sub-TestIntegrateur-testIntegrateur-pro-uninstall_subtargets sub-TestMatrice-testMatrice-pro-uninstall_subtargets sub-TestToupie-testToupie-pro-uninstall_subtargets sub-TestVecteur-testVecteur-pro-uninstall_subtargets sub-TestSysteme-testSysteme-pro-uninstall_subtargets sub-general-general-pro-uninstall_subtargets sub-testInvariants-uninstall_subtargets sub-testVecteur-testVecteur-pro-uninstall_subtargets sub-testMatrice-testMatrice-pro-uninstall_subtargets sub-testToupie-testToupie-pro-uninstall_subtargets sub-testIntegrateur-testIntegrateur-pro-uninstall_subtargets sub-testSysteme-testSysteme-pro-uninstall_subtargets sub-Qt_GL-Qt_Gl-pro-uninstall_subtargets FORCE
+install_subtargets: sub-TestComparaison-install_subtargets sub-TestIntegrateur-install_subtargets sub-TestMatrice-install_subtargets sub-TestToupie-install_subtargets sub-TestVecteur-install_subtargets sub-TestSysteme-install_subtargets sub-general-install_subtargets sub-testInvariants-install_subtargets sub-Qt_GL-install_subtargets FORCE
+uninstall_subtargets: sub-TestComparaison-uninstall_subtargets sub-TestIntegrateur-uninstall_subtargets sub-TestMatrice-uninstall_subtargets sub-TestToupie-uninstall_subtargets sub-TestVecteur-uninstall_subtargets sub-TestSysteme-uninstall_subtargets sub-general-uninstall_subtargets sub-testInvariants-uninstall_subtargets sub-Qt_GL-uninstall_subtargets FORCE
 
 sub-TestComparaison-check:
 	@if not exist TestComparaison\ mkdir TestComparaison\ & if not exist TestComparaison\ exit 1
 	cd TestComparaison\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestComparaison\TestComparaison.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-TestIntegrateur-testIntegrateur-pro-check:
+sub-TestIntegrateur-check:
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur check
-sub-TestMatrice-testMatrice-pro-check:
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+sub-TestMatrice-check:
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice check
-sub-TestToupie-testToupie-pro-check:
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+sub-TestToupie-check:
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie check
-sub-TestVecteur-testVecteur-pro-check:
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+sub-TestVecteur-check:
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur check
-sub-TestSysteme-testSysteme-pro-check:
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+sub-TestSysteme-check:
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme check
-sub-general-general-pro-check:
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+sub-general-check:
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
 sub-testInvariants-check:
 	@if not exist testInvariants\ mkdir testInvariants\ & if not exist testInvariants\ exit 1
 	cd testInvariants\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testInvariants\testInvariants.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-testVecteur-testVecteur-pro-check:
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-testMatrice-testMatrice-pro-check:
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-testToupie-testToupie-pro-check:
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-testIntegrateur-testIntegrateur-pro-check:
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-testSysteme-testSysteme-pro-check:
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-Qt_GL-Qt_Gl-pro-check:
+sub-Qt_GL-check:
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl check
-check: sub-TestComparaison-check sub-TestIntegrateur-testIntegrateur-pro-check sub-TestMatrice-testMatrice-pro-check sub-TestToupie-testToupie-pro-check sub-TestVecteur-testVecteur-pro-check sub-TestSysteme-testSysteme-pro-check sub-general-general-pro-check sub-testInvariants-check sub-testVecteur-testVecteur-pro-check sub-testMatrice-testMatrice-pro-check sub-testToupie-testToupie-pro-check sub-testIntegrateur-testIntegrateur-pro-check sub-testSysteme-testSysteme-pro-check sub-Qt_GL-Qt_Gl-pro-check
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
+check: sub-TestComparaison-check sub-TestIntegrateur-check sub-TestMatrice-check sub-TestToupie-check sub-TestVecteur-check sub-TestSysteme-check sub-general-check sub-testInvariants-check sub-Qt_GL-check
 
 sub-TestComparaison-benchmark:
 	@if not exist TestComparaison\ mkdir TestComparaison\ & if not exist TestComparaison\ exit 1
 	cd TestComparaison\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestComparaison\TestComparaison.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-TestIntegrateur-testIntegrateur-pro-benchmark:
+sub-TestIntegrateur-benchmark:
 	@if not exist TestIntegrateur\ mkdir TestIntegrateur\ & if not exist TestIntegrateur\ exit 1
-	cd TestIntegrateur\ && ( if not exist Makefile.testIntegrateur $(QMAKE) -o Makefile.testIntegrateur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testIntegrateur benchmark
-sub-TestMatrice-testMatrice-pro-benchmark:
+	cd TestIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestIntegrateur\TestIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+sub-TestMatrice-benchmark:
 	@if not exist TestMatrice\ mkdir TestMatrice\ & if not exist TestMatrice\ exit 1
-	cd TestMatrice\ && ( if not exist Makefile.testMatrice $(QMAKE) -o Makefile.testMatrice C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testMatrice benchmark
-sub-TestToupie-testToupie-pro-benchmark:
+	cd TestMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestMatrice\TestMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+sub-TestToupie-benchmark:
 	@if not exist TestToupie\ mkdir TestToupie\ & if not exist TestToupie\ exit 1
-	cd TestToupie\ && ( if not exist Makefile.testToupie $(QMAKE) -o Makefile.testToupie C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testToupie benchmark
-sub-TestVecteur-testVecteur-pro-benchmark:
+	cd TestToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestToupie\TestToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+sub-TestVecteur-benchmark:
 	@if not exist TestVecteur\ mkdir TestVecteur\ & if not exist TestVecteur\ exit 1
-	cd TestVecteur\ && ( if not exist Makefile.testVecteur $(QMAKE) -o Makefile.testVecteur C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testVecteur benchmark
-sub-TestSysteme-testSysteme-pro-benchmark:
+	cd TestVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestVecteur\TestVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+sub-TestSysteme-benchmark:
 	@if not exist TestSysteme\ mkdir TestSysteme\ & if not exist TestSysteme\ exit 1
-	cd TestSysteme\ && ( if not exist Makefile.testSysteme $(QMAKE) -o Makefile.testSysteme C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.testSysteme benchmark
-sub-general-general-pro-benchmark:
+	cd TestSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\TestSysteme\TestSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+sub-general-benchmark:
 	@if not exist general\ mkdir general\ & if not exist general\ exit 1
 	cd general\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\general\general.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
 sub-testInvariants-benchmark:
 	@if not exist testInvariants\ mkdir testInvariants\ & if not exist testInvariants\ exit 1
 	cd testInvariants\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testInvariants\testInvariants.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-testVecteur-testVecteur-pro-benchmark:
-	@if not exist testVecteur\ mkdir testVecteur\ & if not exist testVecteur\ exit 1
-	cd testVecteur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testVecteur\testVecteur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-testMatrice-testMatrice-pro-benchmark:
-	@if not exist testMatrice\ mkdir testMatrice\ & if not exist testMatrice\ exit 1
-	cd testMatrice\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testMatrice\testMatrice.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-testToupie-testToupie-pro-benchmark:
-	@if not exist testToupie\ mkdir testToupie\ & if not exist testToupie\ exit 1
-	cd testToupie\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testToupie\testToupie.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-testIntegrateur-testIntegrateur-pro-benchmark:
-	@if not exist testIntegrateur\ mkdir testIntegrateur\ & if not exist testIntegrateur\ exit 1
-	cd testIntegrateur\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testIntegrateur\testIntegrateur.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-testSysteme-testSysteme-pro-benchmark:
-	@if not exist testSysteme\ mkdir testSysteme\ & if not exist testSysteme\ exit 1
-	cd testSysteme\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\testSysteme\testSysteme.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-Qt_GL-Qt_Gl-pro-benchmark:
+sub-Qt_GL-benchmark:
 	@if not exist Qt_GL\ mkdir Qt_GL\ & if not exist Qt_GL\ exit 1
-	cd Qt_GL\ && ( if not exist Makefile.Qt_Gl $(QMAKE) -o Makefile.Qt_Gl C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_Gl.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile.Qt_Gl benchmark
-benchmark: sub-TestComparaison-benchmark sub-TestIntegrateur-testIntegrateur-pro-benchmark sub-TestMatrice-testMatrice-pro-benchmark sub-TestToupie-testToupie-pro-benchmark sub-TestVecteur-testVecteur-pro-benchmark sub-TestSysteme-testSysteme-pro-benchmark sub-general-general-pro-benchmark sub-testInvariants-benchmark sub-testVecteur-testVecteur-pro-benchmark sub-testMatrice-testMatrice-pro-benchmark sub-testToupie-testToupie-pro-benchmark sub-testIntegrateur-testIntegrateur-pro-benchmark sub-testSysteme-testSysteme-pro-benchmark sub-Qt_GL-Qt_Gl-pro-benchmark
+	cd Qt_GL\ && ( if not exist Makefile $(QMAKE) -o Makefile C:\Users\Ian\Documents\GitHub\projet-prog\projet-prog\projet\Qt_GL\Qt_GL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
+benchmark: sub-TestComparaison-benchmark sub-TestIntegrateur-benchmark sub-TestMatrice-benchmark sub-TestToupie-benchmark sub-TestVecteur-benchmark sub-TestSysteme-benchmark sub-general-benchmark sub-testInvariants-benchmark sub-Qt_GL-benchmark
 install:install_subtargets  FORCE
 
 uninstall: uninstall_subtargets FORCE
