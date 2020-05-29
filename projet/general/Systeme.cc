@@ -11,8 +11,8 @@ Systeme::Systeme(Integrateur* integrateur) :integrateur(integrateur){}
 
 Systeme::~Systeme()
 {
-    integrateur=nullptr;
     delete integrateur;
+    integrateur=nullptr;
 }
 //=========================================================================================================
 void Systeme::changer_integrateur(Integrateur& nouvel_integrateur) {
