@@ -20,9 +20,10 @@ int main(int argc, char* argv[]) {
 
   w.setMinimumSize(1080,720);
 
-//Implémentation de la vue----------------------------------------------------------------------------------------------------
+//Nos support a dessin----------------------------------------------------------------------------------------------------
 
   VueOpenGL* v(w.get_Vue_ptr());
+  TextViewer text(cout);
 
 //Nos integrateurs-----------------------------------------------------------------------------------------------------------
 
@@ -218,39 +219,85 @@ int main(int argc, char* argv[]) {
 
   SolideRevolution sr3(v,0.1,1.5,r_i_1,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(0,3,0),null,false);
 
-//Ajout de Toupies=================================================================================================
+  // construction d'un ConeSimple identique a c3
 
-//*****************************modifier ici****************************
+  // avec un support a dessin textuel
+
+  ConeSimple c4(&text,masse_cone(0.1,1.5,0.5),1.5,0.5,Vecteur(0,M_PI/6,0),Vecteur(0,0,200),Vecteur(0,3,0),null,false);
+
+
+//*********************************************************************
 //*********************************************************************
 
-//Nos Cones Simples==============================================================================================
+
+//Nos Simulations Differentes=================================================================================================
+
+  // Nous presentons ici 8 simulations differentes.
+
+  // Pour les executer, il suffit de demasquer
+
+  // l'ajout des toupies de la simulation voulu
+
+  // et de masquer les autres simulations.
+
+  // On fait ceci car la performance de la simulation
+
+  // est reduite par l'ajout de trop d'objets.
+
+  // Les toupies utilise dans la simulation sont afficher
+
+  // textuellement a cote de la simulation graphique (sur cout)
+
+
+//Simulation 1 : Nos Cones Simples==============================================================================================
+
+  // on presente ici les 2 ConeSimples decrits plus haut
+
 
   w.ajouter_Toupie(c1);
-  //w.ajouter_Toupie(c2);
+  w.ajouter_Toupie(c2);
 
-//Nos Toupies Chinoises===========================================================================================
+
+//Simulation 2 : Nos Toupies Chinoises===========================================================================================
+
+  // on presente ici les 2 ToupieChinoises decrites plus haut
+
 
   //w.ajouter_Toupie(tc1);
   //w.ajouter_Toupie(tc2);
 
-//Comparaison entre un ConeSimple et un Solide de Revolution (Toupie Generale)=====================================
+
+//Simulation 3 : Comparaison entre un ConeSimple==================================================================================
+//et un Solide de Revolution (Toupie Generale)====================================================================================
+
+  // comparaison graphique d'un ConeSimple
+
+  // et notre modele d'une toupie generale
+
 
   //w.ajouter_Toupie(c3);
   //w.ajouter_Toupie(sr3);
 
-//Nos Solides de Revolutions=======================================================================================
 
-  // a simuler un par un pour des raisons de lag
+//Simulation 4 : Nos Solides de Revolutions=======================================================================================
+
+  // NB : a simuler un par un pour des raisons de lag
+
+  // on presente ici les 2 Solides de Revolution decrits plus haut
 
   // cone
 
+
   //w.ajouter_Toupie(sr1);
+
 
   // cree par une revolution de la courbe Gaussienne autour de l'axe z
 
+
   //w.ajouter_Toupie(sr2);
 
-//La vue tangentielle sur un ConeSimple==================================================================================
+
+//Simulation 5 : La vue tangentielle sur un ConeSimple==================================================================================
 
   // appuyer sur la touche V pour activer
 
@@ -260,27 +307,56 @@ int main(int argc, char* argv[]) {
 
   // en compte car on ne peut rien y voir
 
+
   //w.ajouter_Toupie(c2);
 
-//Nos Pendules============================================================================================================
+
+//Simulation 6 : Affichage graphique et textuelle======================================================================================
+
+  // simulation simultanement graphique et textuelle
+
+  // d'une toupie conique
+
+
+  //w.ajouter_Toupie(c3);
+  //w.ajouter_Toupie(c4);
+
+
+//Simulation 7 : Nos Pendules============================================================================================================
+
+  // on presente ici les 2 Pendules decrits plus haut
+
 
   //w.ajouter_Toupie(p1);
   //w.ajouter_Toupie(p2);
 
-//Nos Masse Tombante======================================================================================================
+
+//Simulation 8 : Nos Masse Tombante======================================================================================================
+
+  // on presente ici les 2 Masses Tombantes decrites plus haut
+
 
   //w.ajouter_Toupie(mt1);
-  //w.ajouter_Toupie(mt2);
+  //w.ajouter_Toupie(mt2);  
 
 
+//*********************************************************************
+//*********************************************************************
+
+  // affiche les toupies simules
 
   w.affiche(cout);
 
-  //*********************************************************************
-  //*********************************************************************
+  // on affiche le widget
 
   w.show();
+
+  // on gere la memoire du pointeur sur le VueOpenGL
+
+  // du Widget
+
   v = nullptr;
   delete v;
+
   return a.exec();
 }
