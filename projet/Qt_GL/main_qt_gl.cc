@@ -187,8 +187,8 @@ int main(int argc, char* argv[]) {
   //w.ajouter_Toupie(c2);
   //w.ajouter_Toupie(tc1);
   //w.ajouter_Toupie(tc2);
-  //w.ajouter_Toupie(sr1);
-  w.ajouter_Toupie(sr2);
+  w.ajouter_Toupie(sr1);
+  //w.ajouter_Toupie(sr2);
   w.affiche(cout);
 
   //*********************************************************************

@@ -153,6 +153,16 @@ void GLWidget::ajouter_Toupie(Toupie const& toupie) {
     //ajoute une toupie au systeme appartenant au GlWidget
     s.ajouter_Toupie(toupie);
 }
+
+void GLWidget::enlever_Toupie()
+{
+    s.enlever_Toupie();
+}
+
+void GLWidget::changer_integrateur(Integrateur &nouvel_integrateur)
+{
+    s.changer_integrateur(nouvel_integrateur);
+}
 //=========================================================================================================
 VueOpenGL* GLWidget::get_Vue_ptr() {
     return &vue;

@@ -21,6 +21,10 @@ public:
 
   void ajouter_Toupie(Toupie const& toupie); // ajoute une toupie dans le systeme du widget
 
+  void enlever_Toupie(); // enleve la derniere toupie dans le systeme du widget
+
+  void changer_integrateur(Integrateur& nouvel_integrateur); // change l'integrateur du systeme du widget
+
   VueOpenGL* get_Vue_ptr(); // retourne un pointeur sur le VueOpenGL du widget
 
   void affiche(std::ostream& sortie) const; // appelle la fonction afficher des toupies du systeme du widget
