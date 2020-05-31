@@ -315,57 +315,130 @@ void VueOpenGL::dessine(MasseTombe const& a_dessiner) {
 //ConeSimple--------------------------------------------------------------------------------------------------------
 
 void VueOpenGL::trace_G(ConeSimple& c){
-
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point qu'on veut dessiner a la memoire
+
     c.ajouter_point_memoire(c.OG_O());
 
-    if (c.get_m().GetPoints().size()>=2){
+    // dessine une ligne si on a plus que 2 points en memoire
+
+    if (c.get_m().GetPoints().size()>=2) {
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<c.get_m().GetPoints().size()-1;i++){
 
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, c.get_m().GetPoints()[i].get_coord(1), c.get_m().GetPoints()[i].get_coord(2), c.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, c.get_m().GetPoints()[i+1].get_coord(1), c.get_m().GetPoints()[i+1].get_coord(2), c.get_m().GetPoints()[i+1].get_coord(3));
-
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
 
 //Pendule-----------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::trace_G(Pendule& p){
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    Vecteur v(p.getP().get_coord(1)*sin(p.getP().get_coord(2)),p.getP().get_coord(3),-p.getP().get_coord(1)*cos(p.getP().get_coord(2)));
+
+    // on ajoute un nouveau point qu'on veut dessiner a la memoire
+
+    Vecteur v(p.getP().get_coord(1)*sin(p.getP().get_coord(2)),p.getP().get_coord(3),-p.getP().get_coord(1)*cos(p.getP().get_coord(2)));    
     p.ajouter_point_memoire(v+p.get_OA());
+
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (p.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<p.get_m().GetPoints().size()-1;i++){
+
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i].get_coord(1), p.get_m().GetPoints()[i].get_coord(2), p.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i+1].get_coord(1), p.get_m().GetPoints()[i+1].get_coord(2), p.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
+
 //ToupieChinoise--------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::trace_G(ToupieChinoise& tc)
 {
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point a la memoire
+
     tc.ajouter_point_memoire(tc.AG_O()+tc.get_OA());
 
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (tc.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<tc.get_m().GetPoints().size()-1;i++){
+
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, tc.get_m().GetPoints()[i].get_coord(1), tc.get_m().GetPoints()[i].get_coord(2), tc.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, tc.get_m().GetPoints()[i+1].get_coord(1), tc.get_m().GetPoints()[i+1].get_coord(2), tc.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
