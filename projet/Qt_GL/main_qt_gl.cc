@@ -355,8 +355,5 @@ int main(int argc, char* argv[]) {
 
   // du Widget
 
-  delete v;
-  v = nullptr;
-
   return a.exec();
 }
