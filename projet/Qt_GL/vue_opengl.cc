@@ -212,8 +212,6 @@ void VueOpenGL::trace_G(ToupieChinoise& tc)
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
     tc.ajouter_point_memoire(tc.AG_O()+tc.get_OA());
 
-    //tc.ajouter_point_memoire(tc.get_OA());
-
     if (tc.get_m().GetPoints().size()>=2){
         glBegin(GL_LINES);
         for(size_t i(0);i<tc.get_m().GetPoints().size()-1;i++){
@@ -263,7 +261,7 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
 {
     double psi(c.getP().get_coord(1));
     double theta(c.getP().get_coord(2));
-    double phi(c.getP().get_coord(3));
+    //double phi(c.getP().get_coord(3));
 
     double Ax(c.get_OA().get_coord(1));
     double Ay(c.get_OA().get_coord(2));
@@ -286,7 +284,7 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
 
     //matrice_vue.rotate(-(phi*360/(2*M_PI)), cos(psi)*sin(theta), sin(psi)*sin(theta), cos(theta)); // on s'oriente par rapport a phi
 
-    //on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soi
+    //on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soit
 
     matrice_vue.translate(-Ax,-Ay,-Az); // translation pour amener la camera sur la toupie
 
@@ -376,7 +374,13 @@ void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double 
    glEnd();
 }
 //=========================================================================================================
+
+// l'attribut prog d'un VueOpenGL n'a pas de constructeur de copie
+
+// donc on ne peut retourner de copie d'un VueOpenGL
+
 SupportADessin* VueOpenGL::copie() const {}
+
 //=========================================================================================================
 void VueOpenGL::changer_vue()
 {
