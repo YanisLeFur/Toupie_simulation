@@ -73,19 +73,37 @@ class VueOpenGL : public SupportADessin {
 
   void dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur = true);
 
+  // dessine un plateforme circulaire sur lequel nos toupies se deplacent
+
   void dessinePlateforme(QMatrix4x4 const& point_de_vue);
+
+  // dessine un polygon qui approxime un cercle de rayon r
+
+  // a une hauteur h au dessus du sol
+
+  // les dernier 4 attributs sont pour la variation de couleur
+
+  // en dependance d'une grandeur physique
 
   void dessinePolygon(QMatrix4x4 const& point_de_vue, double h, double r,
                       Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_);
 
+  // dessine une sphere
+
+  // les dernier 4 attributs sont pour la variation de couleur
+
+  // en dependance d'une grandeur physique
+
   void dessineSphere(QMatrix4x4 const& point_de_vue,
                        Grandeur_physique grandeur=null,double =0,double =0,double =0);
 
- //permet de représenter graphiquement la toupie chinoise
+  // dessine une sphere tronquee pour la toupie chinoise
+
   void dessineSphereCoupe(QMatrix4x4 const& point_de_vue,
                        Grandeur_physique grandeur=null,double =0,double =0,double =0);
 
-//dessin graphique des toupies à partir de leurs paramètres et des formes crées plus haut
+  //dessin graphique des toupies à partir de leurs paramètres et des formes crées plus haut
+
   virtual void dessine(ConeSimple const&) override;
 
   virtual void dessine(Pendule const&) override;
@@ -112,10 +130,12 @@ class VueOpenGL : public SupportADessin {
 
   virtual void trace_G(Toupie&) override;
 
-//point de vue placé sur
+  // pour placer le point du vue sur la vue tangentielle
+
   void vue_tangentielle(ConeSimple const&);
 
   // méthode(s) de dessin (héritée(s) de SupportADessin)
+
   virtual SupportADessin* copie() const override;
 
   private:
@@ -128,7 +148,7 @@ class VueOpenGL : public SupportADessin {
   // Caméra
   QMatrix4x4 matrice_vue;
 
-   //textures
+  // textures
   GLuint textureDeChat;
   GLuint textureBois;
   GLuint textureOptique;
