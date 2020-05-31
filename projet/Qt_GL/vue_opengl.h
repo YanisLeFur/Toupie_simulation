@@ -96,6 +96,8 @@ class VueOpenGL : public SupportADessin {
 
   virtual void dessine(SolideRevolution const&) override;
 
+  virtual void dessine(Toupie const&) override;
+
   //trace graphique du centre de masse des toupies
 
   virtual void trace_G(ConeSimple&) override;
@@ -107,6 +109,8 @@ class VueOpenGL : public SupportADessin {
   virtual void trace_G(ToupieChinoise&) override;
 
   virtual void trace_G(SolideRevolution&) override;
+
+  virtual void trace_G(Toupie&) override;
 
 //point de vue placé sur
   void vue_tangentielle(ConeSimple const&);

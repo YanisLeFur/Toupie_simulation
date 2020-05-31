@@ -157,6 +157,8 @@ void VueOpenGL::dessine(const SolideRevolution& a_dessiner)
                             a_dessiner.getP_point().get_coord(3));
 }
 
+void VueOpenGL::dessine(const Toupie &){}
+
 //Pendule-----------------------------------------------------------------------------------------------------------
 void VueOpenGL::dessine(Pendule const& a_dessiner)
 {
@@ -281,6 +283,8 @@ void VueOpenGL::trace_G(SolideRevolution & sr)
         glEnd();
     }
 }
+
+void VueOpenGL::trace_G(Toupie &){}
 //MasseTombe--------------------------------------------------------------------------------------------------------
 void VueOpenGL::trace_G(MasseTombe& mt){
     QMatrix4x4 point_de_vue;

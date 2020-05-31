@@ -14,7 +14,7 @@ Dessinable::Dessinable(SupportADessin const& support): support(support.copie()) 
 Dessinable::Dessinable(SupportADessin* support): support(support) {}
 
 Dessinable::~Dessinable() {
-    delete support;
+    //delete support;
     support = nullptr;
 }
 
@@ -34,7 +34,7 @@ void TextViewer::dessine(ConeSimple const& conesimple) {
 void TextViewer::dessine(MasseTombe const& massetombe) {
     flot<<"Parametre : "<< massetombe.getP() << endl <<"Derivee : "<< massetombe.getP_point()<<endl;
 }
-	
+
 void TextViewer::dessine(Pendule const& pendule) {
     flot<<"Parametre : "<<pendule.getP() << endl <<"Derivee : "<<pendule.getP_point()<<endl;
 }
@@ -74,3 +74,7 @@ void TextViewer::trace_G(SolideRevolution& solide)
 SupportADessin* TextViewer::copie() const { return new TextViewer(*this); }
 
 //====================================================================================================
+
+void TextViewer::dessine(Toupie const&) {}
+
+void TextViewer::trace_G(Toupie&) {}
