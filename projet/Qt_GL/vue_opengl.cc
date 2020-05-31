@@ -429,7 +429,7 @@ void VueOpenGL::trace_G(ToupieChinoise& tc)
 
             // dessine la ligne d'une certaine couleur
 
-            prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0);
+            prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0);
 
             // entre 2 points consecutifs dans la memoire
 
@@ -443,44 +443,95 @@ void VueOpenGL::trace_G(ToupieChinoise& tc)
     }
 }
 //SolideRevolution--------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::trace_G(SolideRevolution & sr)
 {
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point a la memoire
+
     sr.ajouter_point_memoire(sr.OG_O());
+
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (sr.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<sr.get_m().GetPoints().size()-1;i++){
+
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, sr.get_m().GetPoints()[i].get_coord(1), sr.get_m().GetPoints()[i].get_coord(2), sr.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, sr.get_m().GetPoints()[i+1].get_coord(1), sr.get_m().GetPoints()[i+1].get_coord(2), sr.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
 
-void VueOpenGL::trace_G(Toupie &){}
 //MasseTombe--------------------------------------------------------------------------------------------------------
 void VueOpenGL::trace_G(MasseTombe& mt){
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point a la memoire
+
     mt.ajouter_point_memoire(mt.OG_O());
+
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (mt.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<mt.get_m().GetPoints().size()-1;i++){
+
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, mt.get_m().GetPoints()[i].get_coord(1), mt.get_m().GetPoints()[i].get_coord(2), mt.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, mt.get_m().GetPoints()[i+1].get_coord(1), mt.get_m().GetPoints()[i+1].get_coord(2), mt.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
+
 //============================================================================================================================
 
 void VueOpenGL::vue_tangentielle(ConeSimple const& c)
-{
+{   
     double psi(c.getP().get_coord(1));
     double theta(c.getP().get_coord(2));
     //double phi(c.getP().get_coord(3));
@@ -506,7 +557,7 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
 
     //matrice_vue.rotate(-(phi*360/(2*M_PI)), cos(psi)*sin(theta), sin(psi)*sin(theta), cos(theta)); // on s'oriente par rapport a phi
 
-    //on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soit
+    // on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soit
 
     matrice_vue.translate(-Ax,-Ay,-Az); // translation pour amener la camera sur la toupie
 
@@ -516,7 +567,7 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
 void VueOpenGL::dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur)
 {
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-  prog.setUniformValue("textureId", 5);//donne une texture vide aux axes
+  prog.setUniformValue("textureId", 5); //donne une texture vide aux axes
   glBegin(GL_LINES);
 
   // axe X
@@ -557,13 +608,15 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
     double slices(50);
     double theta(2*M_PI/slices);
 
+    // cree un cercle (approximatif) de rayon r
+
     for(unsigned int i(0);i<=slices;i++){
         prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.0);
         prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
         prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),0);
    }
 
-    glEnd();
+   glEnd();
 }
 
 void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double r,Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_)
@@ -578,6 +631,10 @@ void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double 
     for(unsigned int i(0);i<=slices;++i){
         prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
         switch (grandeur) {
+
+            // donne une couleur qui varie en fonction de l'importance
+
+            // d'une grandeur physique
 
             case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
             break;
@@ -599,7 +656,7 @@ void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double 
 
 // l'attribut prog d'un VueOpenGL n'a pas de constructeur de copie
 
-// donc on ne peut retourner de copie d'un VueOpenGL
+// donc on ne peut pas retourner de copie d'un VueOpenGL
 
 SupportADessin* VueOpenGL::copie() const {}
 
@@ -656,6 +713,9 @@ void VueOpenGL::initializePosition()
   // position initiale
   matrice_vue.setToIdentity();
   matrice_vue.translate(0.0, 0.0, -4.0);
+
+  // rotation pour avoir l'axe z verticale
+
   matrice_vue.rotate(-90.0, 1.0, 0.0, 0.0);
   matrice_vue.translate(0.0, 0.0, -4.0);
 }
@@ -692,6 +752,10 @@ void VueOpenGL::dessineCylindre(const QMatrix4x4 &point_de_vue, double z_0, doub
         prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
         switch (grandeur) {
 
+            // donne une couleur qui varie en fonction de l'importance
+
+            // d'une grandeur physique
+
             case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
             break;
             case theta_point: prog.setAttributeValue(CouleurId, 0.0, 0.2+abs(theta_point_)/2.0, 0.0);
@@ -703,6 +767,9 @@ void VueOpenGL::dessineCylindre(const QMatrix4x4 &point_de_vue, double z_0, doub
                 else{prog.setAttributeValue(CouleurId, 1.0,0.0, 1.0-(50-i)/(slices)); }
             break;
         }
+
+        // dessine plein de rectangles qui approximent un cylindre
+
         prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_0);
         prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_1);
         prog.setAttributeValue(SommetId, r_i*sin((i+1)*theta),r_i*cos((i+1)*theta),z_1);
@@ -716,6 +783,14 @@ void VueOpenGL::dessineSolideRevolution(const QMatrix4x4 &point_de_vue, double L
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
 
     double N(r_i.size());
+
+    // on superpose des cylindre de rayons
+
+    // correspondant au solide de revolution
+
+    // et de hauteur egale pour correspondre
+
+    // a la hauteur du solide de revolution
 
     dessineCylindre(point_de_vue,0,L/(2*N),r_i[0],grandeur,psi_point_,theta_point_,phi_point_);
 
@@ -744,6 +819,12 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     double r(rayon);
     double slices(50);
     double theta(2*M_PI/slices);
+
+    // on dessine un cercle (approxime par un polygone) pour le haut du cone
+
+    // on relie les points du polygone (cercle approxime) au point
+
+    // de contact en creant des triangles
 
     prog.setUniformValue("textureId", 5);
     glBegin(GL_TRIANGLES);
@@ -857,3 +938,5 @@ void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
 //=========================================================================================================
 
 void VueOpenGL::dessine(const Toupie &){}
+
+void VueOpenGL::trace_G(Toupie &){}

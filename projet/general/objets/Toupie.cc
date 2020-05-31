@@ -295,7 +295,7 @@ Toupie::~Toupie(){}
         if (h>R) throw 14;
         if ((P.dimension()!=5) or (P_point.dimension()!=5)) throw 19;
 
-        this->m.setTaille(25); // pour eviter du lag avec une memoire trop grande
+        this->m.setTaille(35); // pour eviter du lag avec une memoire trop grande
     }
 
     ostream& ToupieChinoise::affiche(ostream& sortie) const {
