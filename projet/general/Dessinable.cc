@@ -14,7 +14,7 @@ Dessinable::Dessinable(SupportADessin const& support): support(support.copie()) 
 Dessinable::Dessinable(SupportADessin* support): support(support) {}
 
 Dessinable::~Dessinable() {
-    //delete support;
+    delete support;
     support = nullptr;
 }
 
@@ -25,10 +25,6 @@ SupportADessin::~SupportADessin() {}
 //TextViewer==========================================================================================
 
 TextViewer::TextViewer(ostream& flot) :flot(flot) {}
-
-void TextViewer::dessine(Toupie const& toupie) {
-    flot<<"Parametre : "<< toupie.getP() << endl << "Derivee : " <<toupie.getP_point() << endl;
-}
 
 void TextViewer::dessine(ConeSimple const& conesimple) {
     flot<<"Parametre : "<<Vecteur(modulo_2pi(conesimple.getP().get_coord(1)),modulo_2pi(conesimple.getP().get_coord(2)),modulo_2pi(conesimple.getP().get_coord(3))) << endl
@@ -51,10 +47,6 @@ void TextViewer::dessine(ToupieChinoise const& chinoise) {
 void TextViewer::dessine(SolideRevolution const& solide) {
     flot<<"Parametre : "<<Vecteur(modulo_2pi(solide.getP().get_coord(1)),modulo_2pi(solide.getP().get_coord(2)),modulo_2pi(solide.getP().get_coord(3))) << endl
         <<"Derivee : "<<Vecteur(modulo_2pi(solide.getP_point().get_coord(1)),modulo_2pi(solide.getP_point().get_coord(2)),modulo_2pi(solide.getP_point().get_coord(3)))<<endl;
-}
-
-void TextViewer::trace_G(Toupie& toupie) {
-    flot<<"Centre de masse : "<< toupie.OG_O() << endl;
 }
 
 void TextViewer::trace_G(ConeSimple& conesimple) {

@@ -66,18 +66,6 @@ Toupie::~Toupie(){}
         return Vecteur(psi_point_point(),theta_point_point(),phi_point_point());
     }
 
-    void Toupie::dessine() const {
-      support->dessine(*this);
-    }
-
-    unique_ptr<Toupie> Toupie::copie() const {
-        return clone();
-    }
-
-    unique_ptr<Toupie> Toupie::clone() const {
-        return unique_ptr<Toupie>(new Toupie(*this));
-    }
-
     Vecteur Toupie::omega_G() const {
         return Vecteur(getP_point().get_coord(2),
                        getP_point().get_coord(1)*sin(getP().get_coord(2)),
@@ -221,10 +209,6 @@ Toupie::~Toupie(){}
 
     double Toupie::prod_mixt() const {
         return (Vecteur({0,0,1}))*(omega_G()^LG_G());
-    }
-
-    void Toupie::trace_G(){
-        support->trace_G(*this);
     }
 
 

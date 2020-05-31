@@ -61,12 +61,8 @@ class Toupie:public Dessinable{
         virtual std::ostream& affiche(std::ostream& sortie) const; // affiche les caracteristiques de la toupies(masse,I1,I3...)
 		
         virtual Vecteur eq_mouv() const; // equation de mouvement de la toupie
-
-        virtual void dessine() const override; // dessine la toupie selon le support à dessin de celle-ci
 		
-        virtual std::unique_ptr<Toupie> copie() const; // copie avec retour covariant
-
-        std::unique_ptr<Toupie> clone() const; // permet d'avoir un retour covariant pour les unique_ptr
+        virtual std::unique_ptr<Toupie> copie() const = 0; // copie avec retour covariant
 
         Vecteur omega_G() const; // retourne la rotation instantanée dans le repere R_G
 
@@ -135,8 +131,6 @@ class Toupie:public Dessinable{
         virtual double E() const; // energie totale
 
         double prod_mixt() const; // le produit mixte (omega^L)*a
-
-        virtual void trace_G() override;
 
 };
 
