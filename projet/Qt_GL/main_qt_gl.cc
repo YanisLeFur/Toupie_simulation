@@ -262,6 +262,10 @@ int main(int argc, char* argv[]) {
 
   // on presente ici les 2 ToupieChinoises decrites plus haut
 
+  // celle de droite a une vitesse initialle importante
+
+  // qui lui permet de se deplacer plus vite
+
 
   //w.ajouter_Toupie(tc1);
   //w.ajouter_Toupie(tc2);
@@ -337,7 +341,7 @@ int main(int argc, char* argv[]) {
 
 
   //w.ajouter_Toupie(mt1);
-  //w.ajouter_Toupie(mt2);  
+  //w.ajouter_Toupie(mt2);
 
 
 //*********************************************************************

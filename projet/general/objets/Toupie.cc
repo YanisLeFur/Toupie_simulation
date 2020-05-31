@@ -66,18 +66,6 @@ Toupie::~Toupie(){}
         return Vecteur(psi_point_point(),theta_point_point(),phi_point_point());
     }
 
-    void Toupie::dessine() const {
-      support->dessine(*this);
-    }
-
-    unique_ptr<Toupie> Toupie::copie() const {
-        return clone();
-    }
-
-    unique_ptr<Toupie> Toupie::clone() const {
-        return unique_ptr<Toupie>(new Toupie(*this));
-    }
-
     Vecteur Toupie::omega_G() const {
         return Vecteur(getP_point().get_coord(2),
                        getP_point().get_coord(1)*sin(getP().get_coord(2)),
@@ -223,10 +211,6 @@ Toupie::~Toupie(){}
         return (Vecteur({0,0,1}))*(omega_G()^LG_G());
     }
 
-    void Toupie::trace_G(){
-        support->trace_G(*this);
-    }
-
 
 //endToupie================================================================================================
     ostream& operator<<(ostream& sortie,Toupie const& etre_affiche) {
@@ -304,12 +288,14 @@ Toupie::~Toupie(){}
 //ToupieChinoise==============================================================
 	
     ToupieChinoise::ToupieChinoise(SupportADessin* support, double m, double h, double R, Vecteur P, Vecteur P_point,Vecteur OA,Grandeur_physique grandeur, bool trace_on) // d???????
-        :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA,grandeur,trace_on),h(h),R(R){
-
+        :Toupie(support,m,P,P_point,I1_chinoise(m,h,R),I3_chinoise(m,h,R),1,OA,grandeur,trace_on),h(h),R(R)
+    {
         if (R<=0) throw 6;
         if (h<0) throw 15;
         if (h>R) throw 14;
         if ((P.dimension()!=5) or (P_point.dimension()!=5)) throw 19;
+
+        this->m.setTaille(35); // pour eviter du lag avec une memoire trop grande
     }
 
     ostream& ToupieChinoise::affiche(ostream& sortie) const {
@@ -650,6 +636,8 @@ Toupie::~Toupie(){}
           if (P.get_coord(1)<=0) throw 17;
           if (m<=0) throw 5;
           if ((P.dimension()!=3) or (P_point.dimension()!=3)) throw 22;
+
+          this->m.setTaille(25); // pour rendre la trace plus joli
     }
 
     ostream& Pendule::affiche(std::ostream& sortie) const{

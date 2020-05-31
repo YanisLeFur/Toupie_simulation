@@ -7,36 +7,56 @@
 #include <QOpenGLFunctions>
 
 
-// Dessin des toupies===============================================================================================
-//Toupie générale---------------------------------------------------------------------------------------------------
-void VueOpenGL::dessine(Toupie const& a_dessiner) {
-    QMatrix4x4 matrice;
-    dessineAxes(matrice);
-    dessinePlateforme(matrice);
-    double psi(a_dessiner.getP().get_coord(1));
-    double theta(a_dessiner.getP().get_coord(2));
-    double phi(a_dessiner.getP().get_coord(3));
-    matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
-    matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
-    matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
-    dessineCone(matrice,1.5,0.5);
-}
+// Dessin des objets===============================================================================================
+
 //ConeSimple-------------------------------------------------------------------------------------------------------
 void VueOpenGL::dessine(ConeSimple const& a_dessiner)
 {
     QMatrix4x4 matrice;
+
+    // dessine les axes cartesiens du repere
+
     dessineAxes(matrice);
+
+    // dessine le plateforme du repere
+
     dessinePlateforme(matrice);
-    double psi(a_dessiner.getP().get_coord(1));
-    double theta(a_dessiner.getP().get_coord(2));
-    double phi(a_dessiner.getP().get_coord(3));
-    double Ax(a_dessiner.get_OA().get_coord(1));
-    double Ay(a_dessiner.get_OA().get_coord(2));
-    double Az(a_dessiner.get_OA().get_coord(3));
-    matrice.translate(Ax,Ay,Az);
-    matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
-    matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
-    matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
+
+    // psi = a_dessiner.getP().get_coord(1)
+    // theta = a_dessiner.getP().get_coord(2)
+    // phi = a_dessiner.getP().get_coord(3)
+
+    // Ax = a_dessiner.get_OA().get_coord(1)
+    // Ay = a_dessiner.get_OA().get_coord(2)
+    // Az = a_dessiner.get_OA().get_coord(3)
+
+    // translate le dessin au point de contact de la toupie
+
+    matrice.translate(a_dessiner.get_OA().get_coord(1),
+                      a_dessiner.get_OA().get_coord(2),
+                      a_dessiner.get_OA().get_coord(3));
+
+    // precession autour de l'axe z
+
+    matrice.rotate(a_dessiner.getP().get_coord(1)*360/(2*M_PI),0.0,0.0,1.0);
+
+    // nutation autour de l'axe nodale
+
+    matrice.rotate(a_dessiner.getP().get_coord(2)*360/(2*M_PI),1.0,0.0,0.0);
+
+    // rotation propre autour de l'axe a
+
+    matrice.rotate(a_dessiner.getP().get_coord(3)*360/(2*M_PI),0.0,0.0,1.0);
+
+    // on dessine maintenant le cone au bon endroit
+
+    // avec les bonnes rotations
+
+    // avec la bonne hauteur et le bon rayon
+
+    // les dernier 4 attributs sont pour la variation de couleur
+
+    // en dependance d'une grandeur physique
 
     dessineCone(matrice,
                 a_dessiner.get_hauteur(),
@@ -46,26 +66,72 @@ void VueOpenGL::dessine(ConeSimple const& a_dessiner)
                 a_dessiner.getP_point().get_coord(2),
                 a_dessiner.getP_point().get_coord(3));
 
-    if (Vue_Tangentielle) vue_tangentielle(a_dessiner); //donne la possibilité à l'utilisateur d'activer la vue tangentielle
+    // donne la possibilité à l'utilisateur d'activer la vue tangentielle
+
+    if (Vue_Tangentielle) vue_tangentielle(a_dessiner);
 }
 //ToupieChinoise----------------------------------------------------------------------------------------------------
 void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
 {
     QMatrix4x4 matrice;
+
+    // dessine les axes cartesiens du repere
+
     dessineAxes(matrice);
+
+    // dessine le plateforme du repere
+
     dessinePlateforme(matrice);
-    double psi(a_dessiner.getP().get_coord(1));
-    double theta(a_dessiner.getP().get_coord(2));
-    double phi(a_dessiner.getP().get_coord(3));
-    double Ax(a_dessiner.get_OA().get_coord(1));
-    double Ay(a_dessiner.get_OA().get_coord(2));
-    double Az(a_dessiner.get_OA().get_coord(3));
-    double R(a_dessiner.get_rayon());
-    matrice.translate(Ax,Ay,Az+R);
-    matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
-    matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
-    matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
-    matrice.scale(R);
+
+    // psi = a_dessiner.getP().get_coord(1)
+    // theta = a_dessiner.getP().get_coord(2)
+    // phi = a_dessiner.getP().get_coord(3)
+
+    // Ax = a_dessiner.get_OA().get_coord(1)
+    // Ay = a_dessiner.get_OA().get_coord(2)
+    // Az = a_dessiner.get_OA().get_coord(3)
+    // R = a_dessiner.get_rayon()
+
+    // la toupie chinoise etant dessine par rapport
+
+    // a son centre geometrique C
+
+    // en plus de translater horizontalement le dessin
+
+    // il nous faut une translation verticale
+
+    // correspondant au rayon R
+
+    matrice.translate(a_dessiner.get_OA().get_coord(1),
+                      a_dessiner.get_OA().get_coord(2),
+                      a_dessiner.get_OA().get_coord(3)+a_dessiner.get_rayon());
+
+    // precession autour de l'axe z
+
+    matrice.rotate(a_dessiner.getP().get_coord(1)*360/(2*M_PI),0.0,0.0,1.0);
+
+    // nutation autour de l'axe nodale
+
+    matrice.rotate(a_dessiner.getP().get_coord(2)*360/(2*M_PI),1.0,0.0,0.0);
+
+    // rotation propre autour de l'axe a
+
+    matrice.rotate(a_dessiner.getP().get_coord(3)*360/(2*M_PI),0.0,0.0,1.0);
+
+    // on change la taille du dessin par rapport
+
+    // au rayon de la toupie chinoise
+
+    matrice.scale(a_dessiner.get_rayon());
+
+    // on dessine maintenant la toupie chinoise au bon endroit
+
+    // avec les bonnes rotations,
+
+    // les dernier 4 attributs sont pour la variation de couleur
+
+    // en dependance d'une grandeur physique
+
     dessineSphereCoupe(matrice,
                        a_dessiner.get_Grandeur(),
                        a_dessiner.getP_point().get_coord(1),
@@ -74,26 +140,60 @@ void VueOpenGL::dessine(ToupieChinoise const& a_dessiner)
 }
 
 //SolideRevolution---------------------------------------------------------------------------------------------------
+
 void VueOpenGL::dessine(const SolideRevolution& a_dessiner)
 {
     QMatrix4x4 matrice;
 
-    dessineAxes(matrice);
-    dessinePlateforme(matrice);
-    double psi(a_dessiner.getP().get_coord(1));
-    double theta(a_dessiner.getP().get_coord(2));
-    double phi(a_dessiner.getP().get_coord(3));
-    double Ax(a_dessiner.get_OA().get_coord(1));
-    double Ay(a_dessiner.get_OA().get_coord(2));
-    double Az(a_dessiner.get_OA().get_coord(3));
-    double L(a_dessiner.get_L());
-    std::vector<double> r_i(a_dessiner.get_r_i());
-    matrice.translate(Ax,Ay,Az);
-    matrice.rotate(psi*360/(2*M_PI),0.0,0.0,1.0);
-    matrice.rotate(theta*360/(2*M_PI),1.0,0.0,0.0);
-    matrice.rotate(phi*360/(2*M_PI),0.0,0.0,1.0);
+    // dessine les axes cartesiens du repere
 
-    dessineSolideRevolution(matrice,L,r_i,
+    dessineAxes(matrice);
+
+    // dessine le plateforme du repere
+
+    dessinePlateforme(matrice);
+
+    // psi = a_dessiner.getP().get_coord(1)
+    // theta = a_dessiner.getP().get_coord(2)
+    // phi = a_dessiner.getP().get_coord(3)
+
+    // Ax = a_dessiner.get_OA().get_coord(1)
+    // Ay = a_dessiner.get_OA().get_coord(2)
+    // Az = a_dessiner.get_OA().get_coord(3)
+
+    // L = a_dessiner.get_L()
+    // r_i = a_dessiner.get_r_i()
+
+    // translate le dessin au point de contact de la toupie
+
+    matrice.translate(a_dessiner.get_OA().get_coord(1),
+                      a_dessiner.get_OA().get_coord(2),
+                      a_dessiner.get_OA().get_coord(3));
+
+    // precession autour de l'axe z
+
+    matrice.rotate(a_dessiner.getP().get_coord(1)*360/(2*M_PI),0.0,0.0,1.0);
+
+    // nutation autour de l'axe nodale
+
+    matrice.rotate(a_dessiner.getP().get_coord(2)*360/(2*M_PI),1.0,0.0,0.0);
+
+    // rotation propre autour de l'axe a
+
+    matrice.rotate(a_dessiner.getP().get_coord(3)*360/(2*M_PI),0.0,0.0,1.0);
+
+    // on dessine maintenant le solide de revolution au bon endroit
+
+    // avec les bonnes rotations
+
+    // avec la bonne hauteur et les bons rayons
+
+    // les dernier 4 attributs sont pour la variation de couleur
+
+    // en dependance d'une grandeur physique
+
+    dessineSolideRevolution(matrice,a_dessiner.get_L(),
+                            a_dessiner.get_r_i(),
                             a_dessiner.get_Grandeur(),
                             a_dessiner.getP_point().get_coord(1),
                             a_dessiner.getP_point().get_coord(2),
@@ -101,164 +201,337 @@ void VueOpenGL::dessine(const SolideRevolution& a_dessiner)
 }
 
 //Pendule-----------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::dessine(Pendule const& a_dessiner)
 {
-  QMatrix4x4 matrice;
-  dessineAxes(matrice);
-  dessinePlateforme(matrice);
+    QMatrix4x4 matrice;
 
-  double Ax(a_dessiner.get_OA().get_coord(1));
-  double Ay(a_dessiner.get_OA().get_coord(2));
-  double Az(a_dessiner.get_OA().get_coord(3));
+    // dessine les axes cartesiens du repere
 
-  glBegin(GL_LINES);
+    dessineAxes(matrice);
 
-  prog.setAttributeValue(SommetId, Ax, Ay, Az);
-  prog.setAttributeValue(SommetId,
-                         Ax+a_dessiner.getP().get_coord(1)*sin(a_dessiner.getP().get_coord(2)),
-                                                                                            Ay,
-                         Az-a_dessiner.getP().get_coord(1)*cos(a_dessiner.getP().get_coord(2)));
+    // dessine le plateforme du repere
 
-  glEnd();
+    dessinePlateforme(matrice);
 
-  matrice.translate(Ax,Ay,Az);
+    // Ax = a_dessiner.get_OA().get_coord(1)
+    // Ay = a_dessiner.get_OA().get_coord(2)
+    // Az = a_dessiner.get_OA().get_coord(3)
 
-  matrice.translate(a_dessiner.getP().get_coord(1)*sin(a_dessiner.getP().get_coord(2)),
-                                                                                     0,
-                   -a_dessiner.getP().get_coord(1)*cos(a_dessiner.getP().get_coord(2)));
-  matrice.scale(0.25);
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // passe en mode "plein"
+    // on dessine le fil du pendule entre le point d'accrochement
 
-  dessineSphere(matrice);
+    glBegin(GL_LINES);
+
+    // entre le point d'accrochement
+
+    prog.setAttributeValue(SommetId, a_dessiner.get_OA().get_coord(1),
+                                     a_dessiner.get_OA().get_coord(2),
+                                     a_dessiner.get_OA().get_coord(3));
+
+    // et la masse de la pendule
+
+    prog.setAttributeValue(SommetId,
+                           a_dessiner.get_OA().get_coord(1)+a_dessiner.getP().get_coord(1)*sin(a_dessiner.getP().get_coord(2)),
+                           a_dessiner.get_OA().get_coord(2),
+                           a_dessiner.get_OA().get_coord(3)-a_dessiner.getP().get_coord(1)*cos(a_dessiner.getP().get_coord(2)));
+
+    glEnd();
+
+    // translate le dessin au point d'accrochement du pendule
+
+    matrice.translate(a_dessiner.get_OA().get_coord(1),
+                      a_dessiner.get_OA().get_coord(2),
+                      a_dessiner.get_OA().get_coord(3));
+
+
+    // translate la masse du pendule selon un angle theta
+
+    // et la longueur du pendule
+
+    matrice.translate(a_dessiner.getP().get_coord(1)*sin(a_dessiner.getP().get_coord(2)),
+                                                                                       0,
+                     -a_dessiner.getP().get_coord(1)*cos(a_dessiner.getP().get_coord(2)));
+
+    // reduit la taille de la sphere qui represente la masse du pendule
+
+    // pour mieux simuler un point materiel
+
+    matrice.scale(0.10);
+
+    // rempli la sphere (on ne peut pas voir a travers)
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    // on dessine maintenant la sphere au bon endroit
+
+    dessineSphere(matrice);
 }
 //MasseTombe-------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::dessine(MasseTombe const& a_dessiner) {
     QMatrix4x4 matrice;
+
+    // commence le dessin de la masse tombante
+
     glBegin(GL_LINES);
+
+    // dessine les axes cartesiens du repere
+
     dessineAxes(matrice);
+
+    // dessine le plateforme du repere
+
     dessinePlateforme(matrice);
+
+    // Px = a_dessiner.get_OA().get_coord(1)
+    // Py = a_dessiner.get_OA().get_coord(2)
+    // Pz = a_dessiner.get_OA().get_coord(3)
+
+    // on translate le dessin au point ou la masse se trouve
+
     matrice.translate(a_dessiner.getP().get_coord(1),
                       a_dessiner.getP().get_coord(2),
                       a_dessiner.getP().get_coord(3));
+
+    // reduit la taille de la sphere qui represente la masse tombante
+
+    // pour mieux simuler un point materiel
+
     matrice.scale(0.25);
 
-    dessineSphere(matrice,
-                   a_dessiner.get_Grandeur(),
-                   a_dessiner.getP_point().get_coord(1),
-                   a_dessiner.getP_point().get_coord(2),
-                   a_dessiner.getP_point().get_coord(3));
+    // on dessine maintenant la sphere qui represente le point materiel
+
+    // au bon endroit
+
+    dessineSphere(matrice);
+
+    // on conclut le dessin de la sphere
 
     glEnd();
 }
-//Trace des Toupies=================================================================================================
-//ConeSimple--------------------------------------------------------------------------------------------------------
-void VueOpenGL::trace_G(ConeSimple& c){
 
+//Trace des Toupies=================================================================================================
+
+//ConeSimple--------------------------------------------------------------------------------------------------------
+
+void VueOpenGL::trace_G(ConeSimple& c){
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point qu'on veut dessiner a la memoire
+
     c.ajouter_point_memoire(c.OG_O());
 
-    if (c.get_m().GetPoints().size()>=2){
+    // dessine une ligne si on a plus que 2 points en memoire
+
+    if (c.get_m().GetPoints().size()>=2) {
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<c.get_m().GetPoints().size()-1;i++){
 
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, c.get_m().GetPoints()[i].get_coord(1), c.get_m().GetPoints()[i].get_coord(2), c.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, c.get_m().GetPoints()[i+1].get_coord(1), c.get_m().GetPoints()[i+1].get_coord(2), c.get_m().GetPoints()[i+1].get_coord(3));
+        }
 
-        }
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
-//Toupie generale----------------------------------------------------------------------------------------------------
-void VueOpenGL::trace_G(Toupie& t){
-    QMatrix4x4 point_de_vue;
-    prog.setUniformValue("textureId", 5);
-    prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    t.ajouter_point_memoire(t.OG_O());
-    if (t.get_m().GetPoints().size()>=2){
-        glBegin(GL_LINES);
-        for(size_t i(0);i<t.get_m().GetPoints().size()-1;i++){
-            prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
-            prog.setAttributeValue(SommetId, t.get_m().GetPoints()[i].get_coord(1), t.get_m().GetPoints()[i].get_coord(2), t.get_m().GetPoints()[i].get_coord(3));
-            prog.setAttributeValue(SommetId, t.get_m().GetPoints()[i+1].get_coord(1), t.get_m().GetPoints()[i+1].get_coord(2), t.get_m().GetPoints()[i+1].get_coord(3));
-        }
-        glEnd();
-    }
-}
+
 //Pendule-----------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::trace_G(Pendule& p){
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-    Vecteur v(p.getP().get_coord(1)*sin(p.getP().get_coord(2)),p.getP().get_coord(3),-p.getP().get_coord(1)*cos(p.getP().get_coord(2)));
+
+    // on ajoute un nouveau point qu'on veut dessiner a la memoire
+
+    Vecteur v(p.getP().get_coord(1)*sin(p.getP().get_coord(2)),p.getP().get_coord(3),-p.getP().get_coord(1)*cos(p.getP().get_coord(2)));    
     p.ajouter_point_memoire(v+p.get_OA());
+
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (p.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<p.get_m().GetPoints().size()-1;i++){
+
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i].get_coord(1), p.get_m().GetPoints()[i].get_coord(2), p.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, p.get_m().GetPoints()[i+1].get_coord(1), p.get_m().GetPoints()[i+1].get_coord(2), p.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
+
 //ToupieChinoise--------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::trace_G(ToupieChinoise& tc)
 {
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point a la memoire
+
     tc.ajouter_point_memoire(tc.AG_O()+tc.get_OA());
 
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (tc.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<tc.get_m().GetPoints().size()-1;i++){
-            prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0);
+
+            // dessine la ligne d'une certaine couleur
+
+            prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, tc.get_m().GetPoints()[i].get_coord(1), tc.get_m().GetPoints()[i].get_coord(2), tc.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, tc.get_m().GetPoints()[i+1].get_coord(1), tc.get_m().GetPoints()[i+1].get_coord(2), tc.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
 //SolideRevolution--------------------------------------------------------------------------------------------------------
+
 void VueOpenGL::trace_G(SolideRevolution & sr)
 {
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point a la memoire
+
     sr.ajouter_point_memoire(sr.OG_O());
+
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (sr.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<sr.get_m().GetPoints().size()-1;i++){
+
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, sr.get_m().GetPoints()[i].get_coord(1), sr.get_m().GetPoints()[i].get_coord(2), sr.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, sr.get_m().GetPoints()[i+1].get_coord(1), sr.get_m().GetPoints()[i+1].get_coord(2), sr.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
+
 //MasseTombe--------------------------------------------------------------------------------------------------------
 void VueOpenGL::trace_G(MasseTombe& mt){
     QMatrix4x4 point_de_vue;
+
+    // pour enlever la texture
+
     prog.setUniformValue("textureId", 5);
+
+    // pour donner le bon point de vue
+
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
+
+    // on ajoute un nouveau point a la memoire
+
     mt.ajouter_point_memoire(mt.OG_O());
+
+    // dessine une ligne si on a plus que 2 points en memoire
+
     if (mt.get_m().GetPoints().size()>=2){
+
+        // commence a dessiner des lignes
+
         glBegin(GL_LINES);
+
         for(size_t i(0);i<mt.get_m().GetPoints().size()-1;i++){
+
+            // dessine la ligne d'une certaine couleur
+
             prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0);
+
+            // entre 2 points consecutifs dans la memoire
+
             prog.setAttributeValue(SommetId, mt.get_m().GetPoints()[i].get_coord(1), mt.get_m().GetPoints()[i].get_coord(2), mt.get_m().GetPoints()[i].get_coord(3));
             prog.setAttributeValue(SommetId, mt.get_m().GetPoints()[i+1].get_coord(1), mt.get_m().GetPoints()[i+1].get_coord(2), mt.get_m().GetPoints()[i+1].get_coord(3));
         }
+
+        // arrete de dessiner des lignes
+
         glEnd();
     }
 }
+
 //============================================================================================================================
 
 void VueOpenGL::vue_tangentielle(ConeSimple const& c)
-{
+{   
     double psi(c.getP().get_coord(1));
     double theta(c.getP().get_coord(2));
     //double phi(c.getP().get_coord(3));
@@ -284,7 +557,7 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
 
     //matrice_vue.rotate(-(phi*360/(2*M_PI)), cos(psi)*sin(theta), sin(psi)*sin(theta), cos(theta)); // on s'oriente par rapport a phi
 
-    //on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soit
+    // on ne fait pas la rotation selon phi car c'est impossible de voir quoi que ce soit
 
     matrice_vue.translate(-Ax,-Ay,-Az); // translation pour amener la camera sur la toupie
 
@@ -294,7 +567,7 @@ void VueOpenGL::vue_tangentielle(ConeSimple const& c)
 void VueOpenGL::dessineAxes(QMatrix4x4 const& point_de_vue, bool en_couleur)
 {
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-  prog.setUniformValue("textureId", 5);//donne une texture vide aux axes
+  prog.setUniformValue("textureId", 5); //donne une texture vide aux axes
   glBegin(GL_LINES);
 
   // axe X
@@ -335,13 +608,15 @@ void VueOpenGL::dessinePlateforme(const QMatrix4x4 &point_de_vue)
     double slices(50);
     double theta(2*M_PI/slices);
 
+    // cree un cercle (approximatif) de rayon r
+
     for(unsigned int i(0);i<=slices;i++){
         prog.setAttributeValue(CouleurId, 0.0, 0.0, 0.0);
         prog.setAttributeValue(CoordonneeTextureId,r*cos(i*theta)+0.5,r*sin(i*theta)+0.5);
         prog.setAttributeValue(SommetId, r*cos(i*theta),r*sin(i*theta),0);
    }
 
-    glEnd();
+   glEnd();
 }
 
 void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double r,Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_)
@@ -356,6 +631,10 @@ void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double 
     for(unsigned int i(0);i<=slices;++i){
         prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
         switch (grandeur) {
+
+            // donne une couleur qui varie en fonction de l'importance
+
+            // d'une grandeur physique
 
             case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
             break;
@@ -377,7 +656,7 @@ void VueOpenGL::dessinePolygon(const QMatrix4x4 &point_de_vue, double h, double 
 
 // l'attribut prog d'un VueOpenGL n'a pas de constructeur de copie
 
-// donc on ne peut retourner de copie d'un VueOpenGL
+// donc on ne peut pas retourner de copie d'un VueOpenGL
 
 SupportADessin* VueOpenGL::copie() const {}
 
@@ -434,6 +713,9 @@ void VueOpenGL::initializePosition()
   // position initiale
   matrice_vue.setToIdentity();
   matrice_vue.translate(0.0, 0.0, -4.0);
+
+  // rotation pour avoir l'axe z verticale
+
   matrice_vue.rotate(-90.0, 1.0, 0.0, 0.0);
   matrice_vue.translate(0.0, 0.0, -4.0);
 }
@@ -457,55 +739,6 @@ void VueOpenGL::rotate(double angle, double dir_x, double dir_y, double dir_z)
   matrice_vue = rotation_supplementaire * matrice_vue;
 }
 //=========================================================================================================
-void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
-{
-  prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
-
-  glBegin(GL_QUADS);
-  // face coté X = +1
-  prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
-  prog.setAttributeValue(SommetId, +1.0, -1.0, -1.0);
-  prog.setAttributeValue(SommetId, +1.0, +1.0, -1.0);
-  prog.setAttributeValue(SommetId, +1.0, +1.0, +1.0);
-  prog.setAttributeValue(SommetId, +1.0, -1.0, +1.0);
-
-  // face coté X = -1
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // vert
-  prog.setAttributeValue(SommetId, -1.0, -1.0, -1.0);
-  prog.setAttributeValue(SommetId, -1.0, -1.0, +1.0);
-  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
-  prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
-
-  // face coté Y = +1
-  prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
-  prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
-  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
-  prog.setAttributeValue(SommetId, +1.0, +1.0, +1.0);
-  prog.setAttributeValue(SommetId, +1.0, +1.0, -1.0);
-
-  // face coté Y = -1
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 1.0); // cyan
-  prog.setAttributeValue(SommetId, -1.0, -1.0, -1.0);
-  prog.setAttributeValue(SommetId, +1.0, -1.0, -1.0);
-  prog.setAttributeValue(SommetId, +1.0, -1.0, +1.0);
-  prog.setAttributeValue(SommetId, -1.0, -1.0, +1.0);
-
-  // face coté Z = +1
-  prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0); // jaune
-  prog.setAttributeValue(SommetId, -1.0, -1.0, +1.0);
-  prog.setAttributeValue(SommetId, +1.0, -1.0, +1.0);
-  prog.setAttributeValue(SommetId, +1.0, +1.0, +1.0);
-  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
-
-  // face coté Z = -1
-  prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0); // magenta
-  prog.setAttributeValue(SommetId, -1.0, -1.0, -1.0);
-  prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
-  prog.setAttributeValue(SommetId, +1.0, +1.0, -1.0);
-  prog.setAttributeValue(SommetId, +1.0, -1.0, -1.0);
-
-  glEnd();
-}
 
 void VueOpenGL::dessineCylindre(const QMatrix4x4 &point_de_vue, double z_0, double z_1, double r_i,Grandeur_physique grandeur,double psi_point_,double theta_point_,double phi_point_)
 {
@@ -519,6 +752,10 @@ void VueOpenGL::dessineCylindre(const QMatrix4x4 &point_de_vue, double z_0, doub
         prog.setAttributeValue(CouleurId,0.0,0.0,0.0);
         switch (grandeur) {
 
+            // donne une couleur qui varie en fonction de l'importance
+
+            // d'une grandeur physique
+
             case psi_point: prog.setAttributeValue(CouleurId, 0.2+abs(psi_point_)/2.0, 0.0, 0.0);
             break;
             case theta_point: prog.setAttributeValue(CouleurId, 0.0, 0.2+abs(theta_point_)/2.0, 0.0);
@@ -530,6 +767,9 @@ void VueOpenGL::dessineCylindre(const QMatrix4x4 &point_de_vue, double z_0, doub
                 else{prog.setAttributeValue(CouleurId, 1.0,0.0, 1.0-(50-i)/(slices)); }
             break;
         }
+
+        // dessine plein de rectangles qui approximent un cylindre
+
         prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_0);
         prog.setAttributeValue(SommetId, r_i*sin(i*theta),r_i*cos(i*theta),z_1);
         prog.setAttributeValue(SommetId, r_i*sin((i+1)*theta),r_i*cos((i+1)*theta),z_1);
@@ -543,6 +783,14 @@ void VueOpenGL::dessineSolideRevolution(const QMatrix4x4 &point_de_vue, double L
     prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
 
     double N(r_i.size());
+
+    // on superpose des cylindre de rayons
+
+    // correspondant au solide de revolution
+
+    // et de hauteur egale pour correspondre
+
+    // a la hauteur du solide de revolution
 
     dessineCylindre(point_de_vue,0,L/(2*N),r_i[0],grandeur,psi_point_,theta_point_,phi_point_);
 
@@ -571,6 +819,12 @@ void VueOpenGL::dessineCone(QMatrix4x4 const& point_de_vue,double hauteur, doubl
     double r(rayon);
     double slices(50);
     double theta(2*M_PI/slices);
+
+    // on dessine un cercle (approxime par un polygone) pour le haut du cone
+
+    // on relie les points du polygone (cercle approxime) au point
+
+    // de contact en creant des triangles
 
     prog.setUniformValue("textureId", 5);
     glBegin(GL_TRIANGLES);
@@ -682,3 +936,7 @@ void VueOpenGL::dessineSphereCoupe (QMatrix4x4 const& point_de_vue,
 
 }
 //=========================================================================================================
+
+void VueOpenGL::dessine(const Toupie &){}
+
+void VueOpenGL::trace_G(Toupie &){}

@@ -22,6 +22,8 @@ class Memoire{
 
            size_t getTaille();
 
+           void setTaille(size_t const& t);
+
            bool get_on();
 };
 
